@@ -17,7 +17,7 @@ def get_user_by_id(user_name):
     ret = flask.Response(json.dumps(lit))
     ret.headers['Access-Control-Allow-Origin'] = '*'
     return ret
-@app.route('/medical-case-of-illness/user/',methods = ['POST'])
+@app.route('/medical-case-of-illness/user',methods = ['POST'])
 def add_user():
     if request.form['name'] is not None and request.form['name']!= '' and request.form['contact']!=None:
         current_user = _form_to_user(request.form)
