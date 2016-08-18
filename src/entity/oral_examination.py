@@ -44,4 +44,4 @@ class Oral_examination(db.Model):
         del dit['_sa_instance_state']
         return dit
 
-db.create_all()
+
