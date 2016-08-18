@@ -27,9 +27,9 @@ def add_new_tooth_location_record():
 
 def _form_to_tooth_location_record(form):
     temp_record =Tooth_location()
-    temp_record.tooth_location = request.form['tooth_location']
-    temp_record.symptom = request.form['symptom']
-    temp_record.user_id = request.form['user_id']
-    temp_record.time_of_occurrence = request.form['time_of_occurrence']
-    temp_record.is_fill_tooth = request.form['is_fill_tooth']
+    temp_record.tooth_location = form['tooth_location']
+    temp_record.symptom = form['symptom']
+    temp_record.user_id = form['user_id']
+    temp_record.time_of_occurrence = form['time_of_occurrence']
+    temp_record.is_fill_tooth = form['is_fill_tooth']
     return temp_record
