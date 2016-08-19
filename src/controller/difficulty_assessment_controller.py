@@ -7,20 +7,38 @@ from src.entity.difficulty_assessment import Difficulty_assessment
 from src.controller.common_function import check_if_user_exist
 from src import db
 
-@app.route('/medical-case-of-illness/difficulty-assessment',methods=['POST'])
+@app.route('/medical-case-of-illness/difficulty-assessment',methods=['POST','PUT'])
 def add_new_difficulty_assessment():
-    if check_if_user_exist(request.form['user_id']):
-        ret_difficult = _form_to_difficult_assessment(request.form)
-        db.session.add(ret_difficult)
-        db.session.commit()
-        res_difficult = Difficulty_assessment.query.filter_by(tooth_id=request.form['tooth_id']).first()
-        response = res_difficult.get_dict()
-        ret = flask.Response(json.dumps(response))
-        ret.headers['Access-Control-Allow-Origin'] = '*'
-        return ret
-    else:
-        ret = flask.Response("Can't find this user")
-        return ret, httplib.BAD_REQUEST
+    if request.method == 'POST':
+        if check_if_user_exist(request.form['user_id']):
+            ret_difficult = _form_to_difficult_assessment(request.form)
+            db.session.add(ret_difficult)
+            db.session.commit()
+            res_difficult = Difficulty_assessment.query.filter_by(tooth_id=request.form['tooth_id']).first()
+            response = res_difficult.get_dict()
+            ret = flask.Response(json.dumps(response))
+            ret.headers['Access-Control-Allow-Origin'] = '*'
+            return ret
+        else:
+            ret = flask.Response("Can't find this user")
+            ret.headers['Access-Control-Allow-Origin'] = '*'
+            return ret, httplib.BAD_REQUEST
+    elif request.method == 'PUT':
+        if check_if_user_exist(request.form['user_id']):
+            ret_difficult = _form_to_difficult_assessment(request.form)
+            db.session.query(Difficulty_assessment).filter(Difficulty_assessment.tooth_id == request.form['tooth_id']).delete()
+            db.session.commit()
+            db.session.add(ret_difficult)
+            db.session.commit()
+            res_difficulty_assessment =Difficulty_assessment.query.filter_by(tooth_id = request.form['tooth_id']).first()
+            response = res_difficulty_assessment.get_dict()
+            ret = flask.Response(json.dumps(response))
+            ret.headers['Access-Control-Allow-Origin'] = '*'
+            return ret
+        else:
+            ret = flask.Response("Can't find this user")
+            ret.headers['Access-Control-Allow-Origin'] = '*'
+            return ret, httplib.BAD_REQUEST
 
 def _form_to_difficult_assessment(form):
     temp_difficult = Difficulty_assessment()

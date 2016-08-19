@@ -22,6 +22,7 @@ def add_personal_history():
             return ret
         else:
             ret = flask.Response("Can't find this user")
+            ret.headers['Access-Control-Allow-Origin'] = '*'
             return ret,httplib.BAD_REQUEST
     elif request.method == 'PUT':
         if check_if_user_exist(request.form['user_id']):
@@ -37,6 +38,7 @@ def add_personal_history():
             return ret
         else:
             ret = flask.Response("Can't find this user")
+            ret.headers['Access-Control-Allow-Origin'] = '*'
             return ret, httplib.BAD_REQUEST
 
 

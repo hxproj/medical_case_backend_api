@@ -23,6 +23,7 @@ def add_new_tooth_location_record():
             return ret
         else:
             ret = flask.Response("Can't find this user")
+            ret.headers['Access-Control-Allow-Origin'] = '*'
             return ret, httplib.BAD_REQUEST
     elif request.method == 'PUT':
         db.session.query(Tooth_location).filter(Tooth_location.tooth_id == request.form['tooth_id']).delete()
@@ -37,6 +38,7 @@ def add_new_tooth_location_record():
         return ret
     else:
         ret = flask.Response("Can't find this user")
+        ret.headers['Access-Control-Allow-Origin'] = '*'
         return ret, httplib.BAD_REQUEST
 
 
