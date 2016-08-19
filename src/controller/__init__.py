@@ -3,3 +3,4 @@ import personal_history_controller
 import tooth_location_controller
 import illness_history_controller
 import oral_examination_controller
+import diagnose_controller
