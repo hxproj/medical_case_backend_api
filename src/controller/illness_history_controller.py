@@ -35,4 +35,5 @@ def _form_to_illness_history(form):
     temp_history.is_relief = form['is_relief']
     temp_history.is_treatment = form['is_treatment']
     temp_history.medicine_name = form['medicine_name']
+    temp_history.fill_type = form['fill_type']
     return temp_history

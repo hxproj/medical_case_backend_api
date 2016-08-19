@@ -7,22 +7,37 @@ from src.entity.oral_examination import Oral_examination
 from src.controller.common_function import check_if_user_exist
 from src import db
 
-@app.route('/medical-case-of-illness/oral-examination',methods=['POST'])
+@app.route('/medical-case-of-illness/oral-examination',methods=['POST','PUT'])
 def add_new_oral_examination ():
-    if check_if_user_exist(request.form['user_id']):
-        oral_examination  = _form_to_oral_examination(request.form)
-        db.session.add(oral_examination)
-        db.session.commit()
-        oral_examination_list = Oral_examination.query.filter_by(user_id = request.form['user_id']).all()
-        response = oral_examination_list[-1]
-        response = response.get_dict()
-        ret = flask.Response(json.dumps(response))
-        ret.headers['Access-Control-Allow-Origin'] = '*'
-        return ret
-    else:
-        ret = flask.Response("Can't find this user")
-        return ret, httplib.BAD_REQUEST
-
+    if request.method =='POST':
+        if check_if_user_exist(request.form['user_id']):
+            oral_examination  = _form_to_oral_examination(request.form)
+            db.session.add(oral_examination)
+            db.session.commit()
+            oral_examination_list = Oral_examination.query.filter_by(user_id = request.form['user_id']).all()
+            response = oral_examination_list[-1]
+            response = response.get_dict()
+            ret = flask.Response(json.dumps(response))
+            ret.headers['Access-Control-Allow-Origin'] = '*'
+            return ret
+        else:
+            ret = flask.Response("Can't find this user")
+            return ret, httplib.BAD_REQUEST
+    elif request.method =='PUT':
+        if check_if_user_exist(request.form['user_id']):
+            db.session.query(Oral_examination).filter(Oral_examination.tooth_id == request.form['tooth_id']).delete()
+            db.session.commit()
+            oral_examination = _form_to_oral_examination(request.form)
+            db.session.add(oral_examination)
+            db.session.commit()
+            res_oral_examination = Oral_examination.query.filter_by(tooth_id = request.form['tooth_id']).first()
+            response = res_oral_examination.get_dict()
+            ret = flask.Response(json.dumps(response))
+            ret.headers['Access-Control-Allow-Origin'] = '*'
+            return ret
+        else:
+            ret = flask.Response("Can't find this user")
+            return ret, httplib.BAD_REQUEST
 
 def _form_to_oral_examination(form):
     temp_oral_examination = Oral_examination()

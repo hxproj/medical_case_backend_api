@@ -10,6 +10,7 @@ class Illness_history(db.Model):
     medicine_name = db.Column(db.String(50))
     is_treatment = db.Column(db.String(50))
     is_relief = db.Column(db.String(50))
+    fill_type = db.Column(db.String(50))
 
     def get_dict(self):
         dit = self.__dict__
