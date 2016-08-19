@@ -17,6 +17,7 @@ def add_new_oral_examination ():
         response = oral_examination_list[-1]
         response = response.get_dict()
         ret = flask.Response(json.dumps(response))
+        ret.headers['Access-Control-Allow-Origin'] = '*'
         return ret
     else:
         ret = flask.Response("Can't find this user")

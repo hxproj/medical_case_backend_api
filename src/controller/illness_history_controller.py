@@ -17,6 +17,7 @@ def add_new_illness_history():
         current_illness_history = illness_history_list[-1]
         response = current_illness_history.get_dict()
         ret = flask.Response(json.dumps(response))
+        ret.headers['Access-Control-Allow-Origin'] = '*'
         return ret
     else:
         ret = flask.Response("Can't find this user")

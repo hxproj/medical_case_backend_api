@@ -16,6 +16,7 @@ def add_new_diagnose():
         diagnose_ret = Diagnose.query.filter_by(tooth_id = request.form['tooth_id']).first()
         response = diagnose_ret.get_dict()
         ret = flask.Response(json.dumps(response))
+        ret.headers['Access-Control-Allow-Origin'] = '*'
         return ret
     else:
         ret = flask.Response("Can't find this user")
