@@ -53,4 +53,5 @@ def _form_to_difficult_assessment(form):
     temp_difficult.saliva = form['saliva']
     temp_difficult.dental_phobia = form['dental_phobia']
     temp_difficult.difficulty_rating = form['difficulty_rating']
+    temp_difficult.difficulty_level = temp_difficult._caculate_difficulty()
     return  temp_difficult
