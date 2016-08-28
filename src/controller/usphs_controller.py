@@ -4,7 +4,7 @@ import flask
 from flask import request
 from src import app
 from src.entity.usphs import Usphs
-from src.controller.common_function import check_if_user_exist
+from src.controller.common_function import check_if_user_exist, refresh_step
 from src import db
 
 @app.route('/medical-case-of-illness/usphs', methods=['POST', 'PUT'])
@@ -14,6 +14,7 @@ def usphs_method():
             temp_usphs = _form_to_usphs(request.form)
             db.session.add(temp_usphs)
             db.session.commit()
+            refresh_step(request.form['tooth_id'], 7)
             res_usphs = Usphs.query.filter_by(tooth_id=request.form['tooth_id']).first()
             response  = res_usphs.get_dict()
             ret = flask.Response(json.dumps(response))

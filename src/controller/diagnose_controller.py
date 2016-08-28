@@ -4,7 +4,7 @@ import flask
 from flask import request
 from src import app
 from src.entity.diagnose import Diagnose
-from src.controller.common_function import check_if_user_exist
+from src.controller.common_function import check_if_user_exist, refresh_step
 from src import db
 
 @app.route('/medical-case-of-illness/diagnose',methods=['POST','PUT'])
@@ -14,6 +14,7 @@ def add_new_diagnose():
             diagnose = _form_to_diagnose(request.form)
             db.session.add(diagnose)
             db.session.commit()
+            refresh_step(request.form['tooth_id'], 3)
             diagnose_ret = Diagnose.query.filter_by(tooth_id = request.form['tooth_id']).first()
             response = diagnose_ret.get_dict()
             ret = flask.Response(json.dumps(response))

@@ -4,7 +4,7 @@ import flask
 from flask import request
 from src import app
 from src.entity.oral_examination import Oral_examination
-from src.controller.common_function import check_if_user_exist
+from src.controller.common_function import check_if_user_exist, refresh_step
 from src import db
 
 @app.route('/medical-case-of-illness/oral-examination',methods=['POST','PUT'])
@@ -14,6 +14,7 @@ def add_new_oral_examination ():
             oral_examination  = _form_to_oral_examination(request.form)
             db.session.add(oral_examination)
             db.session.commit()
+            refresh_step(request.form['tooth_id'], 2)
             oral_examination_list = Oral_examination.query.filter_by(user_id = request.form['user_id']).all()
             response = oral_examination_list[-1]
             response = response.get_dict()

@@ -5,7 +5,7 @@ from flask import request
 from src import app
 from src.entity.surgical import Surgical
 from src.entity.non_surgical import Non_surgical
-from src.controller.common_function import check_if_user_exist
+from src.controller.common_function import check_if_user_exist, refresh_step
 from src import db
 
 
@@ -17,6 +17,7 @@ def handle_method():
                 non_surgical = _form_to_non_surgical(request.form)
                 db.session.add(non_surgical)
                 db.session.commit()
+                refresh_step(request.form['tooth_id'], 5)
                 ret_non_surgical = Non_surgical.query.filter_by(tooth_id=request.form['tooth_id']).first()
                 response = ret_non_surgical.get_dict()
                 ret = flask.Response(json.dumps(response))
@@ -26,6 +27,7 @@ def handle_method():
                 surgical = _form_to_surgical(request.form)
                 db.session.add(surgical)
                 db.session.commit()
+                refresh_step(request.form['tooth_id'], 5)
                 ret_surgical = Surgical.query.filter_by(tooth_id=request.form['tooth_id']).first()
                 response = ret_surgical.get_dict()
                 ret = flask.Response(json.dumps(response))

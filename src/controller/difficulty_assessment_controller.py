@@ -4,7 +4,7 @@ import flask
 from flask import request
 from src import app
 from src.entity.difficulty_assessment import Difficulty_assessment
-from src.controller.common_function import check_if_user_exist
+from src.controller.common_function import check_if_user_exist, refresh_step
 from src import db
 
 @app.route('/medical-case-of-illness/difficulty-assessment',methods=['POST','PUT'])
@@ -14,6 +14,7 @@ def add_new_difficulty_assessment():
             ret_difficult = _form_to_difficult_assessment(request.form)
             db.session.add(ret_difficult)
             db.session.commit()
+            refresh_step(request.form['tooth_id'], 4)
             res_difficult = Difficulty_assessment.query.filter_by(tooth_id=request.form['tooth_id']).first()
             response = res_difficult.get_dict()
             ret = flask.Response(json.dumps(response))

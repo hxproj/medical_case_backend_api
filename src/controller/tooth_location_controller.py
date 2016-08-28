@@ -5,7 +5,7 @@ import flask
 from flask import request
 from src import app
 from src.entity.tooth_location import Tooth_location
-from src.controller.common_function import check_if_user_exist
+from src.controller.common_function import check_if_user_exist, refresh_step
 from src import db
 
 @app.route('/medical-case-of-illness/tooth-location-record',methods=['POST','PUT'])
@@ -13,8 +13,10 @@ def add_new_tooth_location_record():
     if request.method =='POST':
         if check_if_user_exist(request.form['user_id']):
             location_record = _form_to_tooth_location_record(request.form)
+            location_record.step = 0
             db.session.add(location_record)
             db.session.commit()
+            refresh_step(request.form['tooth_id'], 0)
             response_record = Tooth_location.query.filter_by(user_id = request.form['user_id']).all()
             newest_record = response_record[-1]
             response = newest_record.get_dict()
