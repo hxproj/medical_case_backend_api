@@ -13,7 +13,7 @@ from src import db
 def handle_method():
     if request.method == 'POST':
         if check_if_user_exist(request.form['user_id']):
-            if (request.form['handle_type'] == 0):
+            if ((int)(request.form['handle_type']) == 0):
                 non_surgical = _form_to_non_surgical(request.form)
                 db.session.add(non_surgical)
                 db.session.commit()
@@ -22,13 +22,17 @@ def handle_method():
                 ret = flask.Response(json.dumps(response))
                 ret.headers['Access-Control-Allow-Origin'] = '*'
                 return ret
-            elif request.form['handle_type'] == 1:
+            elif (int)(request.form['handle_type']) == 1:
                 surgical = _form_to_surgical(request.form)
                 db.session.add(surgical)
-                db.commit()
+                db.session.commit()
                 ret_surgical = Surgical.query.filter_by(tooth_id=request.form['tooth_id']).first()
                 response = ret_surgical.get_dict()
                 ret = flask.Response(json.dumps(response))
+                ret.headers['Access-Control-Allow-Origin'] = '*'
+                return ret
+            else:
+                ret = flask.Response('no matched opreation')
                 ret.headers['Access-Control-Allow-Origin'] = '*'
                 return ret
         else:
@@ -72,7 +76,7 @@ def _form_to_surgical(form):
 
 
 def _form_to_non_surgical(form):
-    temp_non_surgical = Surgical()
+    temp_non_surgical = Non_surgical()
     temp_non_surgical.user_id = form['user_id']
     temp_non_surgical.tooth_id = form['tooth_id']
     temp_non_surgical.handle_type = form['handle_type']

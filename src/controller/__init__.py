@@ -6,3 +6,4 @@ import oral_examination_controller
 import diagnose_controller
 import difficulty_assessment_controller
 import handle_controller
+import usphs_controller
