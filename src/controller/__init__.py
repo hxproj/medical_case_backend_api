@@ -8,3 +8,4 @@ import difficulty_assessment_controller
 import handle_controller
 import usphs_controller
 import index_info
+import prognosis_of_management_controller

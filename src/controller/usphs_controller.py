@@ -14,7 +14,7 @@ def usphs_method():
             temp_usphs = _form_to_usphs(request.form)
             db.session.add(temp_usphs)
             db.session.commit()
-            refresh_step(request.form['tooth_id'], 7)
+            refresh_step(request.form['tooth_id'], 6)
             res_usphs = Usphs.query.filter_by(tooth_id=request.form['tooth_id']).first()
             response  = res_usphs.get_dict()
             ret = flask.Response(json.dumps(response))
