@@ -7,7 +7,7 @@ from src.entity.difficulty_assessment import Difficulty_assessment
 from src.controller.common_function import check_if_user_exist, refresh_step
 from src import db
 
-@app.route('/medical-case-of-illness/difficulty-assessment',methods=['POST','PUT'])
+@app.route('/medical-case-of-illness/difficulty-assessment',methods=['POST','PUT','GET'])
 def add_new_difficulty_assessment():
     if request.method == 'POST':
         if check_if_user_exist(request.form['user_id']):
@@ -24,6 +24,12 @@ def add_new_difficulty_assessment():
             ret = flask.Response("Can't find this user")
             ret.headers['Access-Control-Allow-Origin'] = '*'
             return ret, httplib.BAD_REQUEST
+    elif request.method == 'GET':
+        temp_result = Difficulty_assessment.query.filter_by(tooth_id = request.args['tooth_id']).first()
+        response = temp_result.get_dict()
+        ret = flask.Response(json.dumps(response))
+        ret.headers['Access-Control-Allow-Origin'] = '*'
+        return ret
     elif request.method == 'PUT':
         if check_if_user_exist(request.form['user_id']):
             ret_difficult = _form_to_difficult_assessment(request.form)

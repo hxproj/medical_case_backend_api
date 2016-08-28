@@ -7,9 +7,15 @@ from src.entity.diagnose import Diagnose
 from src.controller.common_function import check_if_user_exist, refresh_step
 from src import db
 
-@app.route('/medical-case-of-illness/diagnose',methods=['POST','PUT'])
+@app.route('/medical-case-of-illness/diagnose',methods=['POST','PUT','GET'])
 def add_new_diagnose():
-    if request.method == 'POST':
+    if request.method == 'GET':
+        diagnose = Diagnose.query.filter_by(tooth_id = request.args['tooth_id']).first()
+        response = diagnose.get_dict()
+        ret = flask.Response(json.dumps(response))
+        ret.headers['Access-Control-Allow-Origin'] = '*'
+        return ret
+    elif request.method == 'POST':
         if check_if_user_exist(request.form['user_id']):
             diagnose = _form_to_diagnose(request.form)
             db.session.add(diagnose)

@@ -9,7 +9,7 @@ from src.controller.common_function import check_if_user_exist, refresh_step
 from src import db
 
 
-@app.route('/medical-case-of-illness/handle', methods=['POST', 'PUT'])
+@app.route('/medical-case-of-illness/handle', methods=['POST', 'PUT','GET'])
 def handle_method():
     if request.method == 'POST':
         if check_if_user_exist(request.form['user_id']):
@@ -37,6 +37,44 @@ def handle_method():
                 ret = flask.Response('no matched opreation')
                 ret.headers['Access-Control-Allow-Origin'] = '*'
                 return ret
+        else:
+            ret = flask.Response("Can't find this user")
+            ret.headers['Access-Control-Allow-Origin'] = '*'
+            return ret, httplib.BAD_REQUEST
+    elif request.method == 'GET':
+        temp_result = Surgical.query.filter_by(tooth_id=request.args['tooth_id']).first()
+        if temp_result:
+            response = temp_result.get_dict()
+            ret = flask.Response(json.dumps(response))
+            ret.headers['Access-Control-Allow-Origin'] = '*'
+            return ret
+        else :
+            temp_result = Non_surgical.query.filter_by(tooth_id=request.args['tooth_id']).first()
+            response = temp_result.get_dict()
+            ret = flask.Response(json.dumps(response))
+            ret.headers['Access-Control-Allow-Origin'] = '*'
+            return ret
+    elif request.method =='PUT':
+        if check_if_user_exist(request.form['user_id']):
+            if (int)(request.form['handle_type'])==1:
+                temp_result = _form_to_surgical(request.form)
+            else:
+                temp_result = _form_to_non_surgical(request.form)
+            db.session.query(Surgical).filter(
+                Surgical.tooth_id == request.form['tooth_id']).delete()
+            db.session.query(Non_surgical).filter(
+                Non_surgical.tooth_id == request.form['tooth_id']).delete()
+            db.session.commit()
+            db.session.add(temp_result)
+            db.session.commit()
+            if (int)(request.form['handle_type'])==1:
+                result = Surgical.query.filter_by(tooth_id = request.form['tooth_id']).first()
+            else:
+                result = Non_surgical.query.filter_by(tooth_id = request.form['tooth_id']).first()
+            response = result.get_dict()
+            ret = flask.Response(json.dumps(response))
+            ret.headers['Access-Control-Allow-Origin'] = '*'
+            return ret
         else:
             ret = flask.Response("Can't find this user")
             ret.headers['Access-Control-Allow-Origin'] = '*'

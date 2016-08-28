@@ -7,3 +7,4 @@ import diagnose_controller
 import difficulty_assessment_controller
 import handle_controller
 import usphs_controller
+import prognosis_of_management_controller
