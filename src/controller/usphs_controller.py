@@ -7,6 +7,7 @@ from src.entity.usphs import Usphs
 from src.controller.common_function import check_if_user_exist, refresh_step
 from src import db
 
+
 @app.route('/medical-case-of-illness/usphs', methods=['POST', 'PUT'])
 def usphs_method():
     if request.method == 'POST':
@@ -16,7 +17,7 @@ def usphs_method():
             db.session.commit()
             refresh_step(request.form['tooth_id'], 6)
             res_usphs = Usphs.query.filter_by(tooth_id=request.form['tooth_id']).first()
-            response  = res_usphs.get_dict()
+            response = res_usphs.get_dict()
             ret = flask.Response(json.dumps(response))
             ret.headers['Access-Control-Allow-Origin'] = '*'
             return ret

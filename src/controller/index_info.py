@@ -30,11 +30,5 @@ def get_index():
             temp_tooth_list.append(tll)
         temp['tootn_location_list']=temp_tooth_list
     ret = flask.Response(json.dumps(temp_user_list))
+    ret.headers['Access-Control-Allow-Origin'] = '*'
     return ret
-
-
-
-
-
-
-    
