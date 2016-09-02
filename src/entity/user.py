@@ -7,6 +7,7 @@ class User(db.Model):
     gender = db.Column(db.Boolean)
     occupation = db.Column(db.String(50))
     contact = db.Column(db.String(50))
+    in_date = db.Column(db.DateTime)
 
     #def __init__(self, name):
         #self.name = name
