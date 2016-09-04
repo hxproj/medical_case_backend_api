@@ -9,3 +9,4 @@ import handle_controller
 import usphs_controller
 import index_info
 import prognosis_of_management_controller
+import index_info_stepless

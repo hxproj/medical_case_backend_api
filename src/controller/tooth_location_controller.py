@@ -5,10 +5,17 @@ import flask
 from flask import request
 from src import app
 from src.entity.tooth_location import Tooth_location
+from src.entity.illness_history import Illness_history
+from src.entity.oral_examination import Oral_examination
+from src.entity.difficulty_assessment import Difficulty_assessment
+from src.entity.surgical import Surgical
+from src.entity.diagnose import Diagnose
+from src.entity.non_surgical import Non_surgical
+from src.entity.usphs import Usphs
 from src.controller.common_function import check_if_user_exist, refresh_step
 from src import db
 
-@app.route('/medical-case-of-illness/tooth-location-record',methods=['POST','PUT'])
+@app.route('/medical-case-of-illness/tooth-location-record',methods=['POST','PUT','DELETE'])
 def add_new_tooth_location_record():
     if request.method =='POST':
         if check_if_user_exist(request.form['user_id']):
@@ -38,10 +45,35 @@ def add_new_tooth_location_record():
         ret = flask.Response(json.dumps(response))
         ret.headers['Access-Control-Allow-Origin'] = '*'
         return ret
-    else:
-        ret = flask.Response("Can't find this user")
+    elif request.method == 'DELETE':
+        tooth_id = request.args.get('tooth_id')
+        deletelist = db.session.query(Tooth_location).filter(Tooth_location.tooth_id == tooth_id).first()
+        step=deletelist.step
+        count=0
+        if db.session.query(Tooth_location).filter(Tooth_location.tooth_id == tooth_id).delete():
+            count=count+1
+        if db.session.query(Illness_history).filter(Illness_history.tooth_id == tooth_id).delete():
+            count = count + 1
+        if db.session.query(Oral_examination).filter(Oral_examination.tooth_id == tooth_id).delete():
+            count = count + 1
+        if db.session.query(Diagnose).filter(Diagnose.tooth_id == tooth_id).delete():
+            count = count + 1
+        if db.session.query(Difficulty_assessment).filter(Difficulty_assessment.tooth_id == tooth_id).delete():
+            count = count + 1
+        if db.session.query(Surgical).filter(Surgical.tooth_id == tooth_id).delete():
+            count = count + 1
+        if db.session.query(Non_surgical).filter(Non_surgical.tooth_id == tooth_id).delete():
+            count = count + 1
+        if db.session.query(Usphs).filter(Usphs.tooth_id == tooth_id).delete():
+            count = count + 1
+        db.session.commit()
+
+        if step==count-1:
+            ret = flask.Response("Delete Successful")
+        else:
+            ret = flask.Response("Delete have a misstake")
         ret.headers['Access-Control-Allow-Origin'] = '*'
-        return ret, httplib.BAD_REQUEST
+        return ret
 
 
 def _form_to_tooth_location_record(form):
