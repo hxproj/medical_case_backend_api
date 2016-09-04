@@ -1,6 +1,7 @@
 import httplib
 import json
 
+import datetime
 import flask
 from flask import request
 from src import app
@@ -57,6 +58,7 @@ def _form_to_user(form):
     user.gender = form['gender']
     user.name = form['name']
     user.occupation = form['occupation']
+    user.in_date = datetime.datetime.now()
     return user
 
 def _form_to_user_update(form):
