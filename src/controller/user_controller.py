@@ -27,6 +27,7 @@ def add_user():
             db.session.commit()
             response_user = User.query.filter_by(name=request.form['name']).first()
             result = response_user.get_dict()
+            result['in_date']=result['in_date'].strftime('%Y-%m-%d %H:%M:%S')
             ret = flask.Response(json.dumps(result))
             ret.headers['Access-Control-Allow-Origin']='*'
             return ret,httplib.OK
