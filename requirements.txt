@@ -1,0 +1,7 @@
+python-docx
+mysql
+MySQL-python
+lxml
+gevent
+Flask-SQLALchemy
+SQLALchemy
