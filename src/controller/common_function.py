@@ -36,6 +36,6 @@ def check_directory(tooth_id):
 def check_file(tooth_id, file_name):
     path = app.config['STATIC_FILES_PATH'] + (str)(tooth_id) + '\\' + file_name
     if not os.path.exists(path):
-        f = open(path, 'w')
-        f.close()
-    return path
+        return False, path
+    else:
+        return True, path

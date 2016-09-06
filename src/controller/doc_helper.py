@@ -3,6 +3,7 @@ import os
 import sys
 from docx import Document
 from src import app
+from src.controller.common_function import check_directory, check_file
 from src.entity.illness_history import Illness_history
 from src.entity.oral_examination import Oral_examination
 from src.entity.personal_history import Personal_history
@@ -19,14 +20,18 @@ def generate_docx(tooth_id):
         full_text = full_text + '%split%' + graphs.text
     dit = _get_dictionary(tooth_id)
     for key, value in dit.items():
-       full_text = full_text.replace(key, str(dit[key]))
+        full_text = full_text.replace(key, str(dit[key]))
     text_list = full_text.split('%split%')
     text_list.remove('')
     for i in range(len(text_list)):
-        if len(paragraphs[i].runs)>1:
+        if len(paragraphs[i].runs) > 1:
             if not paragraphs[i].runs[0].font.bold:
                 paragraphs[i].text = text_list[i]
-    document.save('D:/test.docx') #todo add function to generate doc path to save
+    check_directory(tooth_id)
+    flag, path = check_file(tooth_id, (str)(tooth_id) + '.docx')
+    if flag:
+        os.remove(path)
+    document.save(path)  # todo add function to generate doc path to save
 
 
 def _get_dictionary(tooth_id):
