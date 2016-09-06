@@ -1,5 +1,6 @@
 from sqlalchemy import and_
-
+import os
+from src import app
 from src.entity.user import User
 from src.entity.tooth_location import Tooth_location
 from src import db
@@ -23,3 +24,18 @@ def refresh_step(user_id, step, tooth_location=None):
             Tooth_location.user_id == user_id).update(
             {'step': step})
     db.session.commit()
+
+
+def check_directory(tooth_id):
+    path = app.config['STATIC_FILES_PATH'] + (str)(tooth_id)
+    if not os.path.exists(path):
+        os.mkdir(path)
+    return path
+
+
+def check_file(tooth_id, file_name):
+    path = app.config['STATIC_FILES_PATH'] + (str)(tooth_id) + '\\' + file_name
+    if not os.path.exists(path):
+        f = open(path, 'w')
+        f.close()
+    return path
