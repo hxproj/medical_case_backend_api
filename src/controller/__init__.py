@@ -10,3 +10,4 @@ import usphs_controller
 import index_info
 import prognosis_of_management_controller
 import index_info_stepless
+import risk_assessment_controller

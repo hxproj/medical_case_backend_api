@@ -6,6 +6,7 @@ HTTP_PORT = 9000
 LOG = 'var/medical_case_of_illness/logs'
 
 QUERY_LIMIT = 10
+PER_PAGE = 10
 
 TEMPLETE_LOCATION ='C:\Users\solitaire\Desktop\illness.docx'
 
