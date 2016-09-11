@@ -60,7 +60,8 @@ def search_options():
                 return_list.append(result[-1])
             else:
                 return_list = result[offset_start:offset_end]
-            response = flask.Response(json.dumps(return_list))
+            info = {'info_list':return_list,'pages':len(result)/app.config['PER_PAGE']}
+            response = flask.Response(json.dumps(info))
             response.headers['Access-Control-Allow-Origin'] = '*'
             return response, 200
         except:
