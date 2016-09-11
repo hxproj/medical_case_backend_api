@@ -12,7 +12,7 @@ from src import db
 def get_index():
     page = request.args.get('page',1,type=int)
     offset = (page-1)*app.config['PER_PAGE']
-    query = db.session.query(User)
+    query = db.session.query(User).order_by(User.user_id.desc())
     query = query.offset(offset)
     query = query.limit(app.config['PER_PAGE'])
     user_list =query.all()

@@ -12,3 +12,5 @@ import prognosis_of_management_controller
 import index_info_stepless
 import risk_assessment_controller
 import search_controller
+import img_controller
+import doc_helper
