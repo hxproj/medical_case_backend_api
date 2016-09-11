@@ -1,6 +1,11 @@
 # -*- coding:utf-8 -*-
 import os
 import sys
+
+import flask
+from flask import request
+
+from src import app
 from docx import Document
 from src.controller.common_function import check_directory, check_file
 from src.entity.diagnose import Diagnose
@@ -13,6 +18,16 @@ from src.entity.risk_assessment import Risk_assessment
 from src.entity.surgical import Surgical
 from src.entity.tooth_location import Tooth_location
 from src.entity.user import User
+
+
+@app.route('/medical-case-of-illness/doc')
+def get_doc():
+    tooth_id = (int)(request.args['tooth_id'])
+    risk = request.args['risk']
+    path = generate_doc(tooth_id,risk)
+    response = flask.Response(path)
+    response.headers['Access-Control-Allow-Origin'] = '*'
+    return response, 200
 
 def generate_doc(tooth_id,risk=None):
     document = Document()
@@ -32,6 +47,7 @@ def generate_doc(tooth_id,risk=None):
     if flag:
         os.remove(path)
     document.save(path)
+    return path
 
 class doc_manager:
     document = ''

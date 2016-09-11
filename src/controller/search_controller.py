@@ -15,6 +15,7 @@ from src.entity.prognosis_of_management import Prognosis_of_management
 from src.entity.risk_assessment import Risk_assessment
 from src import db
 from src.entity.tooth_location import Tooth_location
+from src.entity.user import User
 
 
 @app.route('/medical-case-of-illness/search-by-conditons',methods=['GET'])
@@ -27,6 +28,8 @@ def search_options():
     query = ''
     if table =='personal_history':
         query = Personal_history.query
+    elif table =='user':
+        query = User.query
     elif table =='diagnose':
         query = Diagnose.query
     elif table == 'difficulty_assessment':
@@ -50,10 +53,7 @@ def search_options():
         return response,200
     else:
         try:
-            if (int)(page)== 0:
-                offset_start =0
-            else:
-                offset_start =(int)(page)*app.config['PER_PAGE']-1
+            offset_start = (int)(page)*app.config['PER_PAGE']
             offset_end = offset_start+app.config['PER_PAGE']
             if offset_end>len(result):
                 return_list = result[offset_start:-1]
