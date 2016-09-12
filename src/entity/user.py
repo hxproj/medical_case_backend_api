@@ -17,5 +17,6 @@ class User(db.Model):
     def get_dict(self):
         dit = self.__dict__
         del dit['_sa_instance_state']
-        dit['in_date']= dit['in_date'].strftime('%Y-%m-%d %H:%M:%S')
+        if dit['in_date']:
+            dit['in_date']= dit['in_date'].strftime('%Y-%m-%d %H:%M:%S')
         return dit

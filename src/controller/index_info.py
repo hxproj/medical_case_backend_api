@@ -2,6 +2,8 @@ import httplib
 import json
 import flask
 from flask import request
+from sqlalchemy import func
+
 from src import app
 from src.entity.tooth_location import Tooth_location
 from src.entity.user import User
@@ -29,6 +31,8 @@ def get_index():
             tll=tll.get_dict()
             temp_tooth_list.append(tll)
         temp['tootn_location_list']=temp_tooth_list
-    ret = flask.Response(json.dumps(temp_user_list))
+    count = db.session.query(func.count(User.user_id)).all()[0][0]
+    return_res = {'pages':count,'info_list':temp_user_list}
+    ret = flask.Response(json.dumps(return_res))
     ret.headers['Access-Control-Allow-Origin'] = '*'
     return ret
