@@ -32,6 +32,7 @@ def get_index():
             temp_tooth_list.append(tll)
         temp['tootn_location_list']=temp_tooth_list
     count = db.session.query(func.count(User.user_id)).all()[0][0]
+    count = count/app.config['PER_PAGE']
     return_res = {'pages':count,'info_list':temp_user_list}
     ret = flask.Response(json.dumps(return_res))
     ret.headers['Access-Control-Allow-Origin'] = '*'
