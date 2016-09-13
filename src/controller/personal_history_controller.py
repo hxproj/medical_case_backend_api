@@ -62,7 +62,7 @@ def _form_to_personal_history(form):
     history.salivary_gland_disease = form['salivary_gland_disease']
     history.sjogren_syndrome = form['sjogren_syndrome']
     history.consciously_reduce_salivary_flow = form['consciously_reduce_salivary_flow']
-    history.is_consciously_reduce_salivary_flow = form['is_consciously_reduce_salivary_flow']
-    history.is_salivary_gland_disease = form['is_salivary_gland_disease']
+    #history.is_consciously_reduce_salivary_flow = form['is_consciously_reduce_salivary_flow']
+    #history.is_salivary_gland_disease = form['is_salivary_gland_disease']
     return history
 

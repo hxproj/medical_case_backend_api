@@ -16,10 +16,10 @@ class Personal_history(db.Model):
     is_fluorine = db.Column(db.String(50))
     is_cavity_examination = db.Column(db.String(50))
     is_periodontal_treatment = db.Column(db.String(50))
-    is_salivary_gland_disease = db.Column(db.String(50))
+    #is_salivary_gland_disease = db.Column(db.String(50))
     salivary_gland_disease = db.Column(db.String(50))
     sjogren_syndrome = db.Column(db.String(50))
-    is_consciously_reduce_salivary_flow = db.Column(db.String(50))
+    #is_consciously_reduce_salivary_flow = db.Column(db.String(50))
     consciously_reduce_salivary_flow = db.Column(db.Integer)
 
 
