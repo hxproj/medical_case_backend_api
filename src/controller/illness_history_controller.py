@@ -14,7 +14,8 @@ def add_new_illness_history():
             illness_history = _form_to_illness_history(request.form)
             db.session.add(illness_history)
             db.session.commit()
-            refresh_step(request.form['tooth_id'],1)
+            temp_illness = Illness_history.query.filter_by(user_id = request.form['user_id']).all()[-1]
+            refresh_step(temp_illness.tooth_id,1)
             illness_history_list = Illness_history.query.filter_by(user_id = request.form['user_id']) #todo add try except
             current_illness_history = illness_history_list[-1]
             response = current_illness_history.get_dict()
