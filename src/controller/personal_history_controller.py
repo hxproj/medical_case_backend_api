@@ -8,7 +8,7 @@ from src.controller.common_function import check_if_user_exist
 from src.entity.personal_history import Personal_history
 from src import db
 
-@app.route('/medical-case-of-illness/personal-history',methods=['POST','PUT'])
+@app.route('/medical-case-of-illness/personal-history',methods=['POST','PUT','GET'])
 def add_personal_history():
     if request.method == 'POST':
         if check_if_user_exist(request.form['user_id']):
@@ -24,6 +24,17 @@ def add_personal_history():
             ret = flask.Response("Can't find this user")
             ret.headers['Access-Control-Allow-Origin'] = '*'
             return ret,httplib.BAD_REQUEST
+    elif request.method == 'GET':
+        user_id = request.args['user_id']
+        personal_history = Personal_history.query.filter_by(user_id = user_id).first()
+        if personal_history:
+            response = flask.Response(json.dumps(personal_history.get_dict()))
+            response.headers['Access-Control-Allow-Origin'] = '*'
+            return response,200
+        else :
+            response = flask.Response('can not find this record.')
+            response.headers['Access-Control-Allow-Origin'] = '*'
+            return response, 400
     elif request.method == 'PUT':
         if check_if_user_exist(request.form['user_id']):
             db.session.query(Personal_history).filter(Personal_history.user_id == request.form['user_id']).delete()

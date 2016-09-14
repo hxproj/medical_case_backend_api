@@ -16,7 +16,7 @@ from src.controller.common_function import check_if_user_exist, refresh_step
 from src import db
 
 
-@app.route('/medical-case-of-illness/tooth-location-record', methods=['POST', 'PUT', 'DELETE'])
+@app.route('/medical-case-of-illness/tooth-location-record', methods=['GET','POST', 'PUT', 'DELETE'])
 def add_new_tooth_location_record():
     if request.method == 'POST':
         if check_if_user_exist(request.form['user_id']):
@@ -35,6 +35,19 @@ def add_new_tooth_location_record():
             ret = flask.Response("Can't find this user")
             ret.headers['Access-Control-Allow-Origin'] = '*'
             return ret, httplib.BAD_REQUEST
+    elif request.method == 'GET':
+        tooth_id = request.args['tooth_id']
+        tooth_location = Tooth_location.query.filter_by(tooth_id = tooth_id).first()
+        if tooth_location:
+            response = tooth_location.get_dict()
+            ret = flask.Response(json.dumps(response))
+            ret.headers['Access-Control-Allow-Origin'] = '*'
+            return ret,200
+        else:
+            res = flask.Response('can not find this record')
+            res.headers['Access-Control-Allow-Origin'] = '*'
+            return res,400
+
     elif request.method == 'PUT':
         db.session.query(Tooth_location).filter(Tooth_location.tooth_id == request.form['tooth_id']).delete()
         db.session.commit()
