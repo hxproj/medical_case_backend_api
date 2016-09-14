@@ -24,7 +24,7 @@ def add_new_tooth_location_record():
             location_record.step = 0
             db.session.add(location_record)
             db.session.commit()
-            refresh_step(request.form['user_id'], 0, request.form['tooth_location'])
+            #refresh_step(request.form['user_id'], 0, request.form['tooth_location'])
             response_record = Tooth_location.query.filter_by(user_id=request.form['user_id']).all()
             newest_record = response_record[-1]
             response = newest_record.get_dict()
@@ -84,6 +84,7 @@ def _form_to_tooth_location_record(form):
     temp_record.user_id = form['user_id']
     temp_record.time_of_occurrence = form['time_of_occurrence']
     temp_record.is_fill_tooth = form['is_fill_tooth']
+    temp_record.step = 0
     return temp_record
 
 
