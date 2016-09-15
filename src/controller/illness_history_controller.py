@@ -51,9 +51,9 @@ def add_new_illness_history():
         return ret
 
 def _form_to_illness_history(form):
-    temp_history =Illness_history()
+    temp_history = Illness_history()
     temp_history.tooth_id = form['tooth_id']
-    temp_history.is_medicine = form['is_medicine']
+#   temp_history.is_medicine = form['is_medicine']
     temp_history.is_night_pain_self_pain = form['is_night_pain_self_pain']
     temp_history.user_id = form['user_id']
     temp_history.is_primary = form['is_primary']
