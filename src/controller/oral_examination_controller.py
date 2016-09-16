@@ -50,6 +50,11 @@ def add_new_oral_examination():
         ret = flask.Response(json.dumps(res_oral_examination))
         ret.headers['Access-Control-Allow-Origin'] = '*'
         return ret
+    elif request.method == 'OPTIONS':
+        ret = flask.Response()
+        ret.headers['Access-Control-Allow-Origin'] = '*'
+        ret.headers['Access-Control-Allow-Methods'] = 'PUT,DELETE'
+        return ret
 
 
 def _form_to_oral_examination(form):
