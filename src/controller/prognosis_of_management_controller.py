@@ -6,7 +6,7 @@ from src.entity.prognosis_of_management import Prognosis_of_management
 from src import db
 
 
-@app.route('/medical-case-of-illness/prognosis',methods=['GET','PUT','POST'])
+@app.route('/medical-case-of-illness/prognosis',methods=['GET','PUT','POST','OPTIONS'])
 def prognosis_operation():
     if request.method=='POST':
         prognosis = Prognosis_of_management()
@@ -38,4 +38,9 @@ def prognosis_operation():
         response = prognosis.get_dict()
         ret = flask.Response(json.dumps(response))
         ret.headers['Access-Control-Allow-Origin'] = '*'
+        return ret
+    elif request.method == 'OPTIONS':
+        ret = flask.Response()
+        ret.headers['Access-Control-Allow-Origin'] = '*'
+        ret.headers['Access-Control-Allow-Methods'] = 'PUT,DELETE'
         return ret

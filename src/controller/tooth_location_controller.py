@@ -16,7 +16,7 @@ from src.controller.common_function import check_if_user_exist, refresh_step
 from src import db
 
 
-@app.route('/medical-case-of-illness/tooth-location-record', methods=['GET','POST', 'PUT', 'DELETE'])
+@app.route('/medical-case-of-illness/tooth-location-record', methods=['GET','POST', 'PUT', 'DELETE','OPTIONS'])
 def add_new_tooth_location_record():
     if request.method == 'POST':
         if check_if_user_exist(request.form['user_id']):
@@ -87,6 +87,11 @@ def add_new_tooth_location_record():
         else:
             ret = flask.Response("Delete have a misstake")
         ret.headers['Access-Control-Allow-Origin'] = '*'
+        return ret
+    elif request.method == 'OPTIONS':
+        ret = flask.Response()
+        ret.headers['Access-Control-Allow-Origin'] = '*'
+        ret.headers['Access-Control-Allow-Methods'] = 'PUT,DELETE'
         return ret
 
 

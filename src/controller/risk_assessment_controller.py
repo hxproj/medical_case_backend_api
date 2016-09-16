@@ -9,7 +9,7 @@ from src.controller.common_function import check_if_user_exist
 from src.entity.risk_assessment import Risk_assessment
 from src import db
 
-@app.route('/medical-case-of-illness/risk-assessment',methods=['GET','POST','DELETE'])
+@app.route('/medical-case-of-illness/risk-assessment',methods=['GET','POST','DELETE','OPTIONS'])
 def risk_options():
     if request.method=='POST':
         if not check_if_user_exist(request.form['user_id']):
@@ -55,6 +55,11 @@ def risk_options():
             response = flask.Response('user has not record risk assessment.')
             response.headers['Access-Control-Allow-Origin'] = '*'
             return response, 400
+    elif request.method == 'OPTIONS':
+        ret = flask.Response()
+        ret.headers['Access-Control-Allow-Origin'] = '*'
+        ret.headers['Access-Control-Allow-Methods'] = 'PUT,DELETE'
+        return ret
 
 
 

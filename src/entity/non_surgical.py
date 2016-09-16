@@ -13,6 +13,7 @@ class Non_surgical(db.Model):
     tools = db.Column(db.String(20))
     lamp = db.Column(db.String(20))
     check_time = db.Column(db.String(20))
+    time_of_etching = db.Column(db.String(10))
 
     def get_dict(self):
         dit = self.__dict__

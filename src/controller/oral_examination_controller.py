@@ -8,7 +8,7 @@ from src.controller.common_function import check_if_user_exist, refresh_step
 from src import db
 
 
-@app.route('/medical-case-of-illness/oral-examination', methods=['POST', 'PUT', 'GET'])
+@app.route('/medical-case-of-illness/oral-examination', methods=['POST', 'PUT', 'GET','OPTIONS'])
 def add_new_oral_examination():
     if request.method == 'POST':
         if check_if_user_exist(request.form['user_id']):

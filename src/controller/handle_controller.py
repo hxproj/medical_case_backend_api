@@ -9,7 +9,7 @@ from src.controller.common_function import check_if_user_exist, refresh_step
 from src import db
 
 
-@app.route('/medical-case-of-illness/handle', methods=['POST', 'PUT', 'GET'])
+@app.route('/medical-case-of-illness/handle', methods=['POST', 'PUT', 'GET','OPTIONS'])
 def handle_method():
     if request.method == 'POST':
         if check_if_user_exist(request.form['user_id']):
@@ -135,4 +135,5 @@ def _form_to_non_surgical(form):
     temp_non_surgical.tools = form['tools']
     temp_non_surgical.lamp = form['lamp']
     temp_non_surgical.check_time = form['check_time']
+    temp_non_surgical.time_of_etching = form['time_of_etching']
     return temp_non_surgical

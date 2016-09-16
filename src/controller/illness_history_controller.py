@@ -8,7 +8,7 @@ from src.controller.common_function import check_if_user_exist, refresh_step
 from src import db
 
 
-@app.route('/medical-case-of-illness/illness-history', methods=['POST', 'PUT', 'GET'])
+@app.route('/medical-case-of-illness/illness-history', methods=['POST', 'PUT', 'GET','OPTIONS'])
 def add_new_illness_history():
     if request.method == 'POST':
         if check_if_user_exist(request.form['user_id']):
@@ -50,6 +50,11 @@ def add_new_illness_history():
         response = illness_history.get_dict()
         ret = flask.Response(json.dumps(response))
         ret.headers['Access-Control-Allow-Origin'] = '*'
+        return ret
+    elif request.method == 'OPTIONS':
+        ret = flask.Response()
+        ret.headers['Access-Control-Allow-Origin'] = '*'
+        ret.headers['Access-Control-Allow-Methods'] = 'PUT,DELETE'
         return ret
     elif request.method == 'OPTIONS':
         ret = flask.Response()
