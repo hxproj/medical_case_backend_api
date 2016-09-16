@@ -3,8 +3,8 @@ from src import db
 class Usphs(db.Model):
     tooth_id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer)
-    color = db.Column(db.String(20))
-    marginal_accuracy = db.Column(db.String(20))
+    color = db.Column(db.String(50))
+    marginal_accuracy = db.Column(db.String(50))
     anatomic_form = db.Column(db.String(20))
     surfaceness = db.Column(db.String(20))
     edge_color = db.Column(db.String(20))

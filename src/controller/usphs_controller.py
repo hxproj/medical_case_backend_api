@@ -8,7 +8,7 @@ from src.controller.common_function import check_if_user_exist, refresh_step
 from src import db
 
 
-@app.route('/medical-case-of-illness/usphs', methods=['POST', 'PUT'])
+@app.route('/medical-case-of-illness/usphs', methods=['POST', 'PUT', 'GET','OPTIONS'])
 def usphs_method():
     if request.method == 'POST':
         if check_if_user_exist(request.form['user_id']):
@@ -25,6 +25,17 @@ def usphs_method():
             ret = flask.Response("Can't find this user")
             ret.headers['Access-Control-Allow-Origin'] = '*'
             return ret, httplib.BAD_REQUEST
+    elif request.method == 'GET':
+        temp_result = Usphs.query.filter_by(tooth_id=request.args['tooth_id']).first()
+        response = temp_result.get_dict()
+        ret = flask.Response(json.dumps(response))
+        ret.headers['Access-Control-Allow-Origin'] = '*'
+        return ret
+    elif request.method == 'OPTIONS':
+        ret = flask.Response()
+        ret.headers['Access-Control-Allow-Origin'] = '*'
+        ret.headers['Access-Control-Allow-Methods'] = 'PUT,DELETE'
+        return ret
 
 
 def _form_to_usphs(form):

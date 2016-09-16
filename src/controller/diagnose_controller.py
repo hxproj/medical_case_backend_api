@@ -7,7 +7,7 @@ from src.entity.diagnose import Diagnose
 from src.controller.common_function import check_if_user_exist, refresh_step
 from src import db
 
-@app.route('/medical-case-of-illness/diagnose',methods=['POST','PUT','GET'])
+@app.route('/medical-case-of-illness/diagnose',methods=['POST','PUT','GET','OPTIONS'])
 def add_new_diagnose():
     if request.method == 'GET':
         diagnose = Diagnose.query.filter_by(tooth_id = request.args['tooth_id']).first()
@@ -47,6 +47,11 @@ def add_new_diagnose():
             ret = flask.Response("Can't find this user")
             ret.headers['Access-Control-Allow-Origin'] = '*'
             return ret, httplib.BAD_REQUEST
+    elif request.method == 'OPTIONS':
+        ret = flask.Response()
+        ret.headers['Access-Control-Allow-Origin'] = '*'
+        ret.headers['Access-Control-Allow-Methods'] = 'PUT,DELETE'
+        return ret
 
 def _form_to_diagnose(form):
     temp_diagnose = Diagnose()
