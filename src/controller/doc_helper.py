@@ -118,12 +118,12 @@ class doc_manager:
                 dict['non_surgical'] = '	窝沟封闭：1.清洁牙面： 在低速手机上装好{0}，' \
                                             '蘸取适量{1}于牙面，对牙面和窝沟来回刷洗1分钟，' \
                                             '同时不断滴水保持毛刷湿润。2.用棉纱球隔湿,压缩空气牙面吹干，' \
-                                            '{2}蘸取酸蚀剂置于牙尖斜面的2／3上。酸蚀时间20-30秒/60秒。' \
+                                            '{2}蘸取酸蚀剂置于牙尖斜面的2／3上。酸蚀时间{3}。' \
                                             ' 3.流水冲洗牙面10-15秒，去除牙釉质表面和反应沉淀物。' \
                                             '4.洗刷笔蘸取适量封闭剂沿窝沟从远中向近中涂布在酸蚀后的牙面上。' \
-                                            '5.1-2分钟{3}灯离牙尖1mm照射20-40秒。' \
-                                            '6. 探针进行检查，调合，定期{4}复查。'.format(
-                    dict['additional_device'], dict['reagent'], dict['tools'],
+                                            '5.1-2分钟{4}灯离牙尖1mm照射20-40秒。' \
+                                            '6. 探针进行检查，调合，定期{5}复查。'.format(
+                    dict['additional_device'], dict['reagent'], dict['tools'],dict['time_of_etching'],
                     dict['lamp'], dict['check_time'],
                 )
         for key, value in dict.items():
