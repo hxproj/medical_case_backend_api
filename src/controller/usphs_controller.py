@@ -8,14 +8,15 @@ from src.controller.common_function import check_if_user_exist, refresh_step
 from src import db
 
 
-@app.route('/medical-case-of-illness/usphs', methods=['POST', 'PUT', 'GET','OPTIONS'])
+@app.route('/medical-case-of-illness/usphs', methods=['POST', 'PUT', 'GET', 'OPTIONS'])
 def usphs_method():
     if request.method == 'POST':
         if check_if_user_exist(request.form['user_id']):
             temp_usphs = _form_to_usphs(request.form)
             db.session.add(temp_usphs)
             db.session.commit()
-            refresh_step(request.form['tooth_id'], 6)
+            usphs = Usphs.query.filter_by(user_id=request.form['user_id']).all()[-1]
+            refresh_step(usphs.tooth_id, 6)
             res_usphs = Usphs.query.filter_by(tooth_id=request.form['tooth_id']).first()
             response = res_usphs.get_dict()
             ret = flask.Response(json.dumps(response))
@@ -31,6 +32,22 @@ def usphs_method():
         ret = flask.Response(json.dumps(response))
         ret.headers['Access-Control-Allow-Origin'] = '*'
         return ret
+    elif request.method == 'PUT':
+        usphs = Usphs.query.filter_by(tooth_id = request.form['tooth_id']).first()
+        if usphs:
+            db.session.query(Usphs).filter(Usphs.tooth_id == request.form['tooth_id']).delete()
+            db.session.commit()
+            temp_usphs = _form_to_usphs(request.form)
+            db.session.add(temp_usphs)
+            db.session.commit()
+            res_usphs = Usphs.query.filter_by(tooth_id = request.form['tooth_id']).first()
+            response = flask.Response(json.dumps(res_usphs))
+            response.headers['Access-Control-Allow-Origin'] = '*'
+            return  response,200
+        else:
+            response = flask.Response('can not find this record.')
+            response.headers['Access-Control-Allow-Origin'] = '*'
+            return response, 400
     elif request.method == 'OPTIONS':
         ret = flask.Response()
         ret.headers['Access-Control-Allow-Origin'] = '*'

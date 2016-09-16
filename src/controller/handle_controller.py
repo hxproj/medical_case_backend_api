@@ -9,7 +9,7 @@ from src.controller.common_function import check_if_user_exist, refresh_step
 from src import db
 
 
-@app.route('/medical-case-of-illness/handle', methods=['POST', 'PUT','GET'])
+@app.route('/medical-case-of-illness/handle', methods=['POST', 'PUT', 'GET'])
 def handle_method():
     if request.method == 'POST':
         if check_if_user_exist(request.form['user_id']):
@@ -17,7 +17,8 @@ def handle_method():
                 non_surgical = _form_to_non_surgical(request.form)
                 db.session.add(non_surgical)
                 db.session.commit()
-                refresh_step(request.form['tooth_id'], 5)
+                handle = Non_surgical.query.filter_by(user_id=request.form['user_id']).all()[-1]
+                refresh_step(handle.tooth_id, 5)
                 ret_non_surgical = Non_surgical.query.filter_by(tooth_id=request.form['tooth_id']).first()
                 response = ret_non_surgical.get_dict()
                 ret = flask.Response(json.dumps(response))
@@ -27,7 +28,8 @@ def handle_method():
                 surgical = _form_to_surgical(request.form)
                 db.session.add(surgical)
                 db.session.commit()
-                refresh_step(request.form['tooth_id'], 5)
+                handle = Surgical.query.filter_by(user_id=request.form['user_id']).all()[-1]
+                refresh_step(handle.tooth_id, 5)
                 ret_surgical = Surgical.query.filter_by(tooth_id=request.form['tooth_id']).first()
                 response = ret_surgical.get_dict()
                 ret = flask.Response(json.dumps(response))
@@ -48,15 +50,15 @@ def handle_method():
             ret = flask.Response(json.dumps(response))
             ret.headers['Access-Control-Allow-Origin'] = '*'
             return ret
-        else :
+        else:
             temp_result = Non_surgical.query.filter_by(tooth_id=request.args['tooth_id']).first()
             response = temp_result.get_dict()
             ret = flask.Response(json.dumps(response))
             ret.headers['Access-Control-Allow-Origin'] = '*'
             return ret
-    elif request.method =='PUT':
+    elif request.method == 'PUT':
         if check_if_user_exist(request.form['user_id']):
-            if (int)(request.form['handle_type'])==1:
+            if (int)(request.form['handle_type']) == 1:
                 temp_result = _form_to_surgical(request.form)
             else:
                 temp_result = _form_to_non_surgical(request.form)
@@ -67,10 +69,10 @@ def handle_method():
             db.session.commit()
             db.session.add(temp_result)
             db.session.commit()
-            if (int)(request.form['handle_type'])==1:
-                result = Surgical.query.filter_by(tooth_id = request.form['tooth_id']).first()
+            if (int)(request.form['handle_type']) == 1:
+                result = Surgical.query.filter_by(tooth_id=request.form['tooth_id']).first()
             else:
-                result = Non_surgical.query.filter_by(tooth_id = request.form['tooth_id']).first()
+                result = Non_surgical.query.filter_by(tooth_id=request.form['tooth_id']).first()
             response = result.get_dict()
             ret = flask.Response(json.dumps(response))
             ret.headers['Access-Control-Allow-Origin'] = '*'
