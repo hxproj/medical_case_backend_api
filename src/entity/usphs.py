@@ -9,7 +9,7 @@ class Usphs(db.Model):
     surfaceness = db.Column(db.String(20))
     edge_color = db.Column(db.String(20))
     occlusal_contact = db.Column(db.String(20)) # yao he jie chu
-    sensitivity_of_tooth = db.Column(db.String(20))# ya chi min gan
+    sensitivity_of_tooth = db.Column(db.String(100))# ya chi min gan
     secondary_caries = db.Column(db.String(20))
     integrity = db.Column(db.String(20))
 

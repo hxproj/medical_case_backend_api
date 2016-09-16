@@ -81,6 +81,11 @@ def handle_method():
             ret = flask.Response("Can't find this user")
             ret.headers['Access-Control-Allow-Origin'] = '*'
             return ret, httplib.BAD_REQUEST
+    elif request.method == 'OPTIONS':
+        ret = flask.Response()
+        ret.headers['Access-Control-Allow-Origin'] = '*'
+        ret.headers['Access-Control-Allow-Methods'] = 'PUT,DELETE'
+        return ret
 
 
 def _form_to_surgical(form):
