@@ -181,21 +181,20 @@ class doc_manager:
             full_dict[
                 'illness_history'] = '原发性龋病：{0}前发现牙齿{1}，' \
                                      '近来症状{2}加重，{3}自发痛，夜间痛，' \
-                                     '{4}服用药物（{5}），{6}做过治疗，' \
-                                     '症状{7}缓解。'.format(full_dict['time_of_occurrence'],
+                                     '{4}服用药物，{5}做过治疗，' \
+                                     '症状{6}缓解。'.format(full_dict['time_of_occurrence'],
                                                        full_dict['symptom'], full_dict['is_very_bad'],
                                                        full_dict['is_night_pain_self_pain'],
-                                                       full_dict['is_medicine'], full_dict['medicine_name'],
+                                                        full_dict['medicine_name'],
                                                        full_dict['treatment'], full_dict['is_relief'])
         else:
             full_dict['illness_history'] = '有治疗史的龋病：{0}曾行修复治疗（{1}）' \
-                                           '，{2}{3}，{4}服用药物（{5}），' \
-                                           '症状{6}缓解。'.format(
+                                           '，{2}{3}，{4}服用药物，' \
+                                           '症状{5}缓解。'.format(
                 full_dict['time_of_occurrence'],
                 full_dict['fill_type'],
                 full_dict['time_of_occurrence'],
                 full_dict['symptom'],
-                full_dict['is_medicine'],
                 full_dict['medicine_name'],
                 full_dict['is_relief'])
         if full_dict['gender'] == True:
