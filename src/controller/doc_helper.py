@@ -20,7 +20,7 @@ from src.entity.tooth_location import Tooth_location
 from src.entity.user import User
 
 
-@app.route('/medical-case-of-illness/doc')
+@app.route('/medical-case-of-illness/doc',methods=['GET'])
 def get_doc():
     tooth_id = (int)(request.args['tooth_id'])
     risk = request.args['risk']

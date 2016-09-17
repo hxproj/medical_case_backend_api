@@ -55,6 +55,26 @@ def risk_options():
             response = flask.Response('user has not record risk assessment.')
             response.headers['Access-Control-Allow-Origin'] = '*'
             return response, 400
+    elif request.method == 'PUT':
+        if not check_if_user_exist(request.form['user_id']):
+            response = flask.Response('user is not exist .')
+            response.headers['Access-Control-Allow-Origin'] = '*'
+            return response, 400
+        else:
+            if Risk_assessment.query.filter_by(user_id=request.form['user_id']).first():
+                db.session.query(Risk_assessment).filter(Risk_assessment.user_id==request.form['user_id']).delete()
+                db.session.commit()
+                risk = _form_to_risk(request.form)
+                db.session.add(risk)
+                db.session.commit()
+                response = flask.Response(
+                    json.dumps(Risk_assessment.query.filter_by(user_id=request.form['user_id']).first().get_dict()))
+                response.headers['Access-Control-Allow-Origin'] = '*'
+                return response, 200
+            else:
+                response = flask.Response('this risk record is not already exist ')
+                response.headers['Access-Control-Allow-Origin'] = '*'
+                return response, 400
     elif request.method == 'OPTIONS':
         ret = flask.Response()
         ret.headers['Access-Control-Allow-Origin'] = '*'
