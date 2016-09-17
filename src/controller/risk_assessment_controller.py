@@ -9,7 +9,7 @@ from src.controller.common_function import check_if_user_exist
 from src.entity.risk_assessment import Risk_assessment
 from src import db
 
-@app.route('/medical-case-of-illness/risk-assessment',methods=['GET','POST','DELETE','OPTIONS'])
+@app.route('/medical-case-of-illness/risk-assessment',methods=['GET','POST','PUT','DELETE','OPTIONS'])
 def risk_options():
     if request.method=='POST':
         if not check_if_user_exist(request.form['user_id']):
