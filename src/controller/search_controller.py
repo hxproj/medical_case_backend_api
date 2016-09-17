@@ -60,11 +60,12 @@ def search_options():
                 return_list.append(result[-1])
             else:
                 return_list = result[offset_start:offset_end]
-            info = {'info_list':return_list,'pages':len(result)/app.config['PER_PAGE']+1}
+            info = {'info_list':return_list,'pages':len(result)/app.config['PER_PAGE']+1,'searched':'ok'}
             response = flask.Response(json.dumps(info))
             response.headers['Access-Control-Allow-Origin'] = '*'
             return response, 200
         except:
-            response = flask.Response('out of range')
+            info = {'searched':'failed'}
+            response = flask.Response(json.dumps(info))
             response.headers['Access-Control-Allow-Origin'] = '*'
             return response, 400
