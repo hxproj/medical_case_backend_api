@@ -41,7 +41,7 @@ def usphs_method():
             db.session.add(temp_usphs)
             db.session.commit()
             res_usphs = Usphs.query.filter_by(tooth_id = request.form['tooth_id']).first()
-            response = flask.Response(json.dumps(res_usphs))
+            response = flask.Response(json.dumps(res_usphs.get_dict()))
             response.headers['Access-Control-Allow-Origin'] = '*'
             return  response,200
         else:
