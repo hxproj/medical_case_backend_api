@@ -68,4 +68,4 @@ def search_options():
             info = {'searched':'failed'}
             response = flask.Response(json.dumps(info))
             response.headers['Access-Control-Allow-Origin'] = '*'
-            return response, 400
+            return response, 200
