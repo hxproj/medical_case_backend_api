@@ -7,7 +7,7 @@ LOG = 'var/medical_case_of_illness/logs'
 
 QUERY_LIMIT = 10
 PER_PAGE = 10
-
+ALLOWED_EXTENSIONS=set(['txt','pdf','png','jpg','jpeg','gif'])
 TEMPLETE_LOCATION ='C:\Users\solitaire\Desktop\illness.docx'
 
 STATIC_FILES_PATH='E:\Medical_Case\\'
