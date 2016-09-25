@@ -5,8 +5,7 @@ class Picture(db.Model):
     tooth_id=db.Column(db.Integer)
     path=db.Column(db.String(100))
 
-    def __repr__(self):
-        return '<img %r>' % self.name
+
 
     def get_dict(self):
         dit = self.__dict__

@@ -2,7 +2,7 @@ import httplib
 import os
 import json
 import flask
-
+import time
 from src.controller.common_function import check_directory, check_file
 
 from src import app
@@ -10,37 +10,45 @@ from src import db
 from src.entity.picture import Picture
 from flask import request
 from werkzeug import secure_filename
+from src.entity.tooth_location import Tooth_location
 
 
 def allowed_file(filename):
     return '.' in filename and filename.rsplit('.', 1)[1] in app.config['ALLOWED_EXTENSIONS']
 
-
+ISOTIMEFORMAT='%Y%m%d%H%M%S'
 @app.route('/medical-case-of-illness/img', methods=['GET', 'POST'])
 def upload_img():
     if request.method == 'POST':
-        tooth_id = request.form["tooth_id"]
-        files = request.files.getlist("file[]")
         response = flask.Response('')
-        for file in files:
-            if file and allowed_file(file.filename):
-                filename = secure_filename(file.filename)
-                path = check_directory(tooth_id)
-                file.save(os.path.join(path, filename))
-                flage, path = check_file(tooth_id, filename)
-                if flage == False:
-                    pic = Picture()
-                    pic.tooth_id = tooth_id
-                    pic.path = path
-                    db.session.add(pic)
-                    db.session.commit()
-                    response = flask.Response('upload succeed.')
-                    response.status_code = 302
+        tooth_id = request.form["tooth_id"]
+        tooth_list = Tooth_location.query.filter_by(tooth_id=tooth_id).all()
+        if tooth_list:
+            files = request.files.getlist("file[]")
+            for file in files:
+                if file and allowed_file(file.filename):
+                    filename = secure_filename(file.filename)
+                    filename=time.strftime( ISOTIMEFORMAT, time.localtime() )+'_'+filename
+                    filepath = check_directory(tooth_id)
+
+                    flage, path = check_file(tooth_id, filename)
+                    if flage == False:
+                        file.save(os.path.join(filepath, filename))
+                        pic = Picture()
+                        pic.tooth_id = tooth_id
+                        pic.path = path
+                        db.session.add(pic)
+                        db.session.commit()
+                        response = flask.Response('upload succeed.')
+                        response.status_code = 200
 
 
-                else:
-                    response = flask.Response('upload NOT succeed,The file have been uploaded')
-                    response.status_code = 404
+                    else:
+                        response = flask.Response('upload NOT succeed,The file have been uploaded')
+                        response.status_code = 404
+        else:
+            response = flask.Response('toothid not exist')
+            response.status_code = 404
         response.headers['Access-Control-Allow-Origin'] = '*'
         return response
 
