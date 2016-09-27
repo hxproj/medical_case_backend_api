@@ -5,7 +5,7 @@ class Usphs(db.Model):
     user_id = db.Column(db.Integer)
     color = db.Column(db.String(50))
     marginal_accuracy = db.Column(db.String(50))
-    anatomic_form = db.Column(db.String(20))
+    anatomic_form = db.Column(db.String(50))
     surfaceness = db.Column(db.String(20))
     edge_color = db.Column(db.String(20))
     occlusal_contact = db.Column(db.String(20)) # yao he jie chu

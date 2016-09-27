@@ -102,3 +102,4 @@ def _delete_all(user_id):
     db.session.query(Illness_history).filter(Illness_history.user_id == user_id).delete()
     db.session.query(Difficulty_assessment).filter(Difficulty_assessment.user_id == user_id).delete()
     db.session.query(Diagnose).filter(Diagnose.user_id == user_id).delete()
+    db.session.commit()

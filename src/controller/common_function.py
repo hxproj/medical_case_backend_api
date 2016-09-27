@@ -45,8 +45,9 @@ def get_user_info_list(user_id_list):
     user_list = []
     for user_id in user_id_list:
         user_item = User.query.filter_by(user_id=user_id).first()
-        user_item = user_item.get_dict()
-        user_list.append(user_item)
+        if user_item:
+            user_item = user_item.get_dict()
+            user_list.append(user_item)
     for temp in user_list:
         user_tooth_list = []
         tooth_info = Tooth_location.query.filter_by(user_id = temp['user_id']).all()
