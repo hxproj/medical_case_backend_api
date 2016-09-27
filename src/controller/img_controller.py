@@ -17,11 +17,12 @@ def allowed_file(filename):
     return '.' in filename and filename.rsplit('.', 1)[1] in app.config['ALLOWED_EXTENSIONS']
 
 ISOTIMEFORMAT='%Y%m%d%H%M%S'
-@app.route('/medical-case-of-illness/img', methods=['GET', 'POST'])
+@app.route('/medical-case-of-illness/img', methods=['GET', 'POST','DELETE'])
 def upload_img():
     if request.method == 'POST':
         response = flask.Response('')
         tooth_id = request.form["tooth_id"]
+        picture_type = request.form['picture_type']
         tooth_list = Tooth_location.query.filter_by(tooth_id=tooth_id).all()
         if tooth_list:
             files = request.files.getlist("file[]")
@@ -36,6 +37,7 @@ def upload_img():
                         file.save(os.path.join(filepath, filename))
                         pic = Picture()
                         pic.tooth_id = tooth_id
+                        pic.picture_type = picture_type
                         pic.path = path
                         db.session.add(pic)
                         db.session.commit()
@@ -62,7 +64,7 @@ def upload_img():
     #<input type="submit" value="upload" />
     #</form>
     #'''
-    if request.method == 'GET':
+    elif request.method == 'GET':
         tooth_id=request.args.get('tooth_id')
         img_list=Picture.query.filter_by(tooth_id=tooth_id).all()
         path_list=[]
@@ -72,4 +74,23 @@ def upload_img():
             path_list.append(path)
         ret = flask.Response(json.dumps(path_list))
         ret.headers['Access-Control-Allow-Origin'] = '*'
+        return ret
+    elif request.method == 'DELETE':
+        picture_id = request.form['picture_id']
+        picture = Picture.query.filter_by(picture_id=picture_id).first()
+        try :
+            os.remove(picture.path)
+        except:
+            ret = flask.Response('delete error')
+            ret.headers['Access-Control-Allow-Origin'] = '*'
+            return ret,400
+        db.session.query(Picture).filter(Picture.picture_id ==picture_id).delete()
+        db.session.commit()
+        ret = flask.Response('delete succeed')
+        ret.headers['Access-Control-Allow-Origin'] = '*'
+        return ret, 200
+    elif request.method == 'OPTIONS':
+        ret = flask.Response()
+        ret.headers['Access-Control-Allow-Origin'] = '*'
+        ret.headers['Access-Control-Allow-Methods'] = 'PUT,DELETE'
         return ret
