@@ -76,15 +76,15 @@ def upload_img():
         ret.headers['Access-Control-Allow-Origin'] = '*'
         return ret
     elif request.method == 'DELETE':
-        picture_id = request.form['picture_id']
-        picture = Picture.query.filter_by(picture_id=picture_id).first()
+        picture_id = request.args['picture_id']
+        picture = Picture.query.filter_by(img_id=picture_id).first()
         try :
             os.remove(picture.path)
         except:
             ret = flask.Response('delete error')
             ret.headers['Access-Control-Allow-Origin'] = '*'
             return ret,400
-        db.session.query(Picture).filter(Picture.picture_id ==picture_id).delete()
+        db.session.query(Picture).filter(Picture.img_id ==picture_id).delete()
         db.session.commit()
         ret = flask.Response('delete succeed')
         ret.headers['Access-Control-Allow-Origin'] = '*'
