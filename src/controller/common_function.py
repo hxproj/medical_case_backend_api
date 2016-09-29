@@ -20,9 +20,27 @@ def refresh_step(tooth_id, step, tooth_location=None):
             and_(Tooth_location.tooth_id == (int)(tooth_id), Tooth_location.tooth_location == tooth_location)).update(
             {'step': step})
     else:
-        db.session.query(Tooth_location).filter(
-            Tooth_location.tooth_id == (int)(tooth_id)).update(
-            {'step': step})
+        tooth = Tooth_location.query.filter_by(tooth_id=tooth_id).first()
+        word = ''
+        if tooth:
+            tooth_step_list = tooth.step.split(',')
+            if '' in tooth_step_list:
+                tooth_step_list.remove('')
+            num_list =[]
+            for i in range(len(tooth_step_list)):
+                num_list.append((int)(tooth_step_list[i]))
+            step_set = set(num_list)
+            if not step in step_set:
+                num_list = list(step_set)
+                num_list.append(step)
+                num_list.sort()
+                new_tooth_list = []
+                for i in range(len(num_list)):
+                    new_tooth_list.append((str)(num_list[i]))
+                word = reduce(lambda x,y:x+','+y,new_tooth_list)+','
+            db.session.query(Tooth_location).filter(
+                Tooth_location.tooth_id == (int)(tooth_id)).update(
+                {'step': word})
     db.session.commit()
 
 

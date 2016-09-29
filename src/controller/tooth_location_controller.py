@@ -21,7 +21,7 @@ def add_new_tooth_location_record():
     if request.method == 'POST':
         if check_if_user_exist(request.form['user_id']):
             location_record = _form_to_tooth_location_record(request.form)
-            location_record.step = 0
+            #location_record.step = 0
             db.session.add(location_record)
             db.session.commit()
             #refresh_step(request.form['user_id'], 0, request.form['tooth_location'])
@@ -102,7 +102,7 @@ def _form_to_tooth_location_record(form):
     temp_record.user_id = form['user_id']
     temp_record.time_of_occurrence = form['time_of_occurrence']
     temp_record.is_fill_tooth = form['is_fill_tooth']
-    temp_record.step = 0
+    temp_record.step = '0,'
     return temp_record
 
 
