@@ -16,6 +16,7 @@ from src.entity.risk_assessment import Risk_assessment
 from src import db
 from src.entity.tooth_location import Tooth_location
 from src.entity.user import User
+from src.entity.usphs import Usphs
 
 
 @app.route('/medical-case-of-illness/search-by-conditons',methods=['GET'])
@@ -42,7 +43,15 @@ def search_options():
         query = Prognosis_of_management.query
     elif table == 'tooth_location':
         query = Tooth_location.query
-    result_list = query.filter_by(**args).all()
+    elif table == 'tooth_location':
+        query = Usphs.query
+    se = set(['salivary_gland_disease','consciously_reduce_salivary_flow'])
+    result_list = []
+    for key in args:
+        if key in se:
+            result_list = _search_special(key)
+        else:
+            result_list = query.filter_by(**args).all()
     user_id_list = []
     for result in result_list:
         user_id_list.append(result.user_id)
@@ -69,3 +78,13 @@ def search_options():
             response = flask.Response(json.dumps(info))
             response.headers['Access-Control-Allow-Origin'] = '*'
             return response, 200
+
+def _search_special(key):
+    return_list=[]
+    if key == 'consciously_reduce_salivary_flow':
+        return_list = db.session.query(Personal_history).filter(
+            Personal_history.consciously_reduce_salivary_flow!=None).all()
+    elif key =='salivary_gland_disease':
+        return_list = db.session.query(Personal_history).filter(
+            Personal_history.salivary_gland_disease != None).all()
+    return return_list
