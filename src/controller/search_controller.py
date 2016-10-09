@@ -14,6 +14,7 @@ from src.entity.personal_history import Personal_history
 from src.entity.prognosis_of_management import Prognosis_of_management
 from src.entity.risk_assessment import Risk_assessment
 from src import db
+from src.entity.surgical import Surgical
 from src.entity.tooth_location import Tooth_location
 from src.entity.user import User
 from src.entity.usphs import Usphs
@@ -43,8 +44,10 @@ def search_options():
         query = Prognosis_of_management.query
     elif table == 'tooth_location':
         query = Tooth_location.query
-    elif table == 'tooth_location':
+    elif table == 'usphs':
         query = Usphs.query
+    elif table == 'surgical':
+        query = Surgical.query
     se = set(['salivary_gland_disease','consciously_reduce_salivary_flow'])
     result_list = []
     for key in args:
