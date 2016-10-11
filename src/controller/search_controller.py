@@ -2,6 +2,8 @@ import httplib
 import json
 
 import datetime
+from operator import and_
+
 import flask
 from flask import request
 from src import app
@@ -20,7 +22,7 @@ from src.entity.user import User
 from src.entity.usphs import Usphs
 
 
-@app.route('/medical-case-of-illness/search-by-conditons',methods=['GET'])
+@app.route('/medical-case-of-illness/search-by-conditons', methods=['GET'])
 def search_options():
     args = request.args.to_dict()
     table = args['table']
@@ -28,11 +30,11 @@ def search_options():
     del args['table']
     del args['page']
     query = ''
-    if table =='personal_history':
+    if table == 'personal_history':
         query = Personal_history.query
-    elif table =='user':
+    elif table == 'user':
         query = User.query
-    elif table =='diagnose':
+    elif table == 'diagnose':
         query = Diagnose.query
     elif table == 'difficulty_assessment':
         query = Difficulty_assessment.query
@@ -48,7 +50,7 @@ def search_options():
         query = Usphs.query
     elif table == 'surgical':
         query = Surgical.query
-    se = set(['salivary_gland_disease','consciously_reduce_salivary_flow'])
+    se = set(['salivary_gland_disease', 'consciously_reduce_salivary_flow'])
     result_list = []
     for key in args:
         if key in se:
@@ -59,35 +61,78 @@ def search_options():
     for result in result_list:
         user_id_list.append(result.user_id)
     result = get_user_info_list(user_id_list)
-    if page =='' or page ==None:
+    if page == '' or page == None:
         response = flask.Response((str)(len(result)))
         response.headers['Access-Control-Allow-Origin'] = '*'
-        return response,200
+        return response, 200
     else:
         try:
-            offset_start = (int)(page)*app.config['PER_PAGE']
-            offset_end = offset_start+app.config['PER_PAGE']
-            if offset_end>len(result):
+            offset_start = (int)(page) * app.config['PER_PAGE']
+            offset_end = offset_start + app.config['PER_PAGE']
+            if offset_end > len(result):
                 return_list = result[offset_start:-1]
                 return_list.append(result[-1])
             else:
                 return_list = result[offset_start:offset_end]
-            info = {'info_list':return_list,'pages':len(result)/app.config['PER_PAGE']+1,'searched':'ok'}
+            info = {'info_list': return_list, 'pages': len(result) / app.config['PER_PAGE'] + 1, 'searched': 'ok'}
             response = flask.Response(json.dumps(info))
             response.headers['Access-Control-Allow-Origin'] = '*'
             return response, 200
         except:
-            info = {'searched':'failed'}
+            info = {'searched': 'failed'}
             response = flask.Response(json.dumps(info))
             response.headers['Access-Control-Allow-Origin'] = '*'
             return response, 200
+@app.route('/medical-case-of-illness/step-info', methods=['GET'])
+def get_step_info():
+    tooth_id = request.args['tooth_id']
+    tooth_location = Tooth_location.query.filter_by(tooth_id=tooth_id).first()
+    if tooth_location:
+        step_string = tooth_location.step
+        tooth_step_list = step_string.split(',')
+        if '' in tooth_step_list:
+            tooth_step_list.remove('')
+        num_list = []
+        for i in range(len(tooth_step_list)):
+            num_list.append((int)(tooth_step_list[i]))
+        response = flask.Response(json.dumps(num_list))
+        response.headers['Access-Control-Allow-Origin'] = '*'
+        return response,200
+    else:
+        response = flask.Response('can not find this tooth')
+        response.headers['Access-Control-Allow-Origin'] = '*'
+        return response, 403
+@app.route('/medical-case-of-illness/other-info', methods=['GET'])
+def get_other_info():
+    user_id = request.args['user_id']
+    user = User.query.filter_by(user_id=user_id).all()
+    if user:
+        lit = []
+        risk = Risk_assessment.query.filter_by(user_id=user_id).all()
+        if risk:
+            lit.append('risk')
+        personal_history = Personal_history.query.filter_by(user_id=user_id).all()
+        if personal_history:
+            lit.append('personal_history')
+        prognosis_of_management = Prognosis_of_management.query.filter_by(user_id=user_id).all()
+        if prognosis_of_management:
+            lit.append('prognosis_of_management')
+        response = flask.Response(json.dumps(lit))
+        response.headers['Access-Control-Allow-Origin'] = '*'
+        return response, 200
+    else:
+        response = flask.Response('can not find this user')
+        response.headers['Access-Control-Allow-Origin'] = '*'
+        return response, 403
+
 
 def _search_special(key):
-    return_list=[]
+    return_list = []
     if key == 'consciously_reduce_salivary_flow':
-        return_list = db.session.query(Personal_history).filter(
-            Personal_history.consciously_reduce_salivary_flow!=None).all()
-    elif key =='salivary_gland_disease':
-        return_list = db.session.query(Personal_history).filter(
-            Personal_history.salivary_gland_disease != None).all()
+        return_list = db.session.query(Personal_history).filter(and_(
+            Personal_history.consciously_reduce_salivary_flow != None,
+            Personal_history.consciously_reduce_salivary_flow != '')).all()
+    elif key == 'salivary_gland_disease':
+        return_list = db.session.query(Personal_history).filter(and_(
+            Personal_history.salivary_gland_disease != None, Personal_history.salivary_gland_disease != '')).all()
     return return_list
