@@ -17,7 +17,7 @@ def allowed_file(filename):
     return '.' in filename and filename.rsplit('.', 1)[1] in app.config['ALLOWED_EXTENSIONS']
 
 ISOTIMEFORMAT='%Y%m%d%H%M%S'
-@app.route('/medical-case-of-illness/img', methods=['GET', 'POST','DELETE'])
+@app.route('/medical-case-of-illness/img', methods=['GET', 'POST','DELETE','OPTIONS'])
 def upload_img():
     if request.method == 'POST':
         response = flask.Response('')
@@ -66,7 +66,8 @@ def upload_img():
     #'''
     elif request.method == 'GET':
         tooth_id=request.args.get('tooth_id')
-        img_list=Picture.query.filter_by(tooth_id=tooth_id).all()
+        type = request.args['type']
+        img_list=Picture.query.filter_by(tooth_id=tooth_id,picture_type=type).all()
         path_list=[]
         for img in img_list:
             img=img.get_dict()
