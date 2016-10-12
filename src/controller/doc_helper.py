@@ -66,8 +66,19 @@ class doc_manager:
                 self.document = Document('./templete/handle1.docx')
         elif table == 'risk':
             self.document = Document('./templete/risk.docx')
-        else:
+        elif table == 'illness':
             self.document = Document('./templete/illness.docx')
+        elif table =='illness_history':
+            self.document = Document('./templete/illness_history.docx')
+        elif table == 'personal_history':
+            self.document = Document('./templete/illness.docx')
+        elif table == 'oral_examination':
+            self.document = Document('./templete/oral_examination.docx')
+        elif table == 'diagnose':
+            self.document = Document('./templete/diagnose.docx')
+        elif table == 'difficulty_assessment':
+            self.document = Document('./templete/difficulty_assessment.docx')
+
     def get_document(self):
         paragraphs = self.document.paragraphs
         for paragraph in paragraphs:
