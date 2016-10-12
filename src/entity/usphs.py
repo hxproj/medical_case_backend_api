@@ -12,6 +12,7 @@ class Usphs(db.Model):
     sensitivity_of_tooth = db.Column(db.String(100))# ya chi min gan
     secondary_caries = db.Column(db.String(20))
     integrity = db.Column(db.String(20))
+    level = db.Column(db.String(20))
 
     def get_dict(self):
         dit = self.__dict__

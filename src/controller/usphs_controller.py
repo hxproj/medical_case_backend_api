@@ -1,3 +1,4 @@
+# -*- coding:utf-8 -*-
 import httplib
 import json
 import flask
@@ -68,4 +69,48 @@ def _form_to_usphs(form):
     usphs.sensitivity_of_tooth = form['sensitivity_of_tooth']
     usphs.secondary_caries = form['secondary_caries']
     usphs.integrity = form['integrity']
+    usphs.level = _get_level(form)
     return usphs
+
+def _get_level(form):
+    set_A = set(
+        [u'无明显颜色变化，色度、饱和度、透明度与邻牙匹配好', u'探针和肉眼均不能检测出间隙，充填体与牙釉质良好接触，边缘无悬突、无着色', u'修复体轮廓与牙体组织解剖形态和边缘连续', u'修复体表面光滑', u'无边缘着色',
+         u'正常咬合', u'无敏感症状', u'无任何继发龋', u'修复体完整'])
+
+    set_B = set(
+        [u'轻微色度、饱和度、透明度变化，比色区间小于1，临床可接受', u'探针探有间隙， 肉眼可见超出或不足的边缘，边缘有轻微着色，但无牙体或基底材料暴露', u'修复体充填稍多或稍欠', u'修复表面轻微粗糙，可抛光',
+         u'小于50%的窝洞边缘着色', u'咬合较紧或较松', u'有轻微冷热刺激痛，无自发痛', u'部分缺损'])
+
+    set_C = set(
+        [u'严重色度、饱和度、透明度变化，比色区间大于1，临床不可接受', u'探针探有间隙， 肉眼可见超出或不足的边缘大于1mm， 有牙体或基底材料暴露， 但无缺损或脱落', u'边缘形成悬突或（应充填的）牙体组织暴露',
+         u'修复体表面粗糙，有不规则凹槽，不能抛光', u'大于50%的窝洞边缘着色', u'无咬合', u'有严重冷热刺激痛 ，并出 现自发痛，无法忍受，需要做牙髓治疗',u'可检测到修复体边缘周围继发龋', '修复体缺失'])
+
+    set_D = set([u'无法接受的色度、饱和度、透明度差异',u'边缘继发龋', u'修复体确实，创伤牙合或修复体导致牙齿或周围组织疼痛', u'修复体表面裂纹或剥脱'])
+
+    count_a = 0
+    count_b = 0
+    count_c = 0
+    count_d = 0
+    els = 0
+
+    temp_dict = form
+    for key , value in temp_dict.items():
+        if value in set_A:
+            count_a = count_a + 1
+        elif value in set_B:
+            count_b = count_b + 1
+        elif value in set_C:
+            count_c = count_c + 1
+        elif value in set_D:
+            count_d = count_d + 1
+
+    level = ''
+    if not count_d == 0:
+        level = 'D'
+    elif count_d == 0 and count_c != 0:
+        level = 'C'
+    elif count_d == 0 and count_c == 0 and count_b != 0:
+        level = 'B'
+    else:
+        level = 'A'
+    return level
