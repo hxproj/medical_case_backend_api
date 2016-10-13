@@ -72,7 +72,7 @@ def upload_img():
         for img in img_list:
             img=img.get_dict()
             path=img['path']
-            path_list.append(path)
+            path_list.append(img)
         ret = flask.Response(json.dumps(path_list))
         ret.headers['Access-Control-Allow-Origin'] = '*'
         return ret
