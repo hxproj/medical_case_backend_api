@@ -3,9 +3,11 @@ import os
 import sys
 
 import flask
+import gc
 from flask import request
 
 from src import app
+from src import db
 from docx import Document
 from src.controller.common_function import check_directory, check_file
 from src.entity.diagnose import Diagnose
@@ -25,7 +27,7 @@ def get_doc():
     tooth_id = (int)(request.args['tooth_id'])
     tooth_location = Tooth_location.query.filter_by(tooth_id=tooth_id).first()
     num_list = []
-    step_dict ={'tooth_location':0,'illness_history':1,'oral_examination':2,'diagnose':3,'difficulty_assessment':4,'hanle':5,}
+    step_dict ={'tooth_location':0,'illness_history':1,'oral_examination':2,'diagnose':3,'difficulty_assessment':4,'handle':5,}
     step_info_list=[]
     if tooth_location:
         step_string = tooth_location.step
@@ -34,30 +36,34 @@ def get_doc():
             tooth_step_list.remove('')
         for i in range(len(tooth_step_list)):
             num_list.append((int)(tooth_step_list[i]))
-        for key,value in step_dict.items():
-            for temp in num_list:
-                if value==temp:
-                    step_info_list.append(key)
+        #for key,value in step_dict.items():
+        #    for temp in num_list:
+        #        if value==temp:
+        #            step_info_list.append(key)
         user_id = tooth_location.user_id
         personal_history = Personal_history.query.filter_by(user_id= user_id).all()
         risk = Risk_assessment.query.filter_by(user_id=user_id).all()
         if personal_history:
-            step_info_list.append('personal_history')
+            num_list.append(7)
         if risk :
-            step_info_list.append('risk')
-    path = generate_doc(tooth_id,step_info_list)
+            num_list.append(8)
+    path = generate_doc(tooth_id,num_list)
     response = flask.Response(path)
     response.headers['Access-Control-Allow-Origin'] = '*'
     return response, 200
 
 def generate_doc(tooth_id,step_info_list):
     document = Document()
-    illness = doc_manager(tooth_id,'illness')
-    illness_paras=illness.get_document()
-    handle = doc_manager(tooth_id,'handle')
-    handle_paras = handle.get_document()
-    full_paras =illness_paras+handle_paras
-
+    full_paras=[]
+    manager_list = []
+    for step in step_info_list:
+        manager = doc_manager(tooth_id,step)
+        manager_list.append(manager)
+    for manager in manager_list:
+        paras = manager.get_document()
+        full_paras = full_paras+paras
+        del manager
+        gc.collect()
     for para in full_paras:
         document.add_paragraph(para.text,para.style)
     check_directory(tooth_id)
@@ -76,34 +82,34 @@ class doc_manager:
     def __init__(self,tooth_id,table):
         self.tooth_id=tooth_id
         self.table = table
-        if table =='handle':
+        if table ==5:
             surgical = Surgical.query.filter_by(tooth_id=tooth_id).first()
             if not surgical:
                 self.document = Document('./templete/handle2.docx')
             else:
                 self.document = Document('./templete/handle1.docx')
-        elif table == 'risk':
+        elif table == 8:
             self.document = Document('./templete/risk.docx')
-        elif table == 'tooth_location':
+        elif table == 0:
             self.document = Document('./templete/illness.docx')
-        elif table =='illness_history':
+        elif table ==1:
             self.document = Document('./templete/illness_history.docx')
-        elif table == 'personal_history':
-            self.document = Document('./templete/illness.docx')
-        elif table == 'oral_examination':
+        elif table == 7:
+            self.document = Document('./templete/personal_history.docx')
+        elif table == 2:
             self.document = Document('./templete/oral_examination.docx')
-        elif table == 'diagnose':
+        elif table == 3:
             self.document = Document('./templete/diagnose.docx')
-        elif table == 'difficulty_assessment':
+        elif table == 4:
             self.document = Document('./templete/difficulty_assessment.docx')
 
     def get_document(self):
         paragraphs = self.document.paragraphs
         for paragraph in paragraphs:
             self.full_text = self.full_text+'%separator%'+paragraph.text
-        if self.table =='handle':
+        if self.table ==5:
             self._get_handle_dict()
-        elif self.table == 'risk':
+        elif self.table ==8:
             self._get_risk_dict()
         else :
             self._get_illness_dict()
@@ -178,22 +184,43 @@ class doc_manager:
     def _get_illness_dict(self):
         reload(sys)
         sys.setdefaultencoding('utf8')
-        tooth_location = Tooth_location.query.filter_by(tooth_id=self.tooth_id).first()
-        user_id = tooth_location.user_id
+        dic_list =[]
+        user_id=0
+        oral_tooth_location=''
+        tooth_location = db.session.query(Tooth_location).filter(Tooth_location.tooth_id==self.tooth_id).first()
+        if tooth_location:
+            dic_list.append(tooth_location)
+            user_id = tooth_location.user_id
         user = User.query.filter_by(user_id=user_id).first()
+        if user:
+            dic_list.append(user)
         illness_history = Illness_history.query.filter_by(tooth_id=self.tooth_id).first()
+        if illness_history:
+            dic_list.append(illness_history)
         personal_history = Personal_history.query.filter_by(user_id=user_id).first()
+        if personal_history:
+            dic_list.append(personal_history)
         oral_examination = Oral_examination.query.filter_by(tooth_id=self.tooth_id).first()
+        if oral_examination:
+            dic_list.append(oral_examination)
+            oral_tooth_location = oral_examination.tooth_location
+            oral_examination_dict = oral_examination.__dict__
+            del oral_examination_dict['tooth_location']
         diagnose = Diagnose.query.filter_by(tooth_id=self.tooth_id).first()
+        if diagnose:
+            dic_list.append(diagnose)
         difficulty_assessment = Difficulty_assessment.query.filter_by(tooth_id=self.tooth_id).first()
-        oral_tooth_location = oral_examination.tooth_location
-        oral_examination_dict = oral_examination.get_dict()
-        del oral_examination_dict['tooth_location']
-        full_dict = dict(
-            tooth_location.get_dict().items() + user.get_dict().items() + illness_history.get_dict().items()
-            + personal_history.get_dict().items() + oral_examination_dict.items() +
-            diagnose.get_dict().items() +
-            difficulty_assessment.get_dict().items())
+        if difficulty_assessment:
+            dic_list.append(difficulty_assessment)
+        full_dict = []
+        for dit in dic_list:
+            full_dict = full_dict+dit.__dict__.items()
+        full_dict = dict(full_dict)
+        #full_dict = dict(
+        #    tooth_location.get_dict().items() + user.get_dict().items() + illness_history.get_dict().items()
+        #    + personal_history.get_dict().items() + oral_examination_dict.items() +
+        #    diagnose.get_dict().items() +
+        #    difficulty_assessment.get_dict().items())
         full_dict['oral_tooth_location'] = oral_tooth_location
         full_dict['tooth_location'] = tooth_location.tooth_location
         for key, value in full_dict.items():
@@ -201,39 +228,43 @@ class doc_manager:
                 full_dict[key] = '有'
             elif value == '否':
                 full_dict[key] = '无'
-        if full_dict['is_fill_tooth'] == 0:
-            full_dict['tooth_info'] = full_dict['tooth_location'] + full_dict['symptom'] + full_dict[
-                'time_of_occurrence']
-        else:
-            full_dict['tooth_info'] = full_dict['tooth_location'] + '要求补牙'
-        if full_dict['is_primary'] == 1:
-            full_dict[
-                'illness_history'] = '原发性龋病：{0}前发现牙齿{1}，' \
-                                     '近来症状{2}加重，{3}自发痛，夜间痛，' \
-                                     '{4}服用药物，{5}做过治疗，' \
-                                     '症状{6}缓解。'.format(full_dict['time_of_occurrence'],
-                                                       full_dict['symptom'], full_dict['is_very_bad'],
-                                                       full_dict['is_night_pain_self_pain'],
-                                                        full_dict['medicine_name'],
-                                                       full_dict['treatment'], full_dict['is_relief'])
-        else:
-            full_dict['illness_history'] = '有治疗史的龋病：{0}曾行修复治疗（{1}）' \
-                                           '，{2}{3}，{4}服用药物，' \
-                                           '症状{5}缓解。'.format(
-                full_dict['time_of_occurrence'],
-                full_dict['fill_type'],
-                full_dict['time_of_occurrence'],
-                full_dict['symptom'],
-                full_dict['medicine_name'],
-                full_dict['is_relief'])
-        if full_dict['gender'] == True:
-            full_dict['gender'] = '女'
-        else:
-            full_dict['gender'] = '男'
+        if tooth_location:
+            if full_dict['is_fill_tooth'] == 0:
+                full_dict['tooth_info'] = full_dict['tooth_location'] + full_dict['symptom'] + full_dict[
+                    'time_of_occurrence']
+            else:
+                full_dict['tooth_info'] = full_dict['tooth_location'] + '要求补牙'
+        if illness_history:
+            if full_dict['is_primary'] == 1:
+                full_dict[
+                    'illness_history'] = '原发性龋病：{0}前发现牙齿{1}，' \
+                                         '近来症状{2}加重，{3}自发痛，夜间痛，' \
+                                         '{4}服用药物，{5}做过治疗，' \
+                                         '症状{6}缓解。'.format(full_dict['time_of_occurrence'],
+                                                           full_dict['symptom'], full_dict['is_very_bad'],
+                                                           full_dict['is_night_pain_self_pain'],
+                                                            full_dict['medicine_name'],
+                                                           full_dict['treatment'], full_dict['is_relief'])
+            else:
+                full_dict['illness_history'] = '有治疗史的龋病：{0}曾行修复治疗（{1}）' \
+                                               '，{2}{3}，{4}服用药物，' \
+                                               '症状{5}缓解。'.format(
+                    full_dict['time_of_occurrence'],
+                    full_dict['fill_type'],
+                    full_dict['time_of_occurrence'],
+                    full_dict['symptom'],
+                    full_dict['medicine_name'],
+                    full_dict['is_relief'])
+        if user:
+            if full_dict['gender'] == True:
+                full_dict['gender'] = '女'
+            else:
+                full_dict['gender'] = '男'
         level_list = ['-', '+-', '+', '++', '+++']
-        full_dict['hot'] = level_list[full_dict['hot'] - 1]
-        full_dict['cold'] = level_list[full_dict['cold'] - 1]
-        full_dict['touch'] = level_list[full_dict['touch'] - 1]
-        full_dict['bite'] = level_list[full_dict['bite'] - 1]
+        if oral_examination:
+            full_dict['hot'] = level_list[full_dict['hot'] - 1]
+            full_dict['cold'] = level_list[full_dict['cold'] - 1]
+            full_dict['touch'] = level_list[full_dict['touch'] - 1]
+            full_dict['bite'] = level_list[full_dict['bite'] - 1]
         for key, value in full_dict.items():
             self.full_dict['{[' + key + ']}'] = full_dict[key]
