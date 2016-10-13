@@ -23,23 +23,41 @@ from src.entity.user import User
 @app.route('/medical-case-of-illness/doc',methods=['GET'])
 def get_doc():
     tooth_id = (int)(request.args['tooth_id'])
-    risk = request.args['risk']
-    path = generate_doc(tooth_id,risk)
+    tooth_location = Tooth_location.query.filter_by(tooth_id=tooth_id).first()
+    num_list = []
+    step_dict ={'tooth_location':0,'illness_history':1,'oral_examination':2,'diagnose':3,'difficulty_assessment':4,'hanle':5,}
+    step_info_list=[]
+    if tooth_location:
+        step_string = tooth_location.step
+        tooth_step_list = step_string.split(',')
+        if '' in tooth_step_list:
+            tooth_step_list.remove('')
+        for i in range(len(tooth_step_list)):
+            num_list.append((int)(tooth_step_list[i]))
+        for key,value in step_dict.items():
+            for temp in num_list:
+                if value==temp:
+                    step_info_list.append(key)
+        user_id = tooth_location.user_id
+        personal_history = Personal_history.query.filter_by(user_id= user_id).all()
+        risk = Risk_assessment.query.filter_by(user_id=user_id).all()
+        if personal_history:
+            step_info_list.append('personal_history')
+        if risk :
+            step_info_list.append('risk')
+    path = generate_doc(tooth_id,step_info_list)
     response = flask.Response(path)
     response.headers['Access-Control-Allow-Origin'] = '*'
     return response, 200
 
-def generate_doc(tooth_id,risk=None):
+def generate_doc(tooth_id,step_info_list):
     document = Document()
     illness = doc_manager(tooth_id,'illness')
     illness_paras=illness.get_document()
     handle = doc_manager(tooth_id,'handle')
     handle_paras = handle.get_document()
     full_paras =illness_paras+handle_paras
-    if risk :
-        risk = doc_manager(tooth_id,'risk')
-        risk_doc = risk.get_document()
-        full_paras=full_paras+risk_doc
+
     for para in full_paras:
         document.add_paragraph(para.text,para.style)
     check_directory(tooth_id)
@@ -66,7 +84,7 @@ class doc_manager:
                 self.document = Document('./templete/handle1.docx')
         elif table == 'risk':
             self.document = Document('./templete/risk.docx')
-        elif table == 'illness':
+        elif table == 'tooth_location':
             self.document = Document('./templete/illness.docx')
         elif table =='illness_history':
             self.document = Document('./templete/illness_history.docx')
