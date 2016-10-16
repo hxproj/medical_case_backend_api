@@ -67,7 +67,7 @@ def search_options():
         return response, 200
     else:
         try:
-            offset_start = (int)(page) * app.config['PER_PAGE']
+            offset_start = ((int)(page)-1) * app.config['PER_PAGE']
             offset_end = offset_start + app.config['PER_PAGE']
             if offset_end > len(result):
                 return_list = result[offset_start:-1]
