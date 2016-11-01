@@ -8,7 +8,8 @@ from src.controller.common_function import check_if_user_exist
 from src.entity.personal_history import Personal_history
 from src import db
 
-@app.route('/medical-case-of-illness/personal-history',methods=['POST','PUT','GET','OPTIONS'])
+
+@app.route('/medical-case-of-illness/personal-history', methods=['POST', 'PUT', 'GET', 'OPTIONS'])
 def add_personal_history():
     if request.method == 'POST':
         if check_if_user_exist(request.form['user_id']):
