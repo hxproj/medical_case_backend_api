@@ -74,6 +74,7 @@ def _form_to_oral_examination(form):
     temp_oral_examination.bite = form['bite']
     temp_oral_examination.vitality_value_of_teeth = form['vitality_value_of_teeth']
     temp_oral_examination.gingival_hyperemia = form['gingival_hyperemia']
+    temp_oral_examination.gingival_color = form['gingival_color']
     temp_oral_examination.bop = form['bop']
     temp_oral_examination.tartar_down = form['tartar_down']
     temp_oral_examination.tartar_up = form['tartar_up']
