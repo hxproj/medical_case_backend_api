@@ -4,6 +4,7 @@ class Oral_examination(db.Model):
     tooth_id = db.Column(db.Integer,primary_key=True)
     user_id = db.Column(db.Integer)
     tooth_location = db.Column(db.String(50))
+    tooth_type = db.Column(db.String(50))
     caries_tired = db.Column(db.String(50))
     depth = db.Column(db.String(50))
     fill = db.Column(db.String(50))

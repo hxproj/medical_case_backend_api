@@ -62,6 +62,7 @@ def _form_to_oral_examination(form):
     temp_oral_examination.tooth_id = form['tooth_id']
     temp_oral_examination.user_id = form['user_id']
     temp_oral_examination.tooth_location = form['tooth_location']
+    temp_oral_examination.tooth_type = form['tooth_type']
     temp_oral_examination.caries_tired = form['caries_tired']
     temp_oral_examination.depth = form['depth']
     temp_oral_examination.fill = form['fill']
