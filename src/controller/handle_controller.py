@@ -44,18 +44,21 @@ def handle_method():
             ret.headers['Access-Control-Allow-Origin'] = '*'
             return ret, httplib.BAD_REQUEST
     elif request.method == 'GET':
-        temp_result = Surgical.query.filter_by(tooth_id=request.args['tooth_id']).first()
-        if temp_result:
-            response = temp_result.get_dict()
-            ret = flask.Response(json.dumps(response))
+        query_result = Surgical.query.filter_by(tooth_id=request.args['tooth_id']).first()
+        if query_result:
+            ret = flask.Response(json.dumps(query_result.get_dict()))
             ret.headers['Access-Control-Allow-Origin'] = '*'
             return ret
         else:
-            temp_result = Non_surgical.query.filter_by(tooth_id=request.args['tooth_id']).first()
-            response = temp_result.get_dict()
-            ret = flask.Response(json.dumps(response))
-            ret.headers['Access-Control-Allow-Origin'] = '*'
-            return ret
+            query_result = Non_surgical.query.filter_by(tooth_id=request.args['tooth_id']).first()
+            if query_result:
+                ret = flask.Response(json.dumps(query_result.get_dict()))
+                ret.headers['Access-Control-Allow-Origin'] = '*'
+                return ret, 200
+            else:
+                response = flask.Response("Can not find the cure...")
+                response.headers['Access-Control-Allow-Origin'] = '*'
+                return response, 400
     elif request.method == 'PUT':
         if check_if_user_exist(request.form['user_id']):
             if (int)(request.form['handle_type']) == 1:

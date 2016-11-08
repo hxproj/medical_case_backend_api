@@ -35,10 +35,14 @@ def prognosis_operation():
         return ret
     elif request.method == 'GET':
         prognosis = Prognosis_of_management.query.filter_by(user_id = request.args['user_id']).first()
-        response = prognosis.get_dict()
-        ret = flask.Response(json.dumps(response))
-        ret.headers['Access-Control-Allow-Origin'] = '*'
-        return ret
+        if prognosis:
+            response = flask.Response(json.dumps(prognosis.get_dict()))
+            response.headers['Access-Control-Allow-Origin'] = '*'
+            return response, 200
+        else:
+            response = flask.Response("Can not find the prognosis...")
+            response.headers['Access-Control-Allow-Origin'] = '*'
+            return response, 400
     elif request.method == 'OPTIONS':
         ret = flask.Response()
         ret.headers['Access-Control-Allow-Origin'] = '*'

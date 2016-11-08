@@ -27,11 +27,15 @@ def add_new_difficulty_assessment():
             ret.headers['Access-Control-Allow-Origin'] = '*'
             return ret, httplib.BAD_REQUEST
     elif request.method == 'GET':
-        temp_result = Difficulty_assessment.query.filter_by(tooth_id=request.args['tooth_id']).first()
-        response = temp_result.get_dict()
-        ret = flask.Response(json.dumps(response))
-        ret.headers['Access-Control-Allow-Origin'] = '*'
-        return ret
+        difficulty_assessment = Difficulty_assessment.query.filter_by(tooth_id=request.args['tooth_id']).first()
+        if difficulty_assessment:
+            response = flask.Response(json.dumps(difficulty_assessment.get_dict()))
+            response.headers['Access-Control-Allow-Origin'] = '*'
+            return response, 200
+        else:
+            response = flask.Response("Can not find the difficulty assessment...")
+            response.headers['Access-Control-Allow-Origin'] = '*'
+            return response, 400
     elif request.method == 'PUT':
         if check_if_user_exist(request.form['user_id']):
             ret_difficult = _form_to_difficult_assessment(request.form)

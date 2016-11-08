@@ -46,10 +46,14 @@ def add_new_oral_examination():
     elif request.method == 'GET':
         id = request.args['tooth_id']
         res_oral_examination = Oral_examination.query.filter_by(tooth_id=id).first()
-        res_oral_examination = res_oral_examination.get_dict()
-        ret = flask.Response(json.dumps(res_oral_examination))
-        ret.headers['Access-Control-Allow-Origin'] = '*'
-        return ret
+        if res_oral_examination:
+            response = flask.Response(json.dumps(res_oral_examination.get_dict()))
+            response.headers['Access-Control-Allow-Origin'] = '*'
+            return response, 200
+        else:
+            response = flask.Response("Can not find the oral examination...")
+            response.headers['Access-Control-Allow-Origin'] = '*'
+            return response, 400
     elif request.method == 'OPTIONS':
         ret = flask.Response()
         ret.headers['Access-Control-Allow-Origin'] = '*'

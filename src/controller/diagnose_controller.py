@@ -12,10 +12,14 @@ from src import db
 def add_new_diagnose():
     if request.method == 'GET':
         diagnose = Diagnose.query.filter_by(tooth_id=request.args['tooth_id']).first()
-        response = diagnose.get_dict()
-        ret = flask.Response(json.dumps(response))
-        ret.headers['Access-Control-Allow-Origin'] = '*'
-        return ret
+        if diagnose:
+            response = flask.Response(json.dumps(diagnose.get_dict()))
+            response.headers['Access-Control-Allow-Origin'] = '*'
+            return response, 200
+        else:
+            response = flask.Response("Can not find the diagnose...")
+            response.headers['Access-Control-Allow-Origin'] = '*'
+            return response, 400
     elif request.method == 'POST':
         if check_if_user_exist(request.form['user_id']):
             diagnose = _form_to_diagnose(request.form)

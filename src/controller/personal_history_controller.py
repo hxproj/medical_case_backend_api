@@ -32,7 +32,7 @@ def add_personal_history():
             response = flask.Response(json.dumps(personal_history.get_dict()))
             response.headers['Access-Control-Allow-Origin'] = '*'
             return response,200
-        else :
+        else:
             response = flask.Response('can not find this record.')
             response.headers['Access-Control-Allow-Origin'] = '*'
             return response, 400

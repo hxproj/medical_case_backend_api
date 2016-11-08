@@ -47,15 +47,14 @@ def add_new_illness_history():
     elif request.method == 'GET':
         id = request.args['tooth_id']
         illness_history = Illness_history.query.filter_by(tooth_id=id).first()
-        response = illness_history.get_dict()
-        ret = flask.Response(json.dumps(response))
-        ret.headers['Access-Control-Allow-Origin'] = '*'
-        return ret
-    elif request.method == 'OPTIONS':
-        ret = flask.Response()
-        ret.headers['Access-Control-Allow-Origin'] = '*'
-        ret.headers['Access-Control-Allow-Methods'] = 'PUT,DELETE'
-        return ret
+        if illness_history:
+            response = flask.Response(json.dumps(illness_history.get_dict()))
+            response.headers['Access-Control-Allow-Origin'] = '*'
+            return response, 200
+        else:
+            response = flask.Response("Can not find the illness history...")
+            response.headers['Access-Control-Allow-Origin'] = '*'
+            return response, 400
     elif request.method == 'OPTIONS':
         ret = flask.Response()
         ret.headers['Access-Control-Allow-Origin'] = '*'
