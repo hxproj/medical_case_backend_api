@@ -29,10 +29,14 @@ def usphs_method():
             return ret, httplib.BAD_REQUEST
     elif request.method == 'GET':
         temp_result = Usphs.query.filter_by(tooth_id=request.args['tooth_id']).first()
-        response = temp_result.get_dict()
-        ret = flask.Response(json.dumps(response))
-        ret.headers['Access-Control-Allow-Origin'] = '*'
-        return ret
+        if temp_result:
+            response = flask.Response(json.dumps(temp_result.get_dict()))
+            response.headers['Access-Control-Allow-Origin'] = '*'
+            return response, 200
+        else:
+            response = flask.Response("Can not find the USPHS...")
+            response.headers['Access-Control-Allow-Origin'] = '*'
+            return response, 400
     elif request.method == 'PUT':
         usphs = Usphs.query.filter_by(tooth_id = request.form['tooth_id']).first()
         if usphs:
