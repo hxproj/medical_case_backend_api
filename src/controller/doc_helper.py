@@ -20,6 +20,7 @@ from src.entity.risk_assessment import Risk_assessment
 from src.entity.surgical import Surgical
 from src.entity.tooth_location import Tooth_location
 from src.entity.user import User
+from src.entity.usphs import Usphs
 
 
 @app.route('/medical-case-of-illness/doc',methods=['GET'])
@@ -65,7 +66,8 @@ def generate_doc(tooth_id,step_info_list):
         del manager
         gc.collect()
     for para in full_paras:
-        document.add_paragraph(para.text,para.style)
+        if not '{[' in para.text:
+            document.add_paragraph(para.text,para.style)
     check_directory(tooth_id)
     flag, path = check_file(tooth_id, (str)(tooth_id) + '.docx')
     if flag:
@@ -102,6 +104,8 @@ class doc_manager:
             self.document = Document('./templete/diagnose.docx')
         elif table == 4:
             self.document = Document('./templete/difficulty_assessment.docx')
+        elif table == 6:
+            self.document = Document('./templete/usphs.docx')
 
     def get_document(self):
         paragraphs = self.document.paragraphs
@@ -119,8 +123,10 @@ class doc_manager:
         text_list.remove('')
         for i in range(len(text_list)):
             if len(paragraphs[i].runs) > 1:
-                if not paragraphs[i].runs[0].font.bold:
-                    paragraphs[i].text = text_list[i]
+                paragraphs[i].text = text_list[i]
+        for i in range(len(paragraphs)):
+            for j in range(len(paragraphs[i].runs)):
+                paragraphs[i].runs[j].style=self.document.paragraphs[i].runs[j].style
         return paragraphs
 
 
@@ -131,11 +137,6 @@ class doc_manager:
         if not surgical:
             surgical = Non_surgical.query.filter_by(tooth_id=self.tooth_id).first()
         dict = surgical.get_dict()
-        for key, value in dict.items():
-            if value == '是':
-                dict[key] = '有'
-            elif value == '否':
-                dict[key] = '无'
         if dict['handle_type'] == 1:
             if not dict['appease_medicine'] == '':
                 dict['appease_medicine'] = '安抚药物{0},'.format(dict['appease_medicine'])
@@ -143,11 +144,22 @@ class doc_manager:
             if not dict['modulo'] == '':
                 dict['modulo'] = '取模材料{0}。'.format(dict['modulo'])
                 dict['inlay'] = '嵌体材料{0}。'.format(dict['inlay'])
+            if dict['specific_method'] == '牙安抚治疗&树脂充填修复':
+                dict['is_first'] = ''
+                dict['is_second'] = ''
+            if dict['specific_method'] == '嵌体修复':
+                dict['qumo'] = ''
+            if dict['etching_type'] == '自酸蚀粘接系统':
+                dict['full_etching'] = dict['self_etching']
+            if dict['microscope'] == '是':
+                dict['microscope'] = '使用显微镜'
+            if dict['microscope'] == '否':
+                dict['microscope'] = '不使用显微镜'
         elif dict['handle_type'] == 0:
             if dict['specific_method'] == '药物治疗':
                 dict['non_surgical'] = '	药物治疗：将药物氟化物:{0}，硝酸银:{1}涂布于龋损处30s。' \
                     .format(dict['fluorination'], dict['silver_nitrate'])
-            elif dict['specific_method'] == '再矿物治疗':
+            elif dict['specific_method'] == '再矿化治疗':
                 dict['non_surgical'] = '	再矿化治疗：患牙清洁，干燥，将矿化液浸湿的小棉球置于患牙牙面，反复涂搽3-4次。'
             elif dict['specific_method'] == '窝沟封闭':
                 dict['non_surgical'] = '	窝沟封闭：1.清洁牙面： 在低速手机上装好{0}，' \
@@ -161,6 +173,7 @@ class doc_manager:
                     dict['additional_device'], dict['reagent'], dict['tools'],dict['time_of_etching'],
                     dict['lamp'], dict['check_time'],
                 )
+
         for key, value in dict.items():
             self.full_dict['{[' + key + ']}'] = dict[key]
     def _get_risk_dict(self):
@@ -200,6 +213,9 @@ class doc_manager:
         personal_history = Personal_history.query.filter_by(user_id=user_id).first()
         if personal_history:
             dic_list.append(personal_history)
+        usphs=Usphs.query.filter_by(user_id=user_id).first()
+        if usphs:
+            dic_list.append(usphs)
         oral_examination = Oral_examination.query.filter_by(tooth_id=self.tooth_id).first()
         if oral_examination:
             dic_list.append(oral_examination)
@@ -216,55 +232,30 @@ class doc_manager:
         for dit in dic_list:
             full_dict = full_dict+dit.__dict__.items()
         full_dict = dict(full_dict)
-        #full_dict = dict(
-        #    tooth_location.get_dict().items() + user.get_dict().items() + illness_history.get_dict().items()
-        #    + personal_history.get_dict().items() + oral_examination_dict.items() +
-        #    diagnose.get_dict().items() +
-        #    difficulty_assessment.get_dict().items())
         full_dict['oral_tooth_location'] = oral_tooth_location
         full_dict['tooth_location'] = tooth_location.tooth_location
-        for key, value in full_dict.items():
-            if value == '是':
-                full_dict[key] = '有'
-            elif value == '否':
-                full_dict[key] = '无'
         if tooth_location:
             if full_dict['is_fill_tooth'] == 0:
-                full_dict['tooth_info'] = full_dict['tooth_location'] + full_dict['symptom'] + full_dict[
+                full_dict['tooth_info'] = '不要求补牙'+full_dict['tooth_location'] + full_dict['symptom'] + full_dict[
                     'time_of_occurrence']
             else:
-                full_dict['tooth_info'] = full_dict['tooth_location'] + '要求补牙'
-        if illness_history:
-            if full_dict['is_primary'] == 1:
-                full_dict[
-                    'illness_history'] = '原发性龋病：{0}前发现牙齿{1}，' \
-                                         '近来症状{2}加重，{3}自发痛，夜间痛，' \
-                                         '{4}服用药物，{5}做过治疗，' \
-                                         '症状{6}缓解。'.format(full_dict['time_of_occurrence'],
-                                                           full_dict['symptom'], full_dict['is_very_bad'],
-                                                           full_dict['is_night_pain_self_pain'],
-                                                            full_dict['medicine_name'],
-                                                           full_dict['treatment'], full_dict['is_relief'])
-            else:
-                full_dict['illness_history'] = '有治疗史的龋病：{0}曾行修复治疗（{1}）' \
-                                               '，{2}{3}，{4}服用药物，' \
-                                               '症状{5}缓解。'.format(
-                    full_dict['time_of_occurrence'],
-                    full_dict['fill_type'],
-                    full_dict['time_of_occurrence'],
-                    full_dict['symptom'],
-                    full_dict['medicine_name'],
-                    full_dict['is_relief'])
+                full_dict['tooth_info'] = '要求补牙'+full_dict['tooth_location'] + '要求补牙'
         if user:
             if full_dict['gender'] == True:
                 full_dict['gender'] = '女'
             else:
                 full_dict['gender'] = '男'
-        level_list = ['-', '+-', '+', '++', '+++']
-        if oral_examination:
-            full_dict['hot'] = level_list[full_dict['hot'] - 1]
-            full_dict['cold'] = level_list[full_dict['cold'] - 1]
-            full_dict['touch'] = level_list[full_dict['touch'] - 1]
-            full_dict['bite'] = level_list[full_dict['bite'] - 1]
+        if full_dict.has_key('difficulty_level'):
+            if full_dict['difficulty_level']==1:
+                full_dict['doctor_level']='III'
+            elif full_dict['difficulty_level']==3:
+                full_dict['doctor_level']='I'
+            elif full_dict['difficulty_level']==2:
+                full_dict['doctor_level'] = 'II'
+        if full_dict.has_key('is_primary'):
+            if full_dict['is_primary']==0:
+                full_dict['first_illness']=''
+            if full_dict['is_primary']==1:
+                full_dict['second_illness']=''
         for key, value in full_dict.items():
             self.full_dict['{[' + key + ']}'] = full_dict[key]
