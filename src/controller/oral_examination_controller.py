@@ -90,6 +90,7 @@ def _form_to_oral_examination(form):
     temp_oral_examination.overflow_pus = form['overflow_pus']
     temp_oral_examination.mobility = form['mobility']
     temp_oral_examination.loss_caries_index_up = form['loss_caries_index_up']  # todo
+    temp_oral_examination.loss_caries_surface_index_up = form['loss_caries_surface_index_up']
     temp_oral_examination.development_of_the_situation = form['development_of_the_situation']
     temp_oral_examination.relations_between_teeth = form['relations_between_teeth']
     temp_oral_examination.is_teeth_crowd = form['is_teeth_crowd']

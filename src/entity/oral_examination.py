@@ -28,6 +28,7 @@ class Oral_examination(db.Model):
     overflow_pus = db.Column(db.String(50))
     mobility = db.Column(db.String(50))
     loss_caries_index_up = db.Column(db.String(50))
+    loss_caries_surface_index_up = db.Column(db.String(50))
     development_of_the_situation = db.Column(db.String(50))
     relations_between_teeth = db.Column(db.String(50))
     is_teeth_crowd = db.Column(db.String(50))
