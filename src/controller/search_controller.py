@@ -50,6 +50,8 @@ def search_options():
         query = Usphs.query
     elif table == 'surgical':
         query = Surgical.query
+    elif table == 'risk_assessment':
+        query = Risk_assessment.query
     se = set(['salivary_gland_disease', 'consciously_reduce_salivary_flow'])
     result_list = []
     for key in args:
