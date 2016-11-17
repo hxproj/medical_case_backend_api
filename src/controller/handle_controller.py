@@ -116,6 +116,7 @@ def _form_to_surgical(form):
     temp_surgical.coating_time = form['coating_time']
     temp_surgical.illumination_time = form['illumination_time']
     temp_surgical.resin = form['resin']
+    temp_surgical.color_of_resin = form['color_of_resin']
     temp_surgical.modification = form['modification']
     temp_surgical.lamp = form['lamp']
     temp_surgical.time_of_lamp = form['time_of_lamp']

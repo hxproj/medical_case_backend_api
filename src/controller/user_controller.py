@@ -30,7 +30,7 @@ def get_user_by_id(user_name):
     ret = flask.Response(json.dumps(lit))
     ret.headers['Access-Control-Allow-Origin'] = '*'
     return ret
-@app.route('/medical-case-of-illness/user',methods = ['POST','PUT','DELETE','OPTIONS'])
+@app.route('/medical-case-of-illness/user',methods = ['POST','PUT','GET','DELETE','OPTIONS'])
 def add_user():
     if request.method =='POST':
         if request.form['name'] is not None and request.form['name']!= '' and request.form['contact']!=None:
@@ -47,6 +47,17 @@ def add_user():
             ret = flask.Response('post error')
             ret.headers['Access-Control-Allow-Origin'] = '*'
             return ret, httplib.BAD_REQUEST
+    elif request.method == 'GET':
+        user_id = request.args['user_id']
+        user = User.query.filter_by(user_id = user_id).first()
+        if user:
+            response = flask.Response(json.dumps(user.get_dict()))
+            response.headers['Access-Control-Allow-Origin'] = '*'
+            return response, 200
+        else:
+            response = flask.Response('can not find this record.')
+            response.headers['Access-Control-Allow-Origin'] = '*'
+            return response, 400
     elif request.method=='DELETE':
         user_id=request.args['user_id']
         _delete_all(user_id)

@@ -25,6 +25,7 @@ class Surgical(db.Model):
     coating_time = db.Column(db.String(20))
     illumination_time = db.Column(db.String(20))
     resin = db.Column(db.String(20))
+    color_of_resin = db.Column(db.String(20))
     modification = db.Column(db.String(20))
     lamp = db.Column(db.String(20))
     time_of_lamp = db.Column(db.String(20))
