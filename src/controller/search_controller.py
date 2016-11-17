@@ -63,6 +63,7 @@ def search_options():
     for result in result_list:
         user_id_list.append(result.user_id)
     result = get_user_info_list(user_id_list)
+    result=result[-1::-1]
     if page == '' or page == None:
         response = flask.Response((str)(len(result)))
         response.headers['Access-Control-Allow-Origin'] = '*'
@@ -76,7 +77,10 @@ def search_options():
                 return_list.append(result[-1])
             else:
                 return_list = result[offset_start:offset_end]
-            info = {'info_list': return_list, 'pages': len(result) / app.config['PER_PAGE'] + 1, 'searched': 'ok'}
+            pages = (len(result)-1) / app.config['PER_PAGE'] + 1
+            if pages<=0:
+                pages=1
+            info = {'info_list': return_list, 'pages': pages, 'searched': 'ok'}
             response = flask.Response(json.dumps(info))
             response.headers['Access-Control-Allow-Origin'] = '*'
             return response, 200

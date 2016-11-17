@@ -1,3 +1,5 @@
+import shutil
+
 from sqlalchemy import and_
 import os
 from src import app
@@ -58,6 +60,10 @@ def check_file(tooth_id, file_name):
     else:
         return True, path
 
+def delete_directory(tooth_id):
+    path = app.config['STATIC_FILES_PATH'] + (str)(tooth_id)
+    if os.path.exists(path):
+        shutil.rmtree(path)
 
 def get_user_info_list(user_id_list):
     user_list = []

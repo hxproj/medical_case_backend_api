@@ -5,6 +5,7 @@ import datetime
 import flask
 from flask import request
 from src import app
+from src.controller.common_function import delete_directory
 from src.entity.diagnose import Diagnose
 from src.entity.difficulty_assessment import Difficulty_assessment
 from src.entity.illness_history import Illness_history
@@ -106,6 +107,7 @@ def _delete_all(user_id):
     tooth_list=db.session.query(Tooth_location.tooth_id).filter(Tooth_location.user_id==user_id).all()
     if tooth_list:
         for temp in tooth_list:
+            delete_directory(temp)
             db.session.query(Picture).filter(Picture.tooth_id==temp).delete()
     db.session.query(Usphs).filter(Usphs.user_id == user_id).delete()
     db.session.query(Tooth_location).filter(Tooth_location.user_id == user_id).delete()
