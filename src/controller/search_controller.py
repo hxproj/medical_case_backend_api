@@ -62,6 +62,8 @@ def search_options():
     user_id_list = []
     for result in result_list:
         user_id_list.append(result.user_id)
+    temp_set = set(user_id_list)
+    user_id_list = list(temp_set)
     result = get_user_info_list(user_id_list)
     result=result[-1::-1]
     if page == '' or page == None:

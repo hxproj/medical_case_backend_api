@@ -12,7 +12,7 @@ from src.entity.surgical import Surgical
 from src.entity.diagnose import Diagnose
 from src.entity.non_surgical import Non_surgical
 from src.entity.usphs import Usphs
-from src.controller.common_function import check_if_user_exist, refresh_step
+from src.controller.common_function import check_if_user_exist, refresh_step, delete_directory
 from src import db
 
 
@@ -81,7 +81,7 @@ def add_new_tooth_location_record():
         if db.session.query(Usphs).filter(Usphs.tooth_id == tooth_id).delete():
             count = count + 1
         db.session.commit()
-
+        delete_directory(tooth_id)
         if step == count - 1:
             ret = flask.Response("Delete Successful")
         else:

@@ -1,10 +1,13 @@
 import httplib
 import json
+
+from datetime import datetime
 import flask
 from flask import request
 from sqlalchemy import func
 
 from src import app
+from src.entity.prognosis_of_management import Prognosis_of_management
 from src.entity.tooth_location import Tooth_location
 from src.entity.user import User
 from src.controller.common_function import check_if_user_exist, refresh_step
@@ -20,9 +23,27 @@ def get_index():
     user_list =query.all()
     temp_user_list=[]
     for ul in user_list:
+        now_day = datetime.now().day
+        now_month = datetime.now().month
+        old_day = ul.in_date.day
+        old_month = ul.in_date.month
+        days = (now_month - old_month) * 30 + (now_day - old_day)
+        prognosis_of_management = Prognosis_of_management.query.filter_by(user_id=ul.user_id).first()
+        if_over_date = False
+        if prognosis_of_management:
+            type = prognosis_of_management.patient_type
+            subed_days = 0
+            if type == 1:
+                subed_days = days - 180
+            elif type == 2:
+                subed_days = days - 120
+            else:
+                subed_days = days - 90
+            if subed_days > 0:
+                if_over_date = True
         ul=ul.get_dict()
+        ul['if_over_date']=if_over_date
         temp_user_list.append(ul)
-
     for temp in temp_user_list:
 
         tooth_list = Tooth_location.query.filter_by(user_id=temp['user_id']).all()
