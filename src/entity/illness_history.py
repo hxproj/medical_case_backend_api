@@ -1,7 +1,8 @@
 from src import db
 
 class Illness_history(db.Model):
-    tooth_id = db.Column(db.Integer, primary_key=True)
+    case_id = db.Column(db.Integer, primary_key=True)
+    tooth_id = db.Column(db.Integer)
     user_id = db.Column(db.Integer)
     is_primary = db.Column(db.Boolean)
     is_very_bad = db.Column(db.String(50))

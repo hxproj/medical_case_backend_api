@@ -2,7 +2,8 @@ from src import db
 
 
 class Surgical(db.Model):
-    tooth_id = db.Column(db.Integer, primary_key=True)
+    case_id = db.Column(db.Integer, primary_key=True)
+    tooth_id = db.Column(db.Integer)
     user_id = db.Column(db.Integer)
     handle_type = db.Column(db.Integer)
     specific_method = db.Column(db.String(20))

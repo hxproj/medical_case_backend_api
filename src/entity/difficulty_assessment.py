@@ -2,7 +2,8 @@
 from src import db
 
 class Difficulty_assessment(db.Model):
-    tooth_id  = db.Column(db.Integer,primary_key=True)
+    case_id = db.Column(db.Integer, primary_key=True)
+    tooth_id  = db.Column(db.Integer)
     user_id = db.Column(db.Integer)
     tooth_surface_and_location = db.Column(db.String(20))
     caries_depth = db.Column(db.String(20))

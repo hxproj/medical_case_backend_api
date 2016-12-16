@@ -1,7 +1,8 @@
 from src import db
 
 class Personal_history(db.Model):
-    user_id = db.Column(db.Integer, primary_key=True)
+    case_id = db.Column(db.Integer, primary_key=True)
+    user_id = db.Column(db.Integer)
     #more_sweet = db.Column(db.String(10))
     consumption_of_sweet=db.Column(db.String(50))
     frequency_of_sweet=db.Column(db.String(50))

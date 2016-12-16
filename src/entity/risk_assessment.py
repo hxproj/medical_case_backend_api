@@ -1,7 +1,9 @@
 from src import db
 
 class Risk_assessment(db.Model):
-    user_id = db.Column(db.Integer,primary_key=True)
+    case_id = db.Column(db.Integer, primary_key=True)
+    user_id = db.Column(db.Integer)
+    tooth_id = db.Column(db.Integer)
     early_carie = db.Column(db.String(50))
     can_see =db.Column(db.String(50))
     lost_tooth = db.Column(db.String(50))

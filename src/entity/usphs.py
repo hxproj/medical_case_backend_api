@@ -1,7 +1,8 @@
 from src import db
 
 class Usphs(db.Model):
-    tooth_id = db.Column(db.Integer, primary_key=True)
+    case_id = db.Column(db.Integer, primary_key=True)
+    tooth_id = db.Column(db.Integer)
     user_id = db.Column(db.Integer)
     color = db.Column(db.String(50))
     marginal_accuracy = db.Column(db.String(50))

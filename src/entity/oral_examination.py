@@ -1,7 +1,8 @@
 from src import db
 
 class Oral_examination(db.Model):
-    tooth_id = db.Column(db.Integer,primary_key=True)
+    case_id = db.Column(db.Integer, primary_key=True)
+    tooth_id = db.Column(db.Integer)
     user_id = db.Column(db.Integer)
     tooth_location = db.Column(db.String(50))
     tooth_type = db.Column(db.String(50))
