@@ -18,8 +18,8 @@ def handle_method():
                 db.session.add(non_surgical)
                 db.session.commit()
                 handle = Non_surgical.query.filter_by(user_id=request.form['user_id']).all()[-1]
-                refresh_step(handle.tooth_id, 5)
-                ret_non_surgical = Non_surgical.query.filter_by(tooth_id=request.form['tooth_id']).first()
+                refresh_step(handle.case_id, 6)
+                ret_non_surgical = Non_surgical.query.filter_by(case_id=request.form['case_id']).first()
                 response = ret_non_surgical.get_dict()
                 ret = flask.Response(json.dumps(response))
                 ret.headers['Access-Control-Allow-Origin'] = '*'
@@ -29,8 +29,8 @@ def handle_method():
                 db.session.add(surgical)
                 db.session.commit()
                 handle = Surgical.query.filter_by(user_id=request.form['user_id']).all()[-1]
-                refresh_step(handle.tooth_id, 5)
-                ret_surgical = Surgical.query.filter_by(tooth_id=request.form['tooth_id']).first()
+                refresh_step(handle.case_id, 6)
+                ret_surgical = Surgical.query.filter_by(case_id=request.form['case_id']).first()
                 response = ret_surgical.get_dict()
                 ret = flask.Response(json.dumps(response))
                 ret.headers['Access-Control-Allow-Origin'] = '*'
@@ -44,13 +44,13 @@ def handle_method():
             ret.headers['Access-Control-Allow-Origin'] = '*'
             return ret, httplib.BAD_REQUEST
     elif request.method == 'GET':
-        query_result = Surgical.query.filter_by(tooth_id=request.args['tooth_id']).first()
+        query_result = Surgical.query.filter_by(case_id=request.args['case_id']).first()
         if query_result:
             ret = flask.Response(json.dumps(query_result.get_dict()))
             ret.headers['Access-Control-Allow-Origin'] = '*'
             return ret
         else:
-            query_result = Non_surgical.query.filter_by(tooth_id=request.args['tooth_id']).first()
+            query_result = Non_surgical.query.filter_by(case_id=request.args['case_id']).first()
             if query_result:
                 ret = flask.Response(json.dumps(query_result.get_dict()))
                 ret.headers['Access-Control-Allow-Origin'] = '*'
@@ -66,16 +66,16 @@ def handle_method():
             else:
                 temp_result = _form_to_non_surgical(request.form)
             db.session.query(Surgical).filter(
-                Surgical.tooth_id == request.form['tooth_id']).delete()
+                Surgical.case_id == request.form['case_id']).delete()
             db.session.query(Non_surgical).filter(
-                Non_surgical.tooth_id == request.form['tooth_id']).delete()
+                Non_surgical.case_id == request.form['case_id']).delete()
             db.session.commit()
             db.session.add(temp_result)
             db.session.commit()
             if (int)(request.form['handle_type']) == 1:
-                result = Surgical.query.filter_by(tooth_id=request.form['tooth_id']).first()
+                result = Surgical.query.filter_by(case_id=request.form['case_id']).first()
             else:
-                result = Non_surgical.query.filter_by(tooth_id=request.form['tooth_id']).first()
+                result = Non_surgical.query.filter_by(case_id=request.form['case_id']).first()
             response = result.get_dict()
             ret = flask.Response(json.dumps(response))
             ret.headers['Access-Control-Allow-Origin'] = '*'
@@ -95,6 +95,7 @@ def _form_to_surgical(form):
     temp_surgical = Surgical()
     temp_surgical.user_id = form['user_id']
     temp_surgical.tooth_id = form['tooth_id']
+    temp_surgical.case_id = form['case_id']
     temp_surgical.handle_type = form['handle_type']
     temp_surgical.specific_method = form['specific_method']
     temp_surgical.anesthesia_medicine = form['anesthesia_medicine']
@@ -132,6 +133,7 @@ def _form_to_non_surgical(form):
     temp_non_surgical = Non_surgical()
     temp_non_surgical.user_id = form['user_id']
     temp_non_surgical.tooth_id = form['tooth_id']
+    temp_non_surgical.case_id = form['case_id']
     temp_non_surgical.handle_type = form['handle_type']
     temp_non_surgical.specific_method = form['specific_method']
     temp_non_surgical.fluorination = form['fluorination']

@@ -7,6 +7,7 @@ from src import app
 from src.entity.prognosis_of_management import Prognosis_of_management
 from src.entity.user import User
 from src.entity.tooth_location import Tooth_location
+from src.entity.illness_case import Illness_case
 from src import db
 import copy
 
@@ -19,56 +20,56 @@ def check_if_user_exist(user_id):
         return True
 
 
-def refresh_step(tooth_id, step, tooth_location=None):
+def refresh_step(case_id, step, tooth_location=None):
     if tooth_location:
-        db.session.query(Tooth_location).filter(
-            and_(Tooth_location.tooth_id == (int)(tooth_id), Tooth_location.tooth_location == tooth_location)).update(
+        db.session.query(Illness_case).filter(
+            Illness_case.case_id == (int)(case_id)).update(
             {'step': step})
     else:
-        tooth = Tooth_location.query.filter_by(tooth_id=tooth_id).first()
+        case = Illness_case.query.filter_by(case_id=case_id).first()
         word = ''
-        if tooth:
-            tooth_step_list = tooth.step.split(',')
-            if '' in tooth_step_list:
-                tooth_step_list.remove('')
+        if case:
+            case_step_list = case.step.split(',')
+            if '' in case_step_list:
+                case_step_list.remove('')
             num_list =[]
-            for i in range(len(tooth_step_list)):
-                num_list.append((int)(tooth_step_list[i]))
+            for i in range(len(case_step_list)):
+                num_list.append((int)(case_step_list[i]))
             step_set = set(num_list)
             if not step in step_set:
                 num_list = list(step_set)
                 num_list.append(step)
                 num_list.sort()
-                new_tooth_list = []
+                new_case_list = []
                 for i in range(len(num_list)):
-                    new_tooth_list.append((str)(num_list[i]))
-                word = reduce(lambda x,y:x+','+y,new_tooth_list)+','
-            db.session.query(Tooth_location).filter(
-                Tooth_location.tooth_id == (int)(tooth_id)).update(
+                    new_case_list.append((str)(num_list[i]))
+                word = reduce(lambda x,y:x+','+y,new_case_list)+','
+            db.session.query(Illness_case).filter(
+                Illness_case.case_id == (int)(case_id)).update(
                 {'step': word})
     db.session.commit()
 
 
-def check_directory(tooth_id):
-    path = app.config['STATIC_FILES_PATH'] + (str)(tooth_id)
+def check_directory(case_id):
+    path = app.config['STATIC_FILES_PATH'] + (str)(case_id)
     if not os.path.exists(path):
         os.mkdir(path)
     return path
 
 
-def check_file(tooth_id, file_name):
-    path = app.config['STATIC_FILES_PATH'] + (str)(tooth_id) + '\\' + file_name
+def check_file(case_id, file_name):
+    path = app.config['STATIC_FILES_PATH'] + (str)(case_id) + '\\' + file_name
     if not os.path.exists(path):
         return False, path
     else:
         return True, path
 
-def delete_directory(tooth_id):
-    path = app.config['STATIC_FILES_PATH'] + (str)(tooth_id)
+def delete_directory(case_id):
+    path = app.config['STATIC_FILES_PATH'] + (str)(case_id)
     if os.path.exists(path):
         shutil.rmtree(path)
 
-def get_user_info_list(user_id_list):
+def get_user_info_list(user_id_list):#todo : look into detail
     user_list = []
     for user_id in user_id_list:
         user_item = User.query.filter_by(user_id=user_id).first()

@@ -10,6 +10,7 @@ from src import app
 from src.controller.common_function import check_if_user_exist, get_user_info_list
 from src.entity.diagnose import Diagnose
 from src.entity.difficulty_assessment import Difficulty_assessment
+from src.entity.illness_case import Illness_case
 from src.entity.illness_history import Illness_history
 from src.entity.oral_examination import Oral_examination
 from src.entity.personal_history import Personal_history
@@ -93,10 +94,10 @@ def search_options():
             return response, 200
 @app.route('/medical-case-of-illness/step-info', methods=['GET'])
 def get_step_info():
-    tooth_id = request.args['tooth_id']
-    tooth_location = Tooth_location.query.filter_by(tooth_id=tooth_id).first()
-    if tooth_location:
-        step_string = tooth_location.step
+    case_id = request.args['case_id']
+    illness_case = Illness_case.query.filter_by(case_id=case_id).first()
+    if illness_case:
+        step_string = illness_case.step
         tooth_step_list = step_string.split(',')
         if '' in tooth_step_list:
             tooth_step_list.remove('')

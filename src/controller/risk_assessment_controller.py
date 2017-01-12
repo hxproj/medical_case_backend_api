@@ -5,7 +5,7 @@ import datetime
 import flask
 from flask import request
 from src import app
-from src.controller.common_function import check_if_user_exist
+from src.controller.common_function import check_if_user_exist, refresh_step
 from src.entity.risk_assessment import Risk_assessment
 from src import db
 
@@ -17,11 +17,12 @@ def risk_options():
             response.headers['Access-Control-Allow-Origin'] = '*'
             return response ,400
         else:
-            if not Risk_assessment.query.filter_by(user_id = request.form['user_id']).first():
+            if not Risk_assessment.query.filter_by(case_id = request.form['case_id']).first():
                 risk = _form_to_risk(request.form)
                 db.session.add(risk)
                 db.session.commit()
-                response = flask.Response(json.dumps(Risk_assessment.query.filter_by(user_id=request.form['user_id']).first().get_dict()))
+                refresh_step(request.form['case_id'], 3)
+                response = flask.Response(json.dumps(Risk_assessment.query.filter_by(case_id=request.form['case_id']).first().get_dict()))
                 response.headers['Access-Control-Allow-Origin'] = '*'
                 return response, 200
             else:
@@ -29,24 +30,19 @@ def risk_options():
                 response.headers['Access-Control-Allow-Origin'] = '*'
                 return response, 400
     elif request.method =='GET':
-        if  not check_if_user_exist(request.args['user_id']):
-            response = flask.Response('user is not exist .')
+        risk = Risk_assessment.query.filter_by(case_id = request.args['case_id']).first()
+        if risk:
+            response = flask.Response(json.dumps(risk.get_dict()))
+            response.headers['Access-Control-Allow-Origin'] = '*'
+            return response, 200
+        else:
+            response = flask.Response('user has not record risk assessment.')
             response.headers['Access-Control-Allow-Origin'] = '*'
             return response, 400
-        else:
-            risk = Risk_assessment.query.filter_by(user_id = request.args['user_id']).first()
-            if risk:
-                response = flask.Response(json.dumps(risk.get_dict()))
-                response.headers['Access-Control-Allow-Origin'] = '*'
-                return response, 200
-            else:
-                response = flask.Response('user has not record risk assessment.')
-                response.headers['Access-Control-Allow-Origin'] = '*'
-                return response, 400
     elif request.method=='DELETE':
-        risk = Risk_assessment.query.filter_by(user_id=request.args['user_id']).first()
+        risk = Risk_assessment.query.filter_by(case_id=request.args['case_id']).first()
         if risk:
-            db.session.query(Risk_assessment).filter(Risk_assessment.user_id==request.args['user_id']).delete()
+            db.session.query(Risk_assessment).filter(Risk_assessment.case_id==request.args['case_id']).delete()
             db.session.commit()
             response = flask.Response('succeed')
             response.headers['Access-Control-Allow-Origin'] = '*'
@@ -61,14 +57,14 @@ def risk_options():
             response.headers['Access-Control-Allow-Origin'] = '*'
             return response, 400
         else:
-            if Risk_assessment.query.filter_by(user_id=request.form['user_id']).first():
-                db.session.query(Risk_assessment).filter(Risk_assessment.user_id==request.form['user_id']).delete()
+            if Risk_assessment.query.filter_by(case_id=request.form['case_id']).first():
+                db.session.query(Risk_assessment).filter(Risk_assessment.case_id==request.form['case_id']).delete()
                 db.session.commit()
                 risk = _form_to_risk(request.form)
                 db.session.add(risk)
                 db.session.commit()
                 response = flask.Response(
-                    json.dumps(Risk_assessment.query.filter_by(user_id=request.form['user_id']).first().get_dict()))
+                    json.dumps(Risk_assessment.query.filter_by(case_id=request.form['case_id']).first().get_dict()))
                 response.headers['Access-Control-Allow-Origin'] = '*'
                 return response, 200
             else:
@@ -85,6 +81,8 @@ def risk_options():
 
 def _form_to_risk(form):
     risk = Risk_assessment()
+    risk.tooth_id = form['tooth_id']
+    risk.case_id = form['case_id']
     risk.user_id = form['user_id']
     risk.early_carie = form['early_carie']
     risk.can_see = form['can_see']

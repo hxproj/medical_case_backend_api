@@ -16,7 +16,7 @@ def add_new_oral_examination():
             db.session.add(oral_examination)
             db.session.commit()
             oral_examination = Oral_examination.query.filter_by(user_id=request.form['user_id']).all()[-1]
-            refresh_step(oral_examination.tooth_id, 2)
+            refresh_step(oral_examination.case_id, 2)
             oral_examination_list = Oral_examination.query.filter_by(user_id=request.form['user_id']).all()
             response = oral_examination_list[-1]
             response = response.get_dict()
@@ -29,12 +29,12 @@ def add_new_oral_examination():
             return ret, httplib.BAD_REQUEST
     elif request.method == 'PUT':
         if check_if_user_exist(request.form['user_id']):
-            db.session.query(Oral_examination).filter(Oral_examination.tooth_id == request.form['tooth_id']).delete()
+            db.session.query(Oral_examination).filter(Oral_examination.case_id == request.form['case_id']).delete()
             db.session.commit()
             oral_examination = _form_to_oral_examination(request.form)
             db.session.add(oral_examination)
             db.session.commit()
-            res_oral_examination = Oral_examination.query.filter_by(tooth_id=request.form['tooth_id']).first()
+            res_oral_examination = Oral_examination.query.filter_by(case_id=request.form['case_id']).first()
             response = res_oral_examination.get_dict()
             ret = flask.Response(json.dumps(response))
             ret.headers['Access-Control-Allow-Origin'] = '*'
@@ -44,8 +44,8 @@ def add_new_oral_examination():
             ret.headers['Access-Control-Allow-Origin'] = '*'
             return ret, httplib.BAD_REQUEST
     elif request.method == 'GET':
-        id = request.args['tooth_id']
-        res_oral_examination = Oral_examination.query.filter_by(tooth_id=id).first()
+        id = request.args['case_id']
+        res_oral_examination = Oral_examination.query.filter_by(case_id=id).first()
         if res_oral_examination:
             response = flask.Response(json.dumps(res_oral_examination.get_dict()))
             response.headers['Access-Control-Allow-Origin'] = '*'
@@ -64,6 +64,7 @@ def add_new_oral_examination():
 def _form_to_oral_examination(form):
     temp_oral_examination = Oral_examination()
     temp_oral_examination.tooth_id = form['tooth_id']
+    temp_oral_examination.case_id = form['case_id']
     temp_oral_examination.user_id = form['user_id']
     temp_oral_examination.tooth_location = form['tooth_location']
     temp_oral_examination.tooth_type = form['tooth_type']

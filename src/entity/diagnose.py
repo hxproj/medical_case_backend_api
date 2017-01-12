@@ -6,6 +6,9 @@ class Diagnose(db.Model):
     user_id = db.Column(db.Integer)
     caries_type = db.Column(db.String(20))
     caries_degree = db.Column(db.String(20))
+    cure_plan = db.Column(db.String(50))
+    specification = db.Column(db.String(50))
+    if_direct = db.Column(db.String(50))
 
     def get_dict(self):
         dit = self.__dict__

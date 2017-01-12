@@ -14,3 +14,4 @@ import risk_assessment_controller
 import search_controller
 import img_controller
 import doc_helper
+import case_controller

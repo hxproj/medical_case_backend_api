@@ -7,6 +7,7 @@ from src.controller.common_function import check_directory, check_file
 
 from src import app
 from src import db
+from src.entity.illness_case import Illness_case
 from src.entity.picture import Picture
 from flask import request
 from werkzeug import secure_filename
@@ -21,22 +22,22 @@ ISOTIMEFORMAT='%Y%m%d%H%M%S'
 def upload_img():
     if request.method == 'POST':
         response = flask.Response('')
-        tooth_id = request.form["tooth_id"]
+        case_id = request.form["case_id"]
         picture_type = request.form['picture_type']
-        tooth_list = Tooth_location.query.filter_by(tooth_id=tooth_id).all()
-        if tooth_list:
+        case_list = Illness_case.query.filter_by(case_id=case_id).all()
+        if case_list:
             files = request.files.getlist("file[]")
             for file in files:
                 if file and allowed_file(file.filename):
                     filename = secure_filename(file.filename)
                     filename=time.strftime( ISOTIMEFORMAT, time.localtime() )+'_'+filename
-                    filepath = check_directory(tooth_id)
+                    filepath = check_directory(case_id)
 
-                    flage, path = check_file(tooth_id, filename)
+                    flage, path = check_file(case_id, filename)
                     if flage == False:
                         file.save(os.path.join(filepath, filename))
                         pic = Picture()
-                        pic.tooth_id = tooth_id
+                        pic.case_id = case_id
                         pic.picture_type = picture_type
                         pic.path = path
                         db.session.add(pic)
@@ -49,7 +50,7 @@ def upload_img():
                         response = flask.Response('upload NOT succeed,The file have been uploaded')
                         response.status_code = 404
         else:
-            response = flask.Response('toothid not exist')
+            response = flask.Response('case id not exist')
             response.status_code = 404
         response.headers['Access-Control-Allow-Origin'] = '*'
         return response
@@ -65,9 +66,9 @@ def upload_img():
     #</form>
     #'''
     elif request.method == 'GET':
-        tooth_id=request.args.get('tooth_id')
+        case_id=request.args.get('case_id')
         type = request.args['type']
-        img_list=Picture.query.filter_by(tooth_id=tooth_id,picture_type=type).all()
+        img_list=Picture.query.filter_by(case_id=case_id,picture_type=type).all()
         path_list=[]
         for img in img_list:
             img=img.get_dict()

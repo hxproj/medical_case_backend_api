@@ -16,8 +16,8 @@ def add_new_difficulty_assessment():
             db.session.add(ret_difficult)
             db.session.commit()
             difficulty = Difficulty_assessment.query.filter_by(user_id=request.form['user_id']).all()[-1]
-            refresh_step(difficulty.tooth_id, 4)
-            res_difficult = Difficulty_assessment.query.filter_by(tooth_id=request.form['tooth_id']).first()
+            refresh_step(difficulty.case_id, 5)
+            res_difficult = Difficulty_assessment.query.filter_by(case_id=request.form['case_id']).first()
             response = res_difficult.get_dict()
             ret = flask.Response(json.dumps(response))
             ret.headers['Access-Control-Allow-Origin'] = '*'
@@ -27,7 +27,7 @@ def add_new_difficulty_assessment():
             ret.headers['Access-Control-Allow-Origin'] = '*'
             return ret, httplib.BAD_REQUEST
     elif request.method == 'GET':
-        difficulty_assessment = Difficulty_assessment.query.filter_by(tooth_id=request.args['tooth_id']).first()
+        difficulty_assessment = Difficulty_assessment.query.filter_by(case_id=request.args['case_id']).first()
         if difficulty_assessment:
             response = flask.Response(json.dumps(difficulty_assessment.get_dict()))
             response.headers['Access-Control-Allow-Origin'] = '*'
@@ -40,11 +40,11 @@ def add_new_difficulty_assessment():
         if check_if_user_exist(request.form['user_id']):
             ret_difficult = _form_to_difficult_assessment(request.form)
             db.session.query(Difficulty_assessment).filter(
-                Difficulty_assessment.tooth_id == request.form['tooth_id']).delete()
+                Difficulty_assessment.case_id == request.form['case_id']).delete()
             db.session.commit()
             db.session.add(ret_difficult)
             db.session.commit()
-            res_difficulty_assessment = Difficulty_assessment.query.filter_by(tooth_id=request.form['tooth_id']).first()
+            res_difficulty_assessment = Difficulty_assessment.query.filter_by(case_id=request.form['case_id']).first()
             response = res_difficulty_assessment.get_dict()
             ret = flask.Response(json.dumps(response))
             ret.headers['Access-Control-Allow-Origin'] = '*'
@@ -63,6 +63,7 @@ def add_new_difficulty_assessment():
 def _form_to_difficult_assessment(form):
     temp_difficult = Difficulty_assessment()
     temp_difficult.tooth_id = form['tooth_id']
+    temp_difficult.case_id = form['case_id']
     temp_difficult.user_id = form['user_id']
     temp_difficult.tooth_surface_and_location = form['tooth_surface_and_location']
     temp_difficult.caries_depth = form['caries_depth']

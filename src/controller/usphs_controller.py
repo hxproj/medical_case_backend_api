@@ -16,9 +16,9 @@ def usphs_method():
             temp_usphs = _form_to_usphs(request.form)
             db.session.add(temp_usphs)
             db.session.commit()
-            usphs = Usphs.query.filter_by(user_id=request.form['user_id']).all()[-1]
-            refresh_step(usphs.tooth_id, 6)
-            res_usphs = Usphs.query.filter_by(tooth_id=request.form['tooth_id']).first()
+            usphs = Usphs.query.filter_by(case_id=request.form['case_id']).all()[-1]
+            refresh_step(usphs.case_id, 8)
+            res_usphs = Usphs.query.filter_by(case_id=request.form['case_id']).first()
             response = res_usphs.get_dict()
             ret = flask.Response(json.dumps(response))
             ret.headers['Access-Control-Allow-Origin'] = '*'
@@ -28,7 +28,7 @@ def usphs_method():
             ret.headers['Access-Control-Allow-Origin'] = '*'
             return ret, httplib.BAD_REQUEST
     elif request.method == 'GET':
-        temp_result = Usphs.query.filter_by(tooth_id=request.args['tooth_id']).first()
+        temp_result = Usphs.query.filter_by(case_id=request.args['case_id']).first()
         if temp_result:
             response = flask.Response(json.dumps(temp_result.get_dict()))
             response.headers['Access-Control-Allow-Origin'] = '*'
@@ -38,14 +38,14 @@ def usphs_method():
             response.headers['Access-Control-Allow-Origin'] = '*'
             return response, 400
     elif request.method == 'PUT':
-        usphs = Usphs.query.filter_by(tooth_id = request.form['tooth_id']).first()
+        usphs = Usphs.query.filter_by(case_id = request.form['case_id']).first()
         if usphs:
-            db.session.query(Usphs).filter(Usphs.tooth_id == request.form['tooth_id']).delete()
+            db.session.query(Usphs).filter(Usphs.case_id == request.form['case_id']).delete()
             db.session.commit()
             temp_usphs = _form_to_usphs(request.form)
             db.session.add(temp_usphs)
             db.session.commit()
-            res_usphs = Usphs.query.filter_by(tooth_id = request.form['tooth_id']).first()
+            res_usphs = Usphs.query.filter_by(case_id = request.form['case_id']).first()
             response = flask.Response(json.dumps(res_usphs.get_dict()))
             response.headers['Access-Control-Allow-Origin'] = '*'
             return  response,200
@@ -65,6 +65,7 @@ def _form_to_usphs(form):
     usphs.color = form['color']
     usphs.tooth_id = form['tooth_id']
     usphs.user_id = form['user_id']
+    usphs.case_id = form['case_id']
     usphs.marginal_accuracy = form['marginal_accuracy']
     usphs.anatomic_form = form['anatomic_form']
     usphs.surfaceness = form['surfaceness']

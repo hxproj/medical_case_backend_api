@@ -1,9 +1,11 @@
 import httplib
 import json
 
+import datetime
 import flask
 from flask import request
 from src import app
+from src.entity.illness_case import Illness_case
 from src.entity.tooth_location import Tooth_location
 from src.entity.illness_history import Illness_history
 from src.entity.oral_examination import Oral_examination
@@ -27,7 +29,17 @@ def add_new_tooth_location_record():
             #refresh_step(request.form['user_id'], 0, request.form['tooth_location'])
             response_record = Tooth_location.query.filter_by(user_id=request.form['user_id']).all()
             newest_record = response_record[-1]
+            illness_case = Illness_case()
+            illness_case.tooth_id = newest_record.tooth_id
+            illness_case.date = datetime.datetime.now()
+            illness_case.case_type=1
+            illness_case.step = '0,'
+            illness_case.if_handle = 1
+            db.session.add(illness_case)
+            db.session.commit()
+            newest_case = Illness_case.query.filter_by(tooth_id = newest_record.tooth_id).all()[-1]
             response = newest_record.get_dict()
+            response['case_id']=newest_case.case_id
             ret = flask.Response(json.dumps(response))
             ret.headers['Access-Control-Allow-Origin'] = '*'
             return ret
@@ -49,10 +61,10 @@ def add_new_tooth_location_record():
             return res,400
 
     elif request.method == 'PUT':
-        db.session.query(Tooth_location).filter(Tooth_location.tooth_id == request.form['tooth_id']).delete()
-        db.session.commit()
-        location_record = _form_to_tooth_location_record_update(request.form)
-        db.session.add(location_record)
+        Tooth_location.query.filter_by(tooth_id=request.form['tooth_id']).update({'is_fill_tooth':request.form['is_fill_tooth'],
+                                                                                  'symptom':request.form['symptom'],'time_of_occurrence'
+                                                                                  :request.form['time_of_occurrence'],'tooth_location_number'
+                                                                                  :request.form['tooth_location_number']})
         db.session.commit()
         response_record = Tooth_location.query.filter_by(tooth_id=request.form['tooth_id']).first()
         response = response_record.get_dict()
@@ -62,7 +74,7 @@ def add_new_tooth_location_record():
     elif request.method == 'DELETE':
         tooth_id = request.args.get('tooth_id')
         deletelist = db.session.query(Tooth_location).filter(Tooth_location.tooth_id == tooth_id).first()
-        step = deletelist.step
+        # step = deletelist.step
         count = 0
         if db.session.query(Tooth_location).filter(Tooth_location.tooth_id == tooth_id).delete():
             count = count + 1
@@ -81,11 +93,8 @@ def add_new_tooth_location_record():
         if db.session.query(Usphs).filter(Usphs.tooth_id == tooth_id).delete():
             count = count + 1
         db.session.commit()
-        delete_directory(tooth_id)
-        if step == count - 1:
-            ret = flask.Response("Delete Successful")
-        else:
-            ret = flask.Response("Delete have a misstake")
+        #delete_directory(tooth_id) # todo : delete all case directory ?
+        ret = flask.Response("Delete Successful")
         ret.headers['Access-Control-Allow-Origin'] = '*'
         return ret
     elif request.method == 'OPTIONS':
@@ -98,11 +107,11 @@ def add_new_tooth_location_record():
 def _form_to_tooth_location_record(form):
     temp_record = Tooth_location()
     temp_record.tooth_location = form['tooth_location']
-    temp_record.symptom = form['symptom']
+    #temp_record.symptom = form['symptom']
     temp_record.user_id = form['user_id']
-    temp_record.time_of_occurrence = form['time_of_occurrence']
-    temp_record.is_fill_tooth = form['is_fill_tooth']
-    temp_record.step = '0,'
+    #temp_record.time_of_occurrence = form['time_of_occurrence']
+    #temp_record.is_fill_tooth = form['is_fill_tooth']
+    #temp_record.step = '0,'
     return temp_record
 
 

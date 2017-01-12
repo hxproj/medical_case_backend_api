@@ -2,10 +2,38 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="d0531ee9-398b-419b-a56e-c6ae842680e5" name="Default" comment="">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gitignore" afterPath="$PROJECT_DIR$/.gitignore" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/medical_case_backend_api.iml" afterPath="$PROJECT_DIR$/.idea/medical_case_backend_api.iml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/modules.xml" afterPath="$PROJECT_DIR$/.idea/modules.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/vcs.xml" afterPath="$PROJECT_DIR$/.idea/vcs.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/config/default.py" afterPath="$PROJECT_DIR$/config/default.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/requirements.txt" afterPath="$PROJECT_DIR$/requirements.txt" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/run.py" afterPath="$PROJECT_DIR$/run.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/__init__.py" afterPath="$PROJECT_DIR$/src/__init__.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/controller/__init__.py" afterPath="$PROJECT_DIR$/src/controller/__init__.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/controller/common_function.py" afterPath="$PROJECT_DIR$/src/controller/common_function.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/controller/diagnose_controller.py" afterPath="$PROJECT_DIR$/src/controller/diagnose_controller.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/controller/difficulty_assessment_controller.py" afterPath="$PROJECT_DIR$/src/controller/difficulty_assessment_controller.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/controller/doc_helper.py" afterPath="$PROJECT_DIR$/src/controller/doc_helper.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/controller/handle_controller.py" afterPath="$PROJECT_DIR$/src/controller/handle_controller.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/controller/illness_history_controller.py" afterPath="$PROJECT_DIR$/src/controller/illness_history_controller.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/controller/img_controller.py" afterPath="$PROJECT_DIR$/src/controller/img_controller.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/controller/index_info.py" afterPath="$PROJECT_DIR$/src/controller/index_info.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/controller/index_info_stepless.py" afterPath="$PROJECT_DIR$/src/controller/index_info_stepless.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/controller/oral_examination_controller.py" afterPath="$PROJECT_DIR$/src/controller/oral_examination_controller.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/controller/personal_history_controller.py" afterPath="$PROJECT_DIR$/src/controller/personal_history_controller.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/controller/prognosis_of_management_controller.py" afterPath="$PROJECT_DIR$/src/controller/prognosis_of_management_controller.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/controller/risk_assessment_controller.py" afterPath="$PROJECT_DIR$/src/controller/risk_assessment_controller.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/controller/search_controller.py" afterPath="$PROJECT_DIR$/src/controller/search_controller.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/controller/tooth_location_controller.py" afterPath="$PROJECT_DIR$/src/controller/tooth_location_controller.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/controller/user_controller.py" afterPath="$PROJECT_DIR$/src/controller/user_controller.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/controller/usphs_controller.py" afterPath="$PROJECT_DIR$/src/controller/usphs_controller.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/entity/__init__.py" afterPath="$PROJECT_DIR$/src/entity/__init__.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/entity/diagnose.py" afterPath="$PROJECT_DIR$/src/entity/diagnose.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/entity/difficulty_assessment.py" afterPath="$PROJECT_DIR$/src/entity/difficulty_assessment.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/entity/illness_case.py" afterPath="$PROJECT_DIR$/src/entity/illness_case.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/entity/illness_history.py" afterPath="$PROJECT_DIR$/src/entity/illness_history.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/entity/non_surgical.py" afterPath="$PROJECT_DIR$/src/entity/non_surgical.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/entity/oral_examination.py" afterPath="$PROJECT_DIR$/src/entity/oral_examination.py" />
@@ -14,6 +42,8 @@
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/entity/prognosis_of_management.py" afterPath="$PROJECT_DIR$/src/entity/prognosis_of_management.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/entity/risk_assessment.py" afterPath="$PROJECT_DIR$/src/entity/risk_assessment.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/entity/surgical.py" afterPath="$PROJECT_DIR$/src/entity/surgical.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/entity/tooth_location.py" afterPath="$PROJECT_DIR$/src/entity/tooth_location.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/entity/user.py" afterPath="$PROJECT_DIR$/src/entity/user.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/entity/usphs.py" afterPath="$PROJECT_DIR$/src/entity/usphs.py" />
     </list>
     <ignored path="medical_case_backend_api.iws" />
@@ -28,19 +58,19 @@
   </component>
   <component name="ChangesViewManager" flattened_view="true" show_ignored="false" />
   <component name="CoverageDataManager">
-    <SUITE FILE_PATH="coverage/medical_case_backend_api$tooth_location.coverage" NAME="tooth_location Coverage Results" MODIFIED="1471524659010" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src/entity" />
-    <SUITE FILE_PATH="coverage/medical_case_backend_api$difficulty_assessment.coverage" NAME="difficulty_assessment Coverage Results" MODIFIED="1471611323350" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src/entity" />
-    <SUITE FILE_PATH="coverage/medical_case_backend_api$oral_examination.coverage" NAME="oral_examination Coverage Results" MODIFIED="1478219319443" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src/entity" />
     <SUITE FILE_PATH="coverage/medical_case_backend_api$non_surgical.coverage" NAME="non_surgical Coverage Results" MODIFIED="1474017289970" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src/entity" />
-    <SUITE FILE_PATH="coverage/medical_case_backend_api$diagnose.coverage" NAME="diagnose Coverage Results" MODIFIED="1471609943341" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src/entity" />
-    <SUITE FILE_PATH="coverage/medical_case_backend_api$personal_history.coverage" NAME="personal_history Coverage Results" MODIFIED="1471443790327" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src/entity" />
-    <SUITE FILE_PATH="coverage/medical_case_backend_api$Unittests_in_medical_case_backend_api.coverage" NAME="Unittests in medical_case_backend_api Coverage Results" MODIFIED="1478679230320" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/medical_case_backend_api$run.coverage" NAME="run Coverage Results" MODIFIED="1479474090713" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/medical_case_backend_api$oral_examination.coverage" NAME="oral_examination Coverage Results" MODIFIED="1478219319443" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src/entity" />
+    <SUITE FILE_PATH="coverage/medical_case_backend_api$difficulty_assessment.coverage" NAME="difficulty_assessment Coverage Results" MODIFIED="1471611323350" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src/entity" />
+    <SUITE FILE_PATH="coverage/medical_case_backend_api$run.coverage" NAME="run Coverage Results" MODIFIED="1484228427493" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/medical_case_backend_api$surgical.coverage" NAME="surgical Coverage Results" MODIFIED="1478850737466" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src/entity" />
     <SUITE FILE_PATH="coverage/medical_case_backend_api$usphs.coverage" NAME="usphs Coverage Results" MODIFIED="1472357137409" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src/entity" />
     <SUITE FILE_PATH="coverage/medical_case_backend_api$illness_history.coverage" NAME="illness_history Coverage Results" MODIFIED="1477991546967" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src/entity" />
-    <SUITE FILE_PATH="coverage/medical_case_backend_api$surgical.coverage" NAME="surgical Coverage Results" MODIFIED="1478850737466" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src/entity" />
+    <SUITE FILE_PATH="coverage/medical_case_backend_api$Unittests_in_medical_case_backend_api.coverage" NAME="Unittests in medical_case_backend_api Coverage Results" MODIFIED="1478679230320" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/medical_case_backend_api$illness_history_controller.coverage" NAME="illness_history_controller Coverage Results" MODIFIED="1477992608003" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src/controller" />
     <SUITE FILE_PATH="coverage/medical_case_backend_api$doc_helper.coverage" NAME="doc_helper Coverage Results" MODIFIED="1473142788449" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src/controller" />
+    <SUITE FILE_PATH="coverage/medical_case_backend_api$tooth_location.coverage" NAME="tooth_location Coverage Results" MODIFIED="1471524659010" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src/entity" />
+    <SUITE FILE_PATH="coverage/medical_case_backend_api$personal_history.coverage" NAME="personal_history Coverage Results" MODIFIED="1471443790327" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src/entity" />
+    <SUITE FILE_PATH="coverage/medical_case_backend_api$diagnose.coverage" NAME="diagnose Coverage Results" MODIFIED="1471609943341" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src/entity" />
   </component>
   <component name="CreatePatchCommitExecutor">
     <option name="PATCH_PATH" value="" />
@@ -58,107 +88,101 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="tooth_location.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/entity/tooth_location.py">
+      <file leaf-file-name="diagnose_controller.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/controller/diagnose_controller.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="95">
-              <caret line="5" column="41" selection-start-line="4" selection-start-column="3" selection-end-line="5" selection-end-column="41" />
+            <state relative-caret-position="57">
+              <caret line="10" column="45" selection-start-line="10" selection-start-column="12" selection-end-line="10" selection-end-column="45" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="illness_case.py" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/entity/illness_case.py">
+      <file leaf-file-name="difficulty_assessment_controller.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/controller/difficulty_assessment_controller.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="266">
-              <caret line="14" column="18" selection-start-line="14" selection-start-column="18" selection-end-line="14" selection-end-column="18" />
+            <state relative-caret-position="51">
+              <caret line="10" column="58" selection-start-line="10" selection-start-column="12" selection-end-line="10" selection-end-column="58" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="__init__.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/entity/__init__.py">
+      <file leaf-file-name="handle_controller.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/controller/handle_controller.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="19">
-              <caret line="1" column="19" selection-start-line="1" selection-start-column="19" selection-end-line="1" selection-end-column="19" />
-              <folding>
-                <element signature="e#0#11#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="__init__.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/controller/__init__.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
-              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-              <folding>
-                <element signature="e#0#22#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="__init__.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/__init__.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="171">
-              <caret line="9" column="35" selection-start-line="9" selection-start-column="35" selection-end-line="9" selection-end-column="35" />
-              <folding>
-                <element signature="e#0#39#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="default.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/config/default.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="228">
-              <caret line="12" column="20" selection-start-line="12" selection-start-column="20" selection-end-line="12" selection-end-column="20" />
+            <state relative-caret-position="57">
+              <caret line="11" column="43" selection-start-line="11" selection-start-column="12" selection-end-line="11" selection-end-column="43" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="personal_history.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/entity/personal_history.py">
+      <file leaf-file-name="personal_history_controller.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/controller/personal_history_controller.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="171">
-              <caret line="9" column="47" selection-start-line="9" selection-start-column="47" selection-end-line="9" selection-end-column="47" />
+            <state relative-caret-position="57">
+              <caret line="11" column="53" selection-start-line="11" selection-start-column="12" selection-end-line="11" selection-end-column="53" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="user.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/entity/user.py">
+      <file leaf-file-name="oral_examination_controller.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/controller/oral_examination_controller.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="380">
-              <caret line="20" column="72" selection-start-line="19" selection-start-column="8" selection-end-line="20" selection-end-column="72" />
+            <state relative-caret-position="57">
+              <caret line="10" column="50" selection-start-line="10" selection-start-column="12" selection-end-line="10" selection-end-column="53" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="usphs.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/entity/usphs.py">
+      <file leaf-file-name="risk_assessment_controller.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/controller/risk_assessment_controller.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="76">
-              <caret line="4" column="36" selection-start-line="4" selection-start-column="36" selection-end-line="4" selection-end-column="36" />
+            <state relative-caret-position="38">
+              <caret line="11" column="52" selection-start-line="11" selection-start-column="12" selection-end-line="11" selection-end-column="52" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="risk_assessment.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/entity/risk_assessment.py">
+      <file leaf-file-name="prognosis_of_management_controller.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/controller/prognosis_of_management_controller.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="95">
-              <caret line="5" column="35" selection-start-line="5" selection-start-column="35" selection-end-line="5" selection-end-column="35" />
+            <state relative-caret-position="57">
+              <caret line="9" column="14" selection-start-line="9" selection-start-column="12" selection-end-line="9" selection-end-column="46" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="user_controller.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/controller/user_controller.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-160">
+              <caret line="99" column="0" selection-start-line="99" selection-start-column="0" selection-end-line="99" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="illness_history_controller.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/controller/illness_history_controller.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="57">
+              <caret line="10" column="12" selection-start-line="10" selection-start-column="12" selection-end-line="10" selection-end-column="52" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="search_controller.py" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/controller/search_controller.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="114">
+              <caret line="94" column="27" selection-start-line="94" selection-start-column="12" selection-end-line="94" selection-end-column="46" />
               <folding />
             </state>
           </provider>
@@ -180,29 +204,12 @@
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/src/entity/disposition.py" />
-        <option value="$PROJECT_DIR$/src/controller/__init__.py" />
         <option value="$PROJECT_DIR$/requirements.txt" />
-        <option value="$PROJECT_DIR$/src/controller/risk_assessment_controller.py" />
-        <option value="$PROJECT_DIR$/src/entity/tooth_location.py" />
-        <option value="$PROJECT_DIR$/src/controller/img_controller.py" />
         <option value="$PROJECT_DIR$/config/default.py" />
-        <option value="$PROJECT_DIR$/src/controller/personal_history_controller.py" />
-        <option value="$PROJECT_DIR$/src/controller/illness_history_controller.py" />
-        <option value="$PROJECT_DIR$/src/controller/diagnose_controller.py" />
-        <option value="$PROJECT_DIR$/src/controller/difficulty_assessment_controller.py" />
-        <option value="$PROJECT_DIR$/src/controller/prognosis_of_management_controller.py" />
-        <option value="$PROJECT_DIR$/src/controller/usphs_controller.py" />
         <option value="$PROJECT_DIR$/run.py" />
-        <option value="$PROJECT_DIR$/src/controller/oral_examination_controller.py" />
-        <option value="$PROJECT_DIR$/src/controller/handle_controller.py" />
-        <option value="$PROJECT_DIR$/src/controller/user_controller.py" />
         <option value="$PROJECT_DIR$/src/controller/doc_helper.py" />
         <option value="$PROJECT_DIR$/src/controller/index_info.py" />
-        <option value="$PROJECT_DIR$/src/controller/common_function.py" />
-        <option value="$PROJECT_DIR$/src/controller/search_controller.py" />
-        <option value="$PROJECT_DIR$/src/controller/tooth_location_controller.py" />
         <option value="$PROJECT_DIR$/src/entity/test.py" />
-        <option value="$PROJECT_DIR$/src/entity/diagnose.py" />
         <option value="$PROJECT_DIR$/src/entity/difficulty_assessment.py" />
         <option value="$PROJECT_DIR$/src/entity/illness_history.py" />
         <option value="$PROJECT_DIR$/src/entity/non_surgical.py" />
@@ -213,8 +220,27 @@
         <option value="$PROJECT_DIR$/src/entity/surgical.py" />
         <option value="$PROJECT_DIR$/src/entity/usphs.py" />
         <option value="$PROJECT_DIR$/src/entity/risk_assessment.py" />
-        <option value="$PROJECT_DIR$/src/entity/illness_case.py" />
         <option value="$PROJECT_DIR$/src/entity/__init__.py" />
+        <option value="$PROJECT_DIR$/src/entity/user.py" />
+        <option value="$PROJECT_DIR$/src/controller/user_controller.py" />
+        <option value="$PROJECT_DIR$/src/controller/__init__.py" />
+        <option value="$PROJECT_DIR$/src/controller/oral_examination_controller.py" />
+        <option value="$PROJECT_DIR$/src/controller/img_controller.py" />
+        <option value="$PROJECT_DIR$/src/controller/case_controller.py" />
+        <option value="$PROJECT_DIR$/src/entity/illness_case.py" />
+        <option value="$PROJECT_DIR$/src/controller/search_controller.py" />
+        <option value="$PROJECT_DIR$/src/controller/common_function.py" />
+        <option value="$PROJECT_DIR$/src/entity/tooth_location.py" />
+        <option value="$PROJECT_DIR$/src/controller/tooth_location_controller.py" />
+        <option value="$PROJECT_DIR$/src/controller/illness_history_controller.py" />
+        <option value="$PROJECT_DIR$/src/controller/risk_assessment_controller.py" />
+        <option value="$PROJECT_DIR$/src/controller/difficulty_assessment_controller.py" />
+        <option value="$PROJECT_DIR$/src/controller/handle_controller.py" />
+        <option value="$PROJECT_DIR$/src/controller/prognosis_of_management_controller.py" />
+        <option value="$PROJECT_DIR$/src/controller/usphs_controller.py" />
+        <option value="$PROJECT_DIR$/src/controller/diagnose_controller.py" />
+        <option value="$PROJECT_DIR$/src/entity/diagnose.py" />
+        <option value="$PROJECT_DIR$/src/controller/personal_history_controller.py" />
       </list>
     </option>
   </component>
@@ -225,10 +251,10 @@
     <sorting>DEFINITION_ORDER</sorting>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="1432" />
+    <option name="x" value="-8" />
     <option name="y" value="-8" />
-    <option name="width" value="1456" />
-    <option name="height" value="886" />
+    <option name="width" value="1382" />
+    <option name="height" value="754" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="false">
     <OptionsSetting value="true" id="Add" />
@@ -255,8 +281,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scratches" />
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -321,12 +345,32 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="controller" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="medical_case_backend_api" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="medical_case_backend_api" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
               <option name="myItemId" value="config" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
         </subPane>
       </pane>
+      <pane id="Scope" />
+      <pane id="Scratches" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -345,6 +389,29 @@
     </key>
   </component>
   <component name="RunManager" selected="Python.run">
+    <configuration default="false" name="Unittests in medical_case_backend_api" type="tests" factoryName="Unittests" temporary="true" nameIsGenerated="true">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="medical_case_backend_api" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="" />
+      <option name="CLASS_NAME" value="" />
+      <option name="METHOD_NAME" value="" />
+      <option name="FOLDER_NAME" value="$PROJECT_DIR$" />
+      <option name="TEST_TYPE" value="TEST_FOLDER" />
+      <option name="PATTERN" value="" />
+      <option name="USE_PATTERN" value="false" />
+      <option name="PUREUNITTEST" value="true" />
+      <option name="PARAMS" value="" />
+      <option name="USE_PARAM" value="false" />
+      <method />
+    </configuration>
     <configuration default="false" name="illness_history" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -397,29 +464,6 @@
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/src/entity/oral_examination.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
-      <method />
-    </configuration>
-    <configuration default="false" name="Unittests in medical_case_backend_api" type="tests" factoryName="Unittests" temporary="true" nameIsGenerated="true">
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs />
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <module name="medical_case_backend_api" />
-      <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="" />
-      <option name="CLASS_NAME" value="" />
-      <option name="METHOD_NAME" value="" />
-      <option name="FOLDER_NAME" value="$PROJECT_DIR$" />
-      <option name="TEST_TYPE" value="TEST_FOLDER" />
-      <option name="PATTERN" value="" />
-      <option name="USE_PATTERN" value="false" />
-      <option name="PUREUNITTEST" value="true" />
-      <option name="PARAMS" value="" />
-      <option name="USE_PARAM" value="false" />
       <method />
     </configuration>
     <configuration default="false" name="surgical" type="PythonConfigurationType" factoryName="Python" temporary="true">
@@ -609,7 +653,7 @@
       <option name="IS_MODULE_SDK" value="false" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <module name="medical_case_backend_api" />
+      <module name="" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
       <option name="SCRIPT_NAME" value="" />
       <option name="CLASS_NAME" value="" />
@@ -668,19 +712,18 @@
     </configuration>
     <list size="6">
       <item index="0" class="java.lang.String" itemvalue="Python.run" />
-      <item index="1" class="java.lang.String" itemvalue="Python.illness_history" />
-      <item index="2" class="java.lang.String" itemvalue="Python.illness_history_controller" />
-      <item index="3" class="java.lang.String" itemvalue="Python.oral_examination" />
-      <item index="4" class="java.lang.String" itemvalue="Python tests.Unittests in medical_case_backend_api" />
+      <item index="1" class="java.lang.String" itemvalue="Python tests.Unittests in medical_case_backend_api" />
+      <item index="2" class="java.lang.String" itemvalue="Python.illness_history" />
+      <item index="3" class="java.lang.String" itemvalue="Python.illness_history_controller" />
+      <item index="4" class="java.lang.String" itemvalue="Python.oral_examination" />
       <item index="5" class="java.lang.String" itemvalue="Python.surgical" />
     </list>
     <recent_temporary>
-      <list size="5">
+      <list size="4">
         <item index="0" class="java.lang.String" itemvalue="Python.surgical" />
-        <item index="1" class="java.lang.String" itemvalue="Python tests.Unittests in medical_case_backend_api" />
-        <item index="2" class="java.lang.String" itemvalue="Python.oral_examination" />
-        <item index="3" class="java.lang.String" itemvalue="Python.illness_history_controller" />
-        <item index="4" class="java.lang.String" itemvalue="Python.illness_history" />
+        <item index="1" class="java.lang.String" itemvalue="Python.oral_examination" />
+        <item index="2" class="java.lang.String" itemvalue="Python.illness_history_controller" />
+        <item index="3" class="java.lang.String" itemvalue="Python.illness_history" />
       </list>
     </recent_temporary>
   </component>
@@ -715,27 +758,27 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="1432" y="-8" width="1456" height="886" extended-state="6" />
-    <editor active="false" />
+    <frame x="-8" y="-8" width="1382" height="754" extended-state="6" />
+    <editor active="true" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.22636104" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2375189" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32802126" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3295129" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Python Console" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2148541" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32905295" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32263243" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3279743" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.34189406" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.329582" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2953451" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.34189406" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3295082" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.33386838" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
   <component name="Vcs.Log.UiProperties">
@@ -764,17 +807,17 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="python-line">
           <url>file://$PROJECT_DIR$/src/controller/img_controller.py</url>
-          <line>22</line>
+          <line>23</line>
           <option name="timeStamp" value="24" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="python-line">
           <url>file://$PROJECT_DIR$/src/controller/img_controller.py</url>
-          <line>79</line>
+          <line>80</line>
           <option name="timeStamp" value="25" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="python-line">
           <url>file://$PROJECT_DIR$/src/controller/usphs_controller.py</url>
-          <line>110</line>
+          <line>111</line>
           <option name="timeStamp" value="29" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="python-line">
@@ -792,6 +835,41 @@
           <line>51</line>
           <option name="timeStamp" value="42" />
         </line-breakpoint>
+        <line-breakpoint enabled="true" type="python-line">
+          <url>file://$PROJECT_DIR$/src/controller/user_controller.py</url>
+          <line>37</line>
+          <option name="timeStamp" value="57" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="python-line">
+          <url>file://$PROJECT_DIR$/src/controller/case_controller.py</url>
+          <line>23</line>
+          <option name="timeStamp" value="58" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="python-line">
+          <url>file://$PROJECT_DIR$/src/controller/case_controller.py</url>
+          <line>35</line>
+          <option name="timeStamp" value="59" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="python-line">
+          <url>file://$PROJECT_DIR$/src/controller/illness_history_controller.py</url>
+          <line>30</line>
+          <option name="timeStamp" value="61" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="python-line">
+          <url>file://$PROJECT_DIR$/src/controller/diagnose_controller.py</url>
+          <line>27</line>
+          <option name="timeStamp" value="64" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="python-line">
+          <url>file://$PROJECT_DIR$/src/controller/risk_assessment_controller.py</url>
+          <line>54</line>
+          <option name="timeStamp" value="65" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="python-line">
+          <url>file://$PROJECT_DIR$/src/controller/personal_history_controller.py</url>
+          <line>18</line>
+          <option name="timeStamp" value="69" />
+        </line-breakpoint>
       </breakpoints>
       <default-breakpoints>
         <breakpoint type="python-exception">
@@ -800,18 +878,15 @@
           </properties>
         </breakpoint>
       </default-breakpoints>
-      <option name="time" value="57" />
+      <option name="time" value="70" />
     </breakpoint-manager>
     <watches-manager>
       <configuration name="PythonConfigurationType">
-        <watch expression="tooth_location" language="Python" />
-        <watch expression="full_dict" language="Python" />
-        <watch expression="Tooth_location" language="Python" />
+        <watch expression="Illness_case.query.filter_by(case_id=1).first()" language="Python" />
       </configuration>
     </watches-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://C:/Python27/Lib/site-packages/docx/api.py" />
     <entry file="file://C:/Python27/Lib/site-packages/docx/text/paragraph.py" />
     <entry file="file://C:/Python27/Lib/encodings/utf_8.py">
       <provider selected="true" editor-type-id="text-editor">
@@ -842,27 +917,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://C:/Python27/Lib/site-packages/werkzeug/datastructures.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="153">
-          <caret line="401" column="0" selection-start-line="401" selection-start-column="0" selection-end-line="401" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://C:/Python27/Lib/site-packages/werkzeug/local.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="153">
-          <caret line="342" column="0" selection-start-line="342" selection-start-column="0" selection-end-line="342" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://C:/Python27/Lib/site-packages/flask/app.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="73">
-          <caret line="1999" column="0" selection-start-line="1999" selection-start-column="0" selection-end-line="1999" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://C:/Python27/Lib/site-packages/gevent/pywsgi.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="88">
@@ -884,74 +938,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/controller/illness_history_controller.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="149">
-          <caret line="48" column="78" selection-start-line="48" selection-start-column="78" selection-end-line="56" selection-end-column="32" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/controller/diagnose_controller.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="228">
-          <caret line="19" column="64" selection-start-line="19" selection-start-column="56" selection-end-line="19" selection-end-column="64" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/controller/prognosis_of_management_controller.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="57">
-          <caret line="14" column="33" selection-start-line="14" selection-start-column="33" selection-end-line="14" selection-end-column="33" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/controller/difficulty_assessment_controller.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="513">
-          <caret line="34" column="13" selection-start-line="34" selection-start-column="13" selection-end-line="34" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/controller/usphs_controller.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="247">
-          <caret line="89" column="110" selection-start-line="89" selection-start-column="110" selection-end-line="89" selection-end-column="110" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/requirements.txt">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="133">
           <caret line="7" column="0" selection-start-line="7" selection-start-column="0" selection-end-line="7" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/controller/oral_examination_controller.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="92" column="54" selection-start-line="92" selection-start-column="54" selection-end-line="92" selection-end-column="54" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/controller/risk_assessment_controller.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-76">
-          <caret line="11" column="80" selection-start-line="11" selection-start-column="80" selection-end-line="11" selection-end-column="80" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/controller/handle_controller.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="418">
-          <caret line="118" column="55" selection-start-line="118" selection-start-column="55" selection-end-line="118" selection-end-column="55" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/controller/personal_history_controller.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="114">
-          <caret line="26" column="42" selection-start-line="26" selection-start-column="42" selection-end-line="37" selection-end-column="32" />
         </state>
       </provider>
     </entry>
@@ -976,53 +966,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="57">
           <caret line="3" column="14" selection-start-line="3" selection-start-column="14" selection-end-line="3" selection-end-column="14" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/controller/img_controller.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="190">
-          <caret line="22" column="0" selection-start-line="22" selection-start-column="0" selection-end-line="22" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/controller/common_function.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="152">
-          <caret line="8" column="31" selection-start-line="8" selection-start-column="31" selection-end-line="8" selection-end-column="31" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/controller/search_controller.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="836">
-          <caret line="65" column="33" selection-start-line="65" selection-start-column="33" selection-end-line="65" selection-end-column="33" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/controller/tooth_location_controller.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="589">
-          <caret line="83" column="12" selection-start-line="83" selection-start-column="12" selection-end-line="83" selection-end-column="12" />
-          <folding>
-            <element signature="e#791#1625#0" expanded="false" />
-            <element signature="e#1668#2170#0" expanded="false" />
-            <element signature="e#2214#2762#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/controller/user_controller.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="247">
-          <caret line="62" column="0" selection-start-line="62" selection-start-column="0" selection-end-line="62" selection-end-column="0" />
-          <folding>
-            <element signature="e#1334#2083#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1030,31 +973,14 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/entity/test.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="228">
-          <caret line="12" column="21" selection-start-line="12" selection-start-column="21" selection-end-line="12" selection-end-column="21" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/src/entity/test.py" />
     <entry file="file://$PROJECT_DIR$/src/entity/difficulty_assessment.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="95">
           <caret line="5" column="36" selection-start-line="5" selection-start-column="36" selection-end-line="5" selection-end-column="36" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/entity/diagnose.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="76">
-          <caret line="4" column="35" selection-start-line="4" selection-start-column="35" selection-end-line="4" selection-end-column="35" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1062,7 +988,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="95">
           <caret line="5" column="35" selection-start-line="5" selection-start-column="35" selection-end-line="5" selection-end-column="35" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1070,7 +995,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="76">
           <caret line="4" column="35" selection-start-line="4" selection-start-column="35" selection-end-line="4" selection-end-column="35" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1078,7 +1002,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="76">
           <caret line="4" column="35" selection-start-line="4" selection-start-column="35" selection-end-line="4" selection-end-column="35" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1086,6 +1009,69 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="95">
           <caret line="5" column="35" selection-start-line="5" selection-start-column="35" selection-end-line="5" selection-end-column="35" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/entity/surgical.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="95">
+          <caret line="5" column="35" selection-start-line="5" selection-start-column="35" selection-end-line="5" selection-end-column="35" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/entity/usphs.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="76">
+          <caret line="5" column="35" selection-start-line="5" selection-start-column="35" selection-end-line="5" selection-end-column="35" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/entity/personal_history.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="171">
+          <caret line="10" column="39" selection-start-line="10" selection-start-column="39" selection-end-line="10" selection-end-column="39" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/__init__.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="152">
+          <caret line="9" column="35" selection-start-line="9" selection-start-column="35" selection-end-line="9" selection-end-column="35" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/entity/user.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="95">
+          <caret line="5" column="5" selection-start-line="5" selection-start-column="5" selection-end-line="5" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/config/default.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="228">
+          <caret line="12" column="20" selection-start-line="12" selection-start-column="20" selection-end-line="12" selection-end-column="20" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/entity/__init__.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="19">
+          <caret line="2" column="0" selection-start-line="2" selection-start-column="0" selection-end-line="2" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/controller/__init__.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="304">
+          <caret line="16" column="22" selection-start-line="16" selection-start-column="22" selection-end-line="16" selection-end-column="22" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/entity/risk_assessment.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="133">
+          <caret line="7" column="35" selection-start-line="7" selection-start-column="35" selection-end-line="7" selection-end-column="35" />
           <folding />
         </state>
       </provider>
@@ -1098,96 +1084,178 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/entity/surgical.py">
+    <entry file="file://$PROJECT_DIR$/src/controller/img_controller.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="95">
-          <caret line="5" column="35" selection-start-line="5" selection-start-column="35" selection-end-line="5" selection-end-column="35" />
+        <state relative-caret-position="741">
+          <caret line="52" column="46" selection-start-line="52" selection-start-column="46" selection-end-line="52" selection-end-column="46" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/entity/usphs.py">
+    <entry file="file://$PROJECT_DIR$/src/entity/illness_case.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="76">
-          <caret line="4" column="36" selection-start-line="4" selection-start-column="36" selection-end-line="4" selection-end-column="36" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/entity/risk_assessment.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="95">
-          <caret line="5" column="35" selection-start-line="5" selection-start-column="35" selection-end-line="5" selection-end-column="35" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/entity/user.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="380">
-          <caret line="20" column="72" selection-start-line="19" selection-start-column="8" selection-end-line="20" selection-end-column="72" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/entity/personal_history.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="171">
-          <caret line="9" column="47" selection-start-line="9" selection-start-column="47" selection-end-line="9" selection-end-column="47" />
+        <state relative-caret-position="399">
+          <caret line="21" column="30" selection-start-line="21" selection-start-column="30" selection-end-line="21" selection-end-column="30" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/entity/tooth_location.py">
       <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="152">
+          <caret line="8" column="0" selection-start-line="8" selection-start-column="0" selection-end-line="8" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/controller/usphs_controller.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-285">
+          <caret line="19" column="41" selection-start-line="19" selection-start-column="41" selection-end-line="19" selection-end-column="41" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/entity/diagnose.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="190">
+          <caret line="10" column="38" selection-start-line="10" selection-start-column="38" selection-end-line="10" selection-end-column="38" />
+          <folding>
+            <marker date="1484227806529" expanded="true" signature="45:497" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://C:/Python27/Lib/site-packages/flask/app.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="136">
+          <caret line="1624" column="0" selection-start-line="1624" selection-start-column="0" selection-end-line="1624" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://C:/Python27/Lib/site-packages/werkzeug/local.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="115">
+          <caret line="340" column="0" selection-start-line="340" selection-start-column="0" selection-end-line="340" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://C:/Python27/Lib/site-packages/werkzeug/datastructures.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="115">
+          <caret line="399" column="0" selection-start-line="399" selection-start-column="0" selection-end-line="399" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/controller/case_controller.py">
+      <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="95">
-          <caret line="5" column="41" selection-start-line="4" selection-start-column="3" selection-end-line="5" selection-end-column="41" />
+          <caret line="20" column="12" selection-start-line="20" selection-start-column="12" selection-end-line="20" selection-end-column="41" />
+          <folding>
+            <element signature="e#0#14#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/controller/common_function.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="931">
+          <caret line="49" column="0" selection-start-line="49" selection-start-column="0" selection-end-line="49" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#13#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/controller/tooth_location_controller.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-361">
+          <caret line="20" column="58" selection-start-line="20" selection-start-column="12" selection-end-line="20" selection-end-column="58" />
+          <folding>
+            <element signature="e#0#14#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/controller/illness_history_controller.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="57">
+          <caret line="10" column="12" selection-start-line="10" selection-start-column="12" selection-end-line="10" selection-end-column="52" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/controller/__init__.py">
+    <entry file="file://$PROJECT_DIR$/src/controller/personal_history_controller.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <element signature="e#0#22#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/__init__.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="171">
-          <caret line="9" column="35" selection-start-line="9" selection-start-column="35" selection-end-line="9" selection-end-column="35" />
-          <folding>
-            <element signature="e#0#39#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/config/default.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="228">
-          <caret line="12" column="20" selection-start-line="12" selection-start-column="20" selection-end-line="12" selection-end-column="20" />
+        <state relative-caret-position="57">
+          <caret line="11" column="53" selection-start-line="11" selection-start-column="12" selection-end-line="11" selection-end-column="53" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/entity/__init__.py">
+    <entry file="file://$PROJECT_DIR$/src/controller/oral_examination_controller.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="19">
-          <caret line="1" column="19" selection-start-line="1" selection-start-column="19" selection-end-line="1" selection-end-column="19" />
-          <folding>
-            <element signature="e#0#11#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="57">
+          <caret line="10" column="50" selection-start-line="10" selection-start-column="12" selection-end-line="10" selection-end-column="53" />
+          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/entity/illness_case.py">
+    <entry file="file://$PROJECT_DIR$/src/controller/risk_assessment_controller.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="266">
-          <caret line="14" column="18" selection-start-line="14" selection-start-column="18" selection-end-line="14" selection-end-column="18" />
+        <state relative-caret-position="38">
+          <caret line="11" column="52" selection-start-line="11" selection-start-column="12" selection-end-line="11" selection-end-column="52" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/controller/diagnose_controller.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="57">
+          <caret line="10" column="45" selection-start-line="10" selection-start-column="12" selection-end-line="10" selection-end-column="45" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/controller/difficulty_assessment_controller.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="51">
+          <caret line="10" column="58" selection-start-line="10" selection-start-column="12" selection-end-line="10" selection-end-column="58" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/controller/handle_controller.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="57">
+          <caret line="11" column="43" selection-start-line="11" selection-start-column="12" selection-end-line="11" selection-end-column="43" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/controller/prognosis_of_management_controller.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="57">
+          <caret line="9" column="14" selection-start-line="9" selection-start-column="12" selection-end-line="9" selection-end-column="46" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/controller/user_controller.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-160">
+          <caret line="99" column="0" selection-start-line="99" selection-start-column="0" selection-end-line="99" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/controller/search_controller.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="114">
+          <caret line="94" column="27" selection-start-line="94" selection-start-column="12" selection-end-line="94" selection-end-column="46" />
           <folding />
         </state>
       </provider>

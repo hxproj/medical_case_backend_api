@@ -16,7 +16,6 @@ def add_new_illness_history():
             db.session.add(illness_history)
             db.session.commit()
             temp_illness = Illness_history.query.filter_by(user_id=request.form['user_id']).all()[-1]
-            refresh_step(temp_illness.tooth_id, 1)
             illness_history_list = Illness_history.query.filter_by(
                 user_id=request.form['user_id'])  # todo add try except
             current_illness_history = illness_history_list[-1]
@@ -31,11 +30,11 @@ def add_new_illness_history():
     elif request.method == 'PUT':
         if check_if_user_exist(request.form['user_id']):
             illness_history = _form_to_illness_history(request.form)
-            db.session.query(Illness_history).filter(Illness_history.tooth_id == request.form['tooth_id']).delete()
+            db.session.query(Illness_history).filter(Illness_history.case_id == request.form['case_id']).delete()
             db.session.commit()
             db.session.add(illness_history)
             db.session.commit()
-            res_illness_history = Illness_history.query.filter_by(tooth_id=request.form['tooth_id']).first()
+            res_illness_history = Illness_history.query.filter_by(case_id=request.form['case_id']).first()
             response = res_illness_history.get_dict()
             ret = flask.Response(json.dumps(response))
             ret.headers['Access-Control-Allow-Origin'] = '*'
@@ -45,8 +44,8 @@ def add_new_illness_history():
             ret.headers['Access-Control-Allow-Origin'] = '*'
             return ret, httplib.BAD_REQUEST
     elif request.method == 'GET':
-        id = request.args['tooth_id']
-        illness_history = Illness_history.query.filter_by(tooth_id=id).first()
+        id = request.args['case_id']
+        illness_history = Illness_history.query.filter_by(case_id=id).first()
         if illness_history:
             response = flask.Response(json.dumps(illness_history.get_dict()))
             response.headers['Access-Control-Allow-Origin'] = '*'
@@ -64,6 +63,7 @@ def add_new_illness_history():
 
 def _form_to_illness_history(form):
     temp_history = Illness_history()
+    temp_history.case_id = form['case_id']
     temp_history.tooth_id = form['tooth_id']
     temp_history.user_id = form['user_id']
     temp_history.is_night_pain_self_pain = form['is_night_pain_self_pain']

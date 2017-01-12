@@ -4,7 +4,7 @@ import json
 import flask
 from flask import request
 from src import app
-from src.controller.common_function import check_if_user_exist
+from src.controller.common_function import check_if_user_exist, refresh_step
 from src.entity.personal_history import Personal_history
 from src import db
 
@@ -16,7 +16,8 @@ def add_personal_history():
             personal_history = _form_to_personal_history(request.form)
             db.session.add(personal_history)
             db.session.commit()
-            response_history = Personal_history.query.filter_by(user_id=request.form['user_id']).first()
+            refresh_step(request.form['case_id'], 1)
+            response_history = Personal_history.query.filter_by(case_id=request.form['case_id']).first()
             response = response_history.get_dict()
             ret = flask.Response(json.dumps(response))
             ret.headers['Access-Control-Allow-Origin'] = '*'
@@ -26,8 +27,8 @@ def add_personal_history():
             ret.headers['Access-Control-Allow-Origin'] = '*'
             return ret,httplib.BAD_REQUEST
     elif request.method == 'GET':
-        user_id = request.args['user_id']
-        personal_history = Personal_history.query.filter_by(user_id = user_id).first()
+        case_id = request.args['case_id']
+        personal_history = Personal_history.query.filter_by(case_id = case_id).first()
         if personal_history:
             response = flask.Response(json.dumps(personal_history.get_dict()))
             response.headers['Access-Control-Allow-Origin'] = '*'
@@ -38,12 +39,12 @@ def add_personal_history():
             return response, 400
     elif request.method == 'PUT':
         if check_if_user_exist(request.form['user_id']):
-            db.session.query(Personal_history).filter(Personal_history.user_id == request.form['user_id']).delete()
+            db.session.query(Personal_history).filter(Personal_history.case_id == request.form['case_id']).delete()
             db.session.commit()
             personal_history = _form_to_personal_history(request.form)
             db.session.add(personal_history)
             db.session.commit()
-            response_history = Personal_history.query.filter_by(user_id=request.form['user_id']).first()
+            response_history = Personal_history.query.filter_by(case_id=request.form['case_id']).first()
             response = response_history.get_dict()
             ret = flask.Response(json.dumps(response))
             ret.headers['Access-Control-Allow-Origin'] = '*'
@@ -62,6 +63,8 @@ def add_personal_history():
 def _form_to_personal_history(form):
     history = Personal_history()
     history.user_id = form['user_id']
+    history.case_id = form['case_id']
+    history.tooth_id = form['tooth_id']
     history.consumption_of_sweet = form['consumption_of_sweet']
     #history.more_sweet = form['more_sweet']
     history.frequency_of_sweet = form['frequency_of_sweet']

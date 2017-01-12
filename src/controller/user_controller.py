@@ -89,7 +89,8 @@ def add_user():
 
 def _form_to_user(form):
     user = User()
-    user.age = form['age']
+    user.id_number = form['ID']
+    user.main_doctor = form['doctor']
     user.contact = form['contact']
     user.gender = form['gender']
     user.name = form['name']
@@ -102,7 +103,7 @@ def _form_to_user_update(form):
     user.user_id = form['user_id']
     return user
 
-def _delete_all(user_id):
+def _delete_all(user_id): # todo: need to change dependence to case_id
     db.session.query(User).filter(User.user_id==user_id).delete()
     tooth_list=db.session.query(Tooth_location.tooth_id).filter(Tooth_location.user_id==user_id).all()
     if tooth_list:
