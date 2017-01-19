@@ -3,11 +3,11 @@ from src import db
 class User(db.Model):
     user_id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(20))
-    id_number = db.Column(db.Integer)
+    id_number = db.Column(db.String(20))
     gender = db.Column(db.Boolean)
     occupation = db.Column(db.String(50))
     contact = db.Column(db.String(50))
-    main_doctor = db.Column(db.String(50))
+    #main_doctor = db.Column(db.String(50))
     in_date = db.Column(db.DateTime)
 
     #def __init__(self, name):

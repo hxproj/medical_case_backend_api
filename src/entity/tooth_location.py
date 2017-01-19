@@ -8,6 +8,7 @@ class Tooth_location(db.Model):
     tooth_location_number = db.Column(db.String(50))
     symptom = db.Column(db.String(50))
     time_of_occurrence = db.Column(db.String(50))
+    additional = db.Column(db.String(200))
 
     #def __init__(self, name):
         #self.name = name

@@ -46,7 +46,7 @@ def add_new_case():
             return res,400
 
     elif request.method == 'PUT':
-        db.session.query(Illness_case).filter(Illness_case.case_id == request.form['cas_id']).delete()
+        db.session.query(Illness_case).filter(Illness_case.case_id == request.form['case_id']).delete()
         db.session.commit()
         illness_case = _form_to_case(request.form)
         illness_case.case_id = request.form['case_id']
@@ -80,10 +80,7 @@ def add_new_case():
             count = count + 1
         db.session.commit()
         delete_directory(case_id) # todo : delete directory by tooth_id or case id ? done
-        if step == count - 1:
-            ret = flask.Response("Delete Successful")
-        else:
-            ret = flask.Response("Delete have a misstake")
+        ret = flask.Response("Delete Successful")
         ret.headers['Access-Control-Allow-Origin'] = '*'
         return ret
     elif request.method == 'OPTIONS':
@@ -100,6 +97,7 @@ def _form_to_case(form):
     temp_record.case_type = form['case_type']
     temp_record.date = datetime.datetime.now()
     temp_record.if_handle = form['if_handle']
+    temp_record.judge_doctor = form['judge_doctor']
     temp_record.step = '0,'
     return temp_record
 

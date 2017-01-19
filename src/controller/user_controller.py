@@ -68,7 +68,8 @@ def add_user():
     elif request.method =='PUT':
         if request.form['name'] is not None and request.form['name'] != '' and request.form['contact'] != None:
             db.session.query(User).filter(User.user_id==request.form['user_id']).delete()
-            user = _form_to_user_update(request.form)
+            user = _form_to_user(request.form)
+            user.user_id = request.form['user_id'] # todo : keep date
             db.session.commit()
             db.session.add(user)
             db.session.commit()
@@ -90,7 +91,7 @@ def add_user():
 def _form_to_user(form):
     user = User()
     user.id_number = form['ID']
-    user.main_doctor = form['doctor']
+    #user.main_doctor = form['doctor']
     user.contact = form['contact']
     user.gender = form['gender']
     user.name = form['name']

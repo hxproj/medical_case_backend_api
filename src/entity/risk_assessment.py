@@ -4,26 +4,32 @@ class Risk_assessment(db.Model):
     case_id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer)
     tooth_id = db.Column(db.Integer)
-    early_carie = db.Column(db.String(50))
-    can_see =db.Column(db.String(50))
-    lost_tooth = db.Column(db.String(50))
-    system_illness = db.Column(db.String(50))
-    illness_name = db.Column(db.String(50))
-    times_of_carbohydrate = db.Column(db.String(50))
-    consumption_of_carbohydrate = db.Column(db.String(50))
-    times_of_meal = db.Column(db.String(50))
-    speed_of_saliva = db.Column(db.String(50))
-    ablity_saliva = db.Column(db.String(50))
-    bacteria = db.Column(db.String(50))
-    consumption =db.Column(db.String(50))
-    fluorine_with_water = db.Column(db.String(50))
-    fluorine = db.Column(db.String(50))
-    seal = db.Column(db.String(50))
-    times_of_tooth_brush = db.Column(db.String(50))
-    long_of_tooth_brush = db.Column(db.String(50))
-    health_care = db.Column(db.String(50))
+    fluorine_protection = db.Column(db.String(50))
+    sugary_foods = db.Column(db.String(50))
+    relative_illness = db.Column(db.String(50))
+    need_record = db.Column(db.String(50))
+    alcohol_drugs = db.Column(db.String(50))
+    radiotherapy = db.Column(db.String(50))
+    eating_disorders = db.Column(db.String(50))
+    saliva_medicine = db.Column(db.String(50))
+    special_care = db.Column(db.String(50))
+    caries_lost = db.Column(db.String(50))
+    soft_dirt = db.Column(db.String(50))
+    special_tooth_shape = db.Column(db.String(50))
+    adjacent_caries = db.Column(db.String(50))
+    tooth_exposure = db.Column(db.String(50))
+    fill_overhang = db.Column(db.String(50))
+    appliance = db.Column(db.String(50))
+    dry_syndrome = db.Column(db.String(50))
+    hole = db.Column(db.String(50))
+
 
     def get_dict(self):
         dit = self.__dict__
         del dit['_sa_instance_state']
         return dit
+
+    def calculate_risk(self):
+        level1 = 0
+        level2 = 0
+        level3 = 0

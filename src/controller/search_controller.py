@@ -66,23 +66,23 @@ def search_options():
     temp_set = set(user_id_list)
     user_id_list = list(temp_set)
     result = get_user_info_list(user_id_list)
-    result=result[-1::-1]
+    result = result[-1::-1]
     if page == '' or page == None:
         response = flask.Response((str)(len(result)))
         response.headers['Access-Control-Allow-Origin'] = '*'
         return response, 200
     else:
         try:
-            offset_start = ((int)(page)-1) * app.config['PER_PAGE']
+            offset_start = ((int)(page) - 1) * app.config['PER_PAGE']
             offset_end = offset_start + app.config['PER_PAGE']
             if offset_end > len(result):
                 return_list = result[offset_start:-1]
                 return_list.append(result[-1])
             else:
                 return_list = result[offset_start:offset_end]
-            pages = (len(result)-1) / app.config['PER_PAGE'] + 1
-            if pages<=0:
-                pages=1
+            pages = (len(result) - 1) / app.config['PER_PAGE'] + 1
+            if pages <= 0:
+                pages = 1
             info = {'info_list': return_list, 'pages': pages, 'searched': 'ok'}
             response = flask.Response(json.dumps(info))
             response.headers['Access-Control-Allow-Origin'] = '*'
@@ -92,6 +92,8 @@ def search_options():
             response = flask.Response(json.dumps(info))
             response.headers['Access-Control-Allow-Origin'] = '*'
             return response, 200
+
+
 @app.route('/medical-case-of-illness/step-info', methods=['GET'])
 def get_step_info():
     case_id = request.args['case_id']
@@ -106,11 +108,63 @@ def get_step_info():
             num_list.append((int)(tooth_step_list[i]))
         response = flask.Response(json.dumps(num_list))
         response.headers['Access-Control-Allow-Origin'] = '*'
-        return response,200
+        return response, 200
     else:
-        response = flask.Response('can not find this tooth')
+        response = flask.Response('can not find this case')
         response.headers['Access-Control-Allow-Origin'] = '*'
         return response, 403
+
+
+@app.route('/medical-case-of-illness/all-user', methods=['GET'])
+def get_all_user():
+    user_list = User.query.all()
+    user_response_list = []
+    for user in user_list:
+        diagnose_list = _get_user_diagnose(user.user_id)
+        dit = user.get_dict()
+        dit['diagnose_list'] = diagnose_list
+        birthday_year = int(user.id_number[6:10])
+        birthday_month = int(user.id_number[10:12])
+        birthday_day = int(user.id_number[12:14])
+        date_now = datetime.datetime.now()
+        age = date_now.year - birthday_year
+        if date_now.month > birthday_month:
+            age = age - 1
+        elif date_now.month == birthday_month:
+            if date_now.day > birthday_day:
+                age = age - 1
+        dit['age'] = age
+        user_response_list.append(dit)
+    response = flask.Response(json.dumps(user_response_list))
+    response.headers['Access-Control-Allow-Origin'] = '*'
+    return response, 200
+
+@app.route('/medical-case-of-illness/user-tooth-info',methods=['GET'])
+def get_user_tooth_info():
+    user_id = request.args['user_id']
+    tooth_list = Tooth_location.query.filter_by(user_id = user_id).all()
+    for tooth in tooth_list:
+        case_list = Illness_case.query.filter_by(tooth_id = tooth.tooth_id).all()
+        case_info_list = []
+        for case in case_list:
+            step_string = case.step
+            tooth_step_list = step_string.split(',')
+            if '' in tooth_step_list:
+                tooth_step_list.remove('')
+            num_list = []
+            for i in range(len(tooth_step_list)):
+                num_list.append((int)(tooth_step_list[i]))
+            case_info = {}
+            case_info['step']=num_list
+            case_info['judge_doctor']=case.judge_doctor
+            case_info['if_handle'] = case.if_handle
+            case_info['case_type'] = case.case_type
+            case_info_list.append(case_info)
+        response = flask.Response(json.dumps(case_info_list))
+        response.headers['Access-Control-Allow-Origin'] = '*'
+        return response, 200
+
+
 @app.route('/medical-case-of-illness/other-info', methods=['GET'])
 def get_other_info():
     user_id = request.args['user_id']
@@ -133,6 +187,24 @@ def get_other_info():
         response = flask.Response('can not find this user')
         response.headers['Access-Control-Allow-Origin'] = '*'
         return response, 403
+
+
+def _get_user_diagnose(user_id):
+    tooth_list = Tooth_location.query.filter_by(user_id=user_id).all()
+    diagnose_list = []
+    for tooth in tooth_list:
+        case_list = Tooth_location.query.filter_by(tooth_id=tooth.tooth_id).all()
+        tooth_number = case_list[-1].tooth_location_number
+        diagnose = Diagnose.query.filter_by(tooth_id=tooth.tooth_id).all()
+        diagnose_str = ''
+        if diagnose:
+            diagnose_str = diagnose[-1].caries_degree
+        diagnose_list.append((str(tooth_number)) + diagnose_str)
+    return_str = ''
+    for item in diagnose_list:
+        return_str += item
+        return_str +=','
+    return return_str
 
 
 def _search_special(key):

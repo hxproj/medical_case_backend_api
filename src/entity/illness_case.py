@@ -7,12 +7,13 @@ class Illness_case(db.Model):
     date = db.Column(db.DateTime)
     if_handle = db.Column(db.Integer)
     step = db.Column(db.String(50))
+    judge_doctor = db.Column(db.String(50))
 
     def get_dict(self):
         dit = self.__dict__
         del dit['_sa_instance_state']
         if dit['date']:
-            dit['date'] = dit['date'].strftime('%Y-%m-%d %H:%M:%S')
+            dit['date'] = dit['date'].strftime('%Y-%m-%d')
         tooth_step_list = dit['step'].split(',')
         if '' in tooth_step_list:
             tooth_step_list.remove('')

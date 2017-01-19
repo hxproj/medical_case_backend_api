@@ -13,6 +13,7 @@ from src.entity.difficulty_assessment import Difficulty_assessment
 from src.entity.surgical import Surgical
 from src.entity.diagnose import Diagnose
 from src.entity.non_surgical import Non_surgical
+from src.entity.user import User
 from src.entity.usphs import Usphs
 from src.controller.common_function import check_if_user_exist, refresh_step, delete_directory
 from src import db
@@ -64,7 +65,7 @@ def add_new_tooth_location_record():
         Tooth_location.query.filter_by(tooth_id=request.form['tooth_id']).update({'is_fill_tooth':request.form['is_fill_tooth'],
                                                                                   'symptom':request.form['symptom'],'time_of_occurrence'
                                                                                   :request.form['time_of_occurrence'],'tooth_location_number'
-                                                                                  :request.form['tooth_location_number']})
+                                                                                  :request.form['tooth_location_number'],'additional':request.form['additional']})
         db.session.commit()
         response_record = Tooth_location.query.filter_by(tooth_id=request.form['tooth_id']).first()
         response = response_record.get_dict()
@@ -93,7 +94,9 @@ def add_new_tooth_location_record():
         if db.session.query(Usphs).filter(Usphs.tooth_id == tooth_id).delete():
             count = count + 1
         db.session.commit()
-        #delete_directory(tooth_id) # todo : delete all case directory ?
+        case_list = Illness_case.query.filter_by(tooth_id=tooth_id).all()
+        for case in case_list:
+            delete_directory(case.case_id) # todo : delete all case directory ? done
         ret = flask.Response("Delete Successful")
         ret.headers['Access-Control-Allow-Origin'] = '*'
         return ret
