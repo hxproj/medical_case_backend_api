@@ -1,5 +1,5 @@
 import shutil
-from datetime import datetime
+import datetime
 
 from sqlalchemy import and_
 import os
@@ -69,13 +69,26 @@ def delete_directory(case_id):
     if os.path.exists(path):
         shutil.rmtree(path)
 
+def calculate_age(id_number):
+    birthday_year = int(id_number[6:10])
+    birthday_month = int(id_number[10:12])
+    birthday_day = int(id_number[12:14])
+    date_now = datetime.datetime.now()
+    age = date_now.year - birthday_year
+    if date_now.month > birthday_month:
+        age = age - 1
+    elif date_now.month == birthday_month:
+        if date_now.day > birthday_day:
+            age = age - 1
+    return age
+
 def get_user_info_list(user_id_list):#todo : look into detail
     user_list = []
     for user_id in user_id_list:
         user_item = User.query.filter_by(user_id=user_id).first()
         if user_item:
-            now_day = datetime.now().day
-            now_month = datetime.now().month
+            now_day = datetime.datetime.now().day
+            now_month = datetime.datetime.now().month
             old_day = user_item.in_date.day
             old_month=user_item.in_date.month
             days = (now_month-old_month)*30+(now_day-old_day)

@@ -7,7 +7,7 @@ from operator import and_
 import flask
 from flask import request
 from src import app
-from src.controller.common_function import check_if_user_exist, get_user_info_list
+from src.controller.common_function import check_if_user_exist, get_user_info_list, calculate_age
 from src.entity.diagnose import Diagnose
 from src.entity.difficulty_assessment import Difficulty_assessment
 from src.entity.illness_case import Illness_case
@@ -123,17 +123,7 @@ def get_all_user():
         diagnose_list = _get_user_diagnose(user.user_id)
         dit = user.get_dict()
         dit['diagnose_list'] = diagnose_list
-        birthday_year = int(user.id_number[6:10])
-        birthday_month = int(user.id_number[10:12])
-        birthday_day = int(user.id_number[12:14])
-        date_now = datetime.datetime.now()
-        age = date_now.year - birthday_year
-        if date_now.month > birthday_month:
-            age = age - 1
-        elif date_now.month == birthday_month:
-            if date_now.day > birthday_day:
-                age = age - 1
-        dit['age'] = age
+        dit['age'] = calculate_age(user.id_number)
         user_response_list.append(dit)
     response = flask.Response(json.dumps(user_response_list))
     response.headers['Access-Control-Allow-Origin'] = '*'

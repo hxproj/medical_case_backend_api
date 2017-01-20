@@ -5,7 +5,7 @@ import datetime
 import flask
 from flask import request
 from src import app
-from src.controller.common_function import delete_directory
+from src.controller.common_function import delete_directory, calculate_age
 from src.entity.diagnose import Diagnose
 from src.entity.difficulty_assessment import Difficulty_assessment
 from src.entity.illness_history import Illness_history
@@ -52,7 +52,9 @@ def add_user():
         user_id = request.args['user_id']
         user = User.query.filter_by(user_id = user_id).first()
         if user:
-            response = flask.Response(json.dumps(user.get_dict()))
+            dit = user.get_dict()
+            dit['age'] = calculate_age(user.id_number)
+            response = flask.Response(json.dumps(dit))
             response.headers['Access-Control-Allow-Origin'] = '*'
             return response, 200
         else:
