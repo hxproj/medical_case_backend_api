@@ -35,6 +35,11 @@ def get_user_by_id(user_name):
 def add_user():
     if request.method =='POST':
         if request.form['name'] is not None and request.form['name']!= '' and request.form['contact']!=None:
+            if_exist_user = User.query.filter_by(id_number=request.form['ID']).first()
+            if if_exist_user:
+                ret = flask.Response('duplicate id number')
+                ret.headers['Access-Control-Allow-Origin'] = '*'
+                return ret, httplib.BAD_REQUEST
             current_user = _form_to_user(request.form)
             db.session.add(current_user)
             db.session.commit()

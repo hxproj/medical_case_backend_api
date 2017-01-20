@@ -146,6 +146,7 @@ def get_user_tooth_info():
             for i in range(len(tooth_step_list)):
                 num_list.append((int)(tooth_step_list[i]))
             case_info = {}
+            case_info['case_id'] = case.case_id
             case_info['step']=num_list
             case_info['judge_doctor']=case.judge_doctor
             case_info['if_handle'] = case.if_handle
