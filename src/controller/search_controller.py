@@ -136,6 +136,7 @@ def get_user_tooth_info():
     response_info = []
     for tooth in tooth_list:
         case_list = Illness_case.query.filter_by(tooth_id = tooth.tooth_id).all()
+        tooth_info = {}
         case_info_list = []
         for case in case_list:
             step_string = case.step
@@ -152,7 +153,10 @@ def get_user_tooth_info():
             case_info['if_handle'] = case.if_handle
             case_info['case_type'] = case.case_type
             case_info_list.append(case_info)
-        response_info.append(case_info_list)
+        tooth_info['tooth_id'] = tooth.tooth_id
+        tooth_info['tooth_location_number'] = tooth.tooth_location_number
+        tooth_info['cases'] = case_info_list
+        response_info.append(tooth_info)
     response = flask.Response(json.dumps(response_info))
     response.headers['Access-Control-Allow-Origin'] = '*'
     return response, 200

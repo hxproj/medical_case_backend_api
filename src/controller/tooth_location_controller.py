@@ -33,7 +33,7 @@ def add_new_tooth_location_record():
             illness_case = Illness_case()
             illness_case.tooth_id = newest_record.tooth_id
             illness_case.date = datetime.datetime.now()
-            illness_case.case_type=1
+            illness_case.case_type=0
             illness_case.step = '0,'
             illness_case.if_handle = 1
             db.session.add(illness_case)
@@ -64,8 +64,8 @@ def add_new_tooth_location_record():
     elif request.method == 'PUT':
         Tooth_location.query.filter_by(tooth_id=request.form['tooth_id']).update({'is_fill_tooth':request.form['is_fill_tooth'],
                                                                                   'symptom':request.form['symptom'],'time_of_occurrence'
-                                                                                  :request.form['time_of_occurrence'],'tooth_location_number'
-                                                                                  :request.form['tooth_location_number'],'additional':request.form['additional']})
+                                                                                  :request.form['time_of_occurrence'],'tooth_location'
+                                                                                  :request.form['tooth_location'],'additional':request.form['additional']})
         db.session.commit()
         response_record = Tooth_location.query.filter_by(tooth_id=request.form['tooth_id']).first()
         response = response_record.get_dict()
@@ -109,7 +109,7 @@ def add_new_tooth_location_record():
 
 def _form_to_tooth_location_record(form):
     temp_record = Tooth_location()
-    temp_record.tooth_location = form['tooth_location']
+    temp_record.tooth_location_number = form['tooth_location_number']
     #temp_record.symptom = form['symptom']
     temp_record.user_id = form['user_id']
     #temp_record.time_of_occurrence = form['time_of_occurrence']
