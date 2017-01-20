@@ -133,6 +133,7 @@ def get_all_user():
 def get_user_tooth_info():
     user_id = request.args['user_id']
     tooth_list = Tooth_location.query.filter_by(user_id = user_id).all()
+    response_info = []
     for tooth in tooth_list:
         case_list = Illness_case.query.filter_by(tooth_id = tooth.tooth_id).all()
         case_info_list = []
@@ -150,9 +151,10 @@ def get_user_tooth_info():
             case_info['if_handle'] = case.if_handle
             case_info['case_type'] = case.case_type
             case_info_list.append(case_info)
-        response = flask.Response(json.dumps(case_info_list))
-        response.headers['Access-Control-Allow-Origin'] = '*'
-        return response, 200
+        response_info.append(case_info_list)
+    response = flask.Response(json.dumps(response_info))
+    response.headers['Access-Control-Allow-Origin'] = '*'
+    return response, 200
 
 
 @app.route('/medical-case-of-illness/other-info', methods=['GET'])
