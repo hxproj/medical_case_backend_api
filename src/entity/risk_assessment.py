@@ -22,6 +22,7 @@ class Risk_assessment(db.Model):
     appliance = db.Column(db.String(50))
     dry_syndrome = db.Column(db.String(50))
     hole = db.Column(db.String(50))
+    risk_level = db.Column(db.Integer)
 
 
     def get_dict(self):

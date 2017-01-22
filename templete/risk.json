@@ -1,0 +1,194 @@
+{
+  "fluorine_protection": [
+    {
+      "key": "是",
+      "value": 1
+    },
+    {
+      "key": "否",
+      "value": 2
+    }
+  ],
+  "sugary_foods": [
+    {
+      "key": "只在饭点食用",
+      "value": 1
+    },
+    {
+      "key": "经常食用或持续食用",
+      "value": 3
+    }
+  ],
+  "relative_illness": [
+    {
+      "key": "近2年内患龋",
+      "value": 1
+    },
+    {
+      "key": "7-23个月内患龋",
+      "value": 2
+    },
+    {
+      "key": "近6个月内患龋",
+      "value": 3
+    }
+  ],
+  "need_record": [
+    {
+      "key": "是",
+      "value": 1
+    },
+    {
+      "key": "否",
+      "value": 2
+    }
+  ],
+  "special_care": [
+    {
+      "key": "否",
+      "value": 1
+    },
+    {
+      "key": "是（14岁以上）",
+      "value": 2
+    },
+    {
+      "key": "是（6-14岁）",
+      "value": 3
+    }
+  ],
+  "radiotherapy": [
+    {
+      "key": "否",
+      "value": 1
+    },
+    {
+      "key": "是",
+      "value": 3
+    }
+  ],
+  "eating_disorders": [
+    {
+      "key": "否",
+      "value": 1
+    },
+    {
+      "key": "是",
+      "value": 3
+    }
+  ],
+  "saliva_medicine": [
+    {
+      "key": "否",
+      "value": 1
+    },
+    {
+      "key": "是",
+      "value": 3
+    }
+  ],
+  "alcohol_drugs": [
+    {
+      "key": "否",
+      "value": 1
+    },
+    {
+      "key": "是",
+      "value": 3
+    }
+  ],
+  "hole": [
+    {
+      "key": "近3年内无龋损",
+      "value": 1
+    },
+    {
+      "key": "近3年内1-2个",
+      "value": 2
+    },
+    {
+      "key": "近3年内新发龋",
+      "value": 3
+    }
+  ],
+  "caries_lost": [
+    {
+      "key": "无",
+      "value": 1
+    },
+    {
+      "key": "有",
+      "value": 3
+    }
+  ],
+  "soft_dirt": [
+    {
+      "key": "无",
+      "value": 1
+    },
+    {
+      "key": "有",
+      "value": 2
+    }
+  ],
+  "special_tooth_shape": [
+    {
+      "key": "无",
+      "value": 1
+    },
+    {
+      "key": "有",
+      "value": 2
+    }
+  ],
+  "adjacent_caries": [
+    {
+      "key": "无",
+      "value": 1
+    },
+    {
+      "key": "有",
+      "value": 2
+    }
+  ],
+  "tooth_exposure": [
+    {
+      "key": "无",
+      "value": 1
+    },
+    {
+      "key": "有",
+      "value": 2
+    }
+  ],
+  "fill_overhang": [
+    {
+      "key": "无",
+      "value": 1
+    },
+    {
+      "key": "有",
+      "value": 2
+    }
+  ],
+  "appliance": [
+    {
+      "key": "无",
+      "value": 1
+    },
+    {
+      "key": "有",
+      "value": 2
+    }
+  ],
+  "dry_syndrome": [
+    {
+      "key": "无",
+      "value": 1
+    },
+    {
+      "key": "有",
+      "value": 3
+    }
+  ]
+}

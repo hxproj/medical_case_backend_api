@@ -152,6 +152,7 @@ def get_user_tooth_info():
             case_info['judge_doctor']=case.judge_doctor
             case_info['if_handle'] = case.if_handle
             case_info['case_type'] = case.case_type
+            case_info['date'] = case.date.strftime('%Y-%m-%d %H:%M')
             case_info_list.append(case_info)
         tooth_info['tooth_id'] = tooth.tooth_id
         tooth_info['tooth_location_number'] = tooth.tooth_location_number

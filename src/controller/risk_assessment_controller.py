@@ -1,3 +1,4 @@
+import copy
 import httplib
 import json
 
@@ -6,6 +7,7 @@ import flask
 from flask import request
 from src import app
 from src.controller.common_function import check_if_user_exist, refresh_step
+from src.entity.prognosis_of_management import Prognosis_of_management
 from src.entity.risk_assessment import Risk_assessment
 from src import db
 
@@ -19,9 +21,18 @@ def risk_options():
         else:
             if not Risk_assessment.query.filter_by(case_id = request.form['case_id']).first():
                 risk = _form_to_risk(request.form)
+                risk.risk_level = _get_risk_level(risk)
+                prognosis_of_management = Prognosis_of_management()
+                prognosis_of_management.user_id = risk.user_id
+                prognosis_of_management.case_id = risk.case_id
+                prognosis_of_management.tooth_id = risk.tooth_id
+                prognosis_of_management.patient_type = risk.risk_level
+                db.session.query(Prognosis_of_management).filter(Prognosis_of_management.case_id == risk.case_id).delete()
+                db.session.add(prognosis_of_management)
                 db.session.add(risk)
                 db.session.commit()
                 refresh_step(request.form['case_id'], 3)
+                refresh_step(request.form['case_id'], 7)
                 response = flask.Response(json.dumps(Risk_assessment.query.filter_by(case_id=request.form['case_id']).first().get_dict()))
                 response.headers['Access-Control-Allow-Origin'] = '*'
                 return response, 200
@@ -61,6 +72,15 @@ def risk_options():
                 db.session.query(Risk_assessment).filter(Risk_assessment.case_id==request.form['case_id']).delete()
                 db.session.commit()
                 risk = _form_to_risk(request.form)
+                risk.risk_level = _get_risk_level(risk)
+                prognosis_of_management = Prognosis_of_management()
+                prognosis_of_management.user_id = risk.user_id
+                prognosis_of_management.case_id = risk.case_id
+                prognosis_of_management.tooth_id = risk.tooth_id
+                prognosis_of_management.patient_type = risk.risk_level
+                db.session.query(Prognosis_of_management).filter(
+                    Prognosis_of_management.case_id == risk.case_id).delete()
+                db.session.add(prognosis_of_management)
                 db.session.add(risk)
                 db.session.commit()
                 response = flask.Response(
@@ -77,7 +97,31 @@ def risk_options():
         ret.headers['Access-Control-Allow-Methods'] = 'PUT,DELETE'
         return ret
 
+def _get_risk_level(risk):
+    level = 1
+    result_lit = []
+    json_data = _get_json_data()
+    copy_risk = copy.deepcopy(risk)
+    risk_dit = copy_risk.get_dict()
+    for key,value in risk_dit.items():
+        if json_data.has_key(key):
+            for match in json_data[key]:
+                if match['key'] == value:
+                    result_lit.append(match['value'])
+                    break
+    result_set = set(result_lit)
+    if 3 in result_set:
+        level = 3
+    elif 3 not in result_set and 2 in result_set:
+        level = 2
+    else:
+        level =1
+    return level
 
+def _get_json_data():
+    with open('./templete/risk.json') as json_file:
+        data = json.load(json_file)
+        return data
 
 def _form_to_risk(form):
     risk = Risk_assessment()

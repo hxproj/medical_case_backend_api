@@ -24,6 +24,7 @@ def add_new_tooth_location_record():
     if request.method == 'POST':
         if check_if_user_exist(request.form['user_id']):
             location_record = _form_to_tooth_location_record(request.form)
+            doctor = request.form['judge_doctor']
             #location_record.step = 0
             db.session.add(location_record)
             db.session.commit()
@@ -36,7 +37,7 @@ def add_new_tooth_location_record():
             illness_case.case_type=0
             illness_case.step = '0,'
             illness_case.if_handle = 1
-            illness_case.judge_doctor = request.form['judge_doctor']
+            illness_case.judge_doctor = doctor
             db.session.add(illness_case)
             db.session.commit()
             newest_case = Illness_case.query.filter_by(tooth_id = newest_record.tooth_id).all()[-1]

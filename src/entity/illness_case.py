@@ -13,7 +13,7 @@ class Illness_case(db.Model):
         dit = self.__dict__
         del dit['_sa_instance_state']
         if dit['date']:
-            dit['date'] = dit['date'].strftime('%Y-%m-%d')
+            dit['date'] = dit['date'].strftime('%Y-%m-%d ')
         tooth_step_list = dit['step'].split(',')
         if '' in tooth_step_list:
             tooth_step_list.remove('')
