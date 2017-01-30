@@ -16,8 +16,11 @@ class Illness_history(db.Model):
     is_delayed_pain = db.Column(db.String(50))
     cure_time = db.Column(db.String(50))
     fill_state = db.Column(db.String(50))
+    additional = db.Column(db.String(500))
 
     def get_dict(self):
         dit = self.__dict__
         del dit['_sa_instance_state']
         return dit
+
+db.create_all()

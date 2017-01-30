@@ -85,7 +85,11 @@ def _form_to_personal_history(form):
         history.consciously_reduce_salivary_flow = form['consciously_reduce_salivary_flow']
     else :
         history.consciously_reduce_salivary_flow=None;
-    #history.is_consciously_reduce_salivary_flow = form['is_consciously_reduce_salivary_flow']
-    #history.is_salivary_gland_disease = form['is_salivary_gland_disease']
+    history.development_of_the_situation = form['development_of_the_situation']
+    history.radiation_therapy_history = form['radiation_therapy_history']
+    history.loss_caries_index_up = form['loss_caries_index_up']
+    history.loss_caries_surface_index_up = form['loss_caries_surface_index_up']
+    history.orthodontic = form['orthodontic']
+    history.additional = form['additional']
     return history
 

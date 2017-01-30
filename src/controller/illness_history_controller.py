@@ -78,5 +78,6 @@ def _form_to_illness_history(form):
     temp_history.is_delayed_pain = form['is_delayed_pain']
     temp_history.cure_time = form['cure_time']
     temp_history.fill_state = form['fill_state']
+    temp_history.additional = form['additional']
 
     return temp_history
