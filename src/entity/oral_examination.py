@@ -28,20 +28,22 @@ class Oral_examination(db.Model):
     fistula = db.Column(db.String(50))
     overflow_pus = db.Column(db.String(50))
     mobility = db.Column(db.String(50))
-    loss_caries_index_up = db.Column(db.String(50))
-    loss_caries_surface_index_up = db.Column(db.String(50))
-    development_of_the_situation = db.Column(db.String(50))
     relations_between_teeth = db.Column(db.String(50))
     is_teeth_crowd = db.Column(db.String(50))
     involution_teeth = db.Column(db.String(50))
     tooth_shape = db.Column(db.String(50))
-    treatment = db.Column(db.String(50))
-    orthodontic = db.Column(db.String(50))
     X_Ray_location = db.Column(db.String(50))
     X_Ray_depth = db.Column(db.String(50))
     X_Ray_fill_quality = db.Column(db.String(50))
     CT_shows = db.Column(db.String(300))
     piece = db.Column(db.String(300))
+    OtherExpression = db.Column(db.String(300))
+
+    #development_of_the_situation = db.Column(db.String(50))
+    #loss_caries_index_up = db.Column(db.String(50))
+    #loss_caries_surface_index_up = db.Column(db.String(50))
+    #treatment = db.Column(db.String(50))
+    #orthodontic = db.Column(db.String(50))
 
     def get_dict(self):
         dit = self.__dict__
