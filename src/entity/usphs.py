@@ -7,12 +7,8 @@ class Usphs(db.Model):
     color = db.Column(db.String(50))
     marginal_accuracy = db.Column(db.String(50))
     anatomic_form = db.Column(db.String(50))
-    surfaceness = db.Column(db.String(20))
-    edge_color = db.Column(db.String(20))
-    occlusal_contact = db.Column(db.String(20)) # yao he jie chu
-    sensitivity_of_tooth = db.Column(db.String(100))# ya chi min gan
-    secondary_caries = db.Column(db.String(20))
-    integrity = db.Column(db.String(20))
+    edge_color = db.Column(db.String(50))
+    secondary_caries = db.Column(db.String(50))
     level = db.Column(db.String(20))
 
     def get_dict(self):
