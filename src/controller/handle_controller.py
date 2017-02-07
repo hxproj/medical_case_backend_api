@@ -98,34 +98,35 @@ def _form_to_surgical(form):
     temp_surgical.case_id = form['case_id']
     temp_surgical.handle_type = form['handle_type']
     temp_surgical.specific_method = form['specific_method']
-    temp_surgical.anesthesia_medicine = form['anesthesia_medicine']
-    temp_surgical.part_anesthesia = form['part_anesthesia']
-    temp_surgical.rubber = form['rubber']
-    temp_surgical.microscope = form['microscope']
-    temp_surgical.tools = form['tools']
-    temp_surgical.shape_of_hole = form['shape_of_hole']
-    temp_surgical.depth_of_hole = form['depth_of_hole']
-    temp_surgical.is_piece = form['is_piece']
-    temp_surgical.is_chock = form['is_chock']
-    temp_surgical.shade_guide = form['shade_guide']
-    temp_surgical.color_of_tooth = form['color_of_tooth']
-    temp_surgical.disinfect = form['disinfect']
-    temp_surgical.bottom = form['bottom']
-    temp_surgical.etching_type = form['etching_type']
-    temp_surgical.full_etching = form['full_etching']
-    temp_surgical.self_etching = form['self_etching']
-    temp_surgical.coating_time = form['coating_time']
-    temp_surgical.illumination_time = form['illumination_time']
-    temp_surgical.resin = form['resin']
-    temp_surgical.color_of_resin = form['color_of_resin']
-    temp_surgical.modification = form['modification']
-    temp_surgical.lamp = form['lamp']
-    temp_surgical.time_of_lamp = form['time_of_lamp']
-    temp_surgical.polishing = form['polishing']
-    temp_surgical.appease_medicine = form['appease_medicine']
-    temp_surgical.observed_time = form['observed_time']
-    temp_surgical.modulo = form['modulo']
-    temp_surgical.inlay = form['inlay']
+
+    temp_surgical.anesthesia_medicine = form.get('anesthesia_medicine')
+    temp_surgical.part_anesthesia = form.get('part_anesthesia')
+    temp_surgical.rubber = form.get('rubber')
+    temp_surgical.microscope = form.get('microscope')
+    temp_surgical.tools = form.get('tools')
+    temp_surgical.shape_of_hole = form.get('shape_of_hole')
+    temp_surgical.depth_of_hole = form.get('depth_of_hole')
+    temp_surgical.is_piece = form.get('is_piece')
+    temp_surgical.is_chock = form.get('is_chock')
+    temp_surgical.shade_guide = form.get('shade_guide')
+    temp_surgical.color_of_tooth = form.get('color_of_tooth')
+    temp_surgical.disinfect = form.get('disinfect')
+    temp_surgical.bottom = form.get('bottom')
+    temp_surgical.etching_type = form.get('etching_type')
+    temp_surgical.full_etching = form.get('full_etching')
+    temp_surgical.self_etching = form.get('self_etching')
+    temp_surgical.coating_time = form.get('coating_time')
+    temp_surgical.illumination_time = form.get('illumination_time')
+    temp_surgical.resin = form.get('resin')
+    temp_surgical.color_of_resin = form.get('color_of_resin')
+    temp_surgical.modification = form.get('modification')
+    temp_surgical.lamp = form.get('lamp')
+    temp_surgical.time_of_lamp = form.get('time_of_lamp')
+    temp_surgical.polishing = form.get('polishing')
+    temp_surgical.appease_medicine = form.get('appease_medicine')
+    temp_surgical.observed_time = form.get('observed_time')
+    temp_surgical.modulo = form.get('modulo')
+    temp_surgical.inlay = form.get('inlay')
     return temp_surgical
 
 
@@ -136,12 +137,13 @@ def _form_to_non_surgical(form):
     temp_non_surgical.case_id = form['case_id']
     temp_non_surgical.handle_type = form['handle_type']
     temp_non_surgical.specific_method = form['specific_method']
-    temp_non_surgical.fluorination = form['fluorination']
-    temp_non_surgical.silver_nitrate = form['silver_nitrate']
-    temp_non_surgical.additional_device = form['additional_device']
-    temp_non_surgical.reagent = form['reagent']
-    temp_non_surgical.tools = form['tools']
-    temp_non_surgical.lamp = form['lamp']
-    temp_non_surgical.check_time = form['check_time']
-    temp_non_surgical.time_of_etching = form['time_of_etching']
+
+    temp_non_surgical.fluorination = form.get("fluorination")
+    temp_non_surgical.silver_nitrate = form.get("silver_nitrate")
+    temp_non_surgical.additional_device = form.get("additional_device")
+    temp_non_surgical.reagent = form.get("reagent")
+    temp_non_surgical.tools = form.get("tools")
+    temp_non_surgical.lamp = form.get("lamp")
+    temp_non_surgical.check_time = form.get("check_time")
+    temp_non_surgical.time_of_etching = form.get("time_of_etching")
     return temp_non_surgical
