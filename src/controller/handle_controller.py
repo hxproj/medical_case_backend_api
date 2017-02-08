@@ -13,7 +13,8 @@ from src import db
 def handle_method():
     if request.method == 'POST':
         if check_if_user_exist(request.form['user_id']):
-            if ((int)(request.form['handle_type']) == 0):
+            handle_type = int(request.form['handle_type'])
+            if handle_type == 0:
                 non_surgical = _form_to_non_surgical(request.form)
                 db.session.add(non_surgical)
                 db.session.commit()
@@ -24,7 +25,7 @@ def handle_method():
                 ret = flask.Response(json.dumps(response))
                 ret.headers['Access-Control-Allow-Origin'] = '*'
                 return ret
-            elif (int)(request.form['handle_type']) == 1:
+            elif handle_type == 1 or handle_type == 2 or handle_type == 3 or handle_type == 4:
                 surgical = _form_to_surgical(request.form)
                 db.session.add(surgical)
                 db.session.commit()
