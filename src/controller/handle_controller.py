@@ -62,10 +62,10 @@ def handle_method():
                 return response, 400
     elif request.method == 'PUT':
         if check_if_user_exist(request.form['user_id']):
-            if (int)(request.form['handle_type']) == 1:
-                temp_result = _form_to_surgical(request.form)
-            else:
+            if int(request.form['handle_type']) == 0:
                 temp_result = _form_to_non_surgical(request.form)
+            else:
+                temp_result = _form_to_surgical(request.form)
             db.session.query(Surgical).filter(
                 Surgical.case_id == request.form['case_id']).delete()
             db.session.query(Non_surgical).filter(
@@ -73,10 +73,10 @@ def handle_method():
             db.session.commit()
             db.session.add(temp_result)
             db.session.commit()
-            if (int)(request.form['handle_type']) == 1:
-                result = Surgical.query.filter_by(case_id=request.form['case_id']).first()
-            else:
+            if int(request.form['handle_type']) == 0:
                 result = Non_surgical.query.filter_by(case_id=request.form['case_id']).first()
+            else:
+                result = Surgical.query.filter_by(case_id=request.form['case_id']).first()
             response = result.get_dict()
             ret = flask.Response(json.dumps(response))
             ret.headers['Access-Control-Allow-Origin'] = '*'
