@@ -41,6 +41,7 @@ def add_user():
                 ret.headers['Access-Control-Allow-Origin'] = '*'
                 return ret, httplib.BAD_REQUEST
             current_user = _form_to_user(request.form)
+            current_user.birthday = int(current_user.id_number[6:14])
             db.session.add(current_user)
             db.session.commit()
             response_user = User.query.filter_by(name=request.form['name']).first()

@@ -35,7 +35,7 @@ def add_new_tooth_location_record():
             illness_case.tooth_id = newest_record.tooth_id
             illness_case.date = datetime.datetime.now()
             illness_case.case_type=0
-            illness_case.step = '0,'
+            illness_case.step = ''
             illness_case.if_handle = 1
             illness_case.judge_doctor = doctor
             db.session.add(illness_case)

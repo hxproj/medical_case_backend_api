@@ -6,6 +6,7 @@ from src import app
 from src.entity.oral_examination import Oral_examination
 from src.controller.common_function import check_if_user_exist, refresh_step
 from src import db
+from src.entity.tooth_location import Tooth_location
 
 
 @app.route('/medical-case-of-illness/oral-examination', methods=['POST', 'PUT', 'GET','OPTIONS'])
@@ -15,6 +16,12 @@ def add_new_oral_examination():
             oral_examination = _form_to_oral_examination(request.form)
             db.session.add(oral_examination)
             db.session.commit()
+            db.session.query(Tooth_location).filter(
+                Tooth_location.tooth_id == (int)(oral_examination.tooth_id)).update(
+                {'tooth_location_number': oral_examination.tooth_location})
+            db.session.query(Oral_examination).filter(
+                Oral_examination.tooth_id == (int)(oral_examination.tooth_id)).update(
+                {'tooth_location': oral_examination.tooth_location})
             oral_examination = Oral_examination.query.filter_by(user_id=request.form['user_id']).all()[-1]
             refresh_step(oral_examination.case_id, 2)
             oral_examination_list = Oral_examination.query.filter_by(user_id=request.form['user_id']).all()

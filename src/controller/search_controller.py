@@ -6,6 +6,8 @@ from operator import and_
 
 import flask
 from flask import request
+from sqlalchemy import func
+
 from src import app
 from src.controller.common_function import check_if_user_exist, get_user_info_list, calculate_age
 from src.entity.diagnose import Diagnose
@@ -117,7 +119,32 @@ def get_step_info():
 
 @app.route('/medical-case-of-illness/all-user', methods=['GET'])
 def get_all_user():
-    user_list = User.query.all()
+    page = request.args.get('page', 1, type=int)
+    order_by = request.args.get('order','user_id')
+    order_type = request.args.get('order_type',1,type=int)
+    offset = (page - 1) * app.config['PER_PAGE']
+    query = ""
+    if order_type==1:
+        if order_by=="user_id":
+            query = db.session.query(User).order_by(User.user_id)
+        elif order_by == "in_date":
+            query = db.session.query(User).order_by(User.in_date)
+        elif order_by == "name":
+            query = db.session.query(User).order_by(User.name)
+        elif order_by == "age":
+            query = db.session.query(User).order_by(User.name.desc())
+    elif order_type == 2:
+        if order_by == "user_id":
+            query = db.session.query(User).order_by(User.user_id.desc())
+        elif order_by == "in_date":
+            query = db.session.query(User).order_by(User.in_date.desc())
+        elif order_by == "name":
+            query = db.session.query(User).order_by(User.name.desc())
+        elif order_by == "age":
+            query = db.session.query(User).order_by(User.name)
+    query = query.offset(offset)
+    query = query.limit(app.config['PER_PAGE'])
+    user_list = query.all()
     user_response_list = []
     for user in user_list:
         diagnose_list = _get_user_diagnose(user.user_id)
@@ -125,7 +152,10 @@ def get_all_user():
         dit['diagnose_list'] = diagnose_list
         dit['age'] = calculate_age(user.id_number)
         user_response_list.append(dit)
-    response = flask.Response(json.dumps(user_response_list))
+    count = db.session.query(func.count(User.user_id)).all()[0][0]
+    count = count / app.config['PER_PAGE'] + 1
+    response_dict = {"pages":count,"user_list":user_response_list}
+    response = flask.Response(json.dumps(response_dict))
     response.headers['Access-Control-Allow-Origin'] = '*'
     return response, 200
 
