@@ -159,8 +159,9 @@ def get_all_user():
     response.headers['Access-Control-Allow-Origin'] = '*'
     return response, 200
 
-@app.route('/medical-case-of-illness/user-tooth-info',methods=['GET'])
-def get_user_tooth_info():
+
+@app.route('/medical-case-of-illness/user-all-tooth-info',methods=['GET'])
+def get_user_all_tooth_info():
     user_id = request.args['user_id']
     tooth_list = Tooth_location.query.filter_by(user_id = user_id).all()
     response_info = []
@@ -175,8 +176,8 @@ def get_user_tooth_info():
                 tooth_step_list.remove('')
             num_list = []
             for i in range(len(tooth_step_list)):
-                num_list.append((int)(tooth_step_list[i]))
-            case_info = {}
+                num_list.append(int(tooth_step_list[i]))
+            case_info={}
             case_info['case_id'] = case.case_id
             case_info['step']=num_list
             case_info['judge_doctor']=case.judge_doctor
@@ -191,6 +192,43 @@ def get_user_tooth_info():
     response = flask.Response(json.dumps(response_info))
     response.headers['Access-Control-Allow-Origin'] = '*'
     return response, 200
+
+
+@app.route('/medical-case-of-illness/user-tooth-info',methods=['GET'])
+def get_user_tooth_info():
+    this_tooth_id = request.args['tooth_id']
+    case_info_list = []
+
+    case_list = Illness_case.query.filter_by(tooth_id=this_tooth_id).all()
+    for case in case_list:
+        step_string = case.step
+        tooth_step_list = step_string.split(',')
+        if '' in tooth_step_list:
+            tooth_step_list.remove('')
+        num_list = []
+        for i in range(len(tooth_step_list)):
+            num_list.append(int(tooth_step_list[i]))
+        case_info = {}
+        case_info['case_id'] = case.case_id
+        case_info['step']=num_list
+        case_info['judge_doctor']=case.judge_doctor
+        case_info['if_handle'] = case.if_handle
+        case_info['case_type'] = case.case_type
+        case_info['date'] = case.date.strftime('%Y-%m-%d %H:%M')
+        case_info_list.append(case_info)
+
+    tooth_info = {}
+    this_tooth_info = Tooth_location.query.filter_by(tooth_id=this_tooth_id).first()
+    if this_tooth_info:
+        tooth_info['tooth_id'] = this_tooth_info.tooth_id
+        tooth_info['tooth_location_number'] = this_tooth_info.tooth_location_number
+        tooth_info['cases'] = case_info_list
+
+    response = flask.Response(json.dumps(tooth_info))
+    response.headers['Access-Control-Allow-Origin'] = '*'
+    return response, 200
+
+
 
 
 @app.route('/medical-case-of-illness/other-info', methods=['GET'])
