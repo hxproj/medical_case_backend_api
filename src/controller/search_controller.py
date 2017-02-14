@@ -228,8 +228,22 @@ def get_user_tooth_info():
     response.headers['Access-Control-Allow-Origin'] = '*'
     return response, 200
 
-
-
+@app.route('/medical-case-of-illness/self-say-history',methods=['GET'])
+def get_self_say_and_history():
+    case_id = request.args['case_id']
+    personal_history = Personal_history.query.filter_by(case_id = case_id).first()
+    illness_history = Illness_history.query.filter_by(case_id = case_id).first()
+    tooth_location = ''
+    if illness_history:
+        tooth_location = Tooth_location.query.filter_by(tooth_id = illness_history.tooth_id).first()
+    response_dit ={}
+    if tooth_location and illness_history and personal_history:
+        response_dit = dict(tooth_location.get_dict().items()+personal_history.get_dict().items()+illness_history.get_dict().items())
+        response = flask.Response(json.dumps(response_dit))
+        response.headers['Access-Control-Allow-Origin'] = '*'
+        return response, 200
+    else :
+        return "data error" , 403
 
 @app.route('/medical-case-of-illness/other-info', methods=['GET'])
 def get_other_info():
