@@ -126,7 +126,7 @@ def get_all_user():
     query = ""
     if order_type==1:
         if order_by=="user_id":
-            query = db.session.query(User).order_by(User.user_id)
+            query = db.session.query(User).order_by(User.user_id.desc())
         elif order_by == "in_date":
             query = db.session.query(User).order_by(User.in_date)
         elif order_by == "name":
@@ -135,7 +135,7 @@ def get_all_user():
             query = db.session.query(User).order_by(User.name.desc())
     elif order_type == 2:
         if order_by == "user_id":
-            query = db.session.query(User).order_by(User.user_id.desc())
+            query = db.session.query(User).order_by(User.user_id)
         elif order_by == "in_date":
             query = db.session.query(User).order_by(User.in_date.desc())
         elif order_by == "name":
