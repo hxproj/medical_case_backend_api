@@ -118,7 +118,7 @@ def _delete_all(user_id): # todo: need to change dependence to case_id
     if tooth_list:
         for temp in tooth_list:
             delete_directory(temp)
-            db.session.query(Picture).filter(Picture.tooth_id==temp).delete()
+            db.session.query(Picture).filter(Picture.case_id==temp).delete()
     db.session.query(Usphs).filter(Usphs.user_id == user_id).delete()
     db.session.query(Tooth_location).filter(Tooth_location.user_id == user_id).delete()
     db.session.query(Surgical).filter(Surgical.user_id == user_id).delete()

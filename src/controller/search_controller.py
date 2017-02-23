@@ -281,11 +281,11 @@ def _get_user_diagnose(user_id):
         diagnose_str = ''
         if diagnose:
             diagnose_str = diagnose[-1].caries_degree
-        diagnose_list.append((str(tooth_number)) + diagnose_str)
+        diagnose_list.append(tooth_number + diagnose_str)
     return_str = ''
     for item in diagnose_list:
         return_str += item
-        return_str +=','
+        return_str +=', '
     return return_str
 
 
