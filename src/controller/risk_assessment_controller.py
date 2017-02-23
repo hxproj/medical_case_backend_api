@@ -32,7 +32,7 @@ def risk_options():
                 db.session.add(risk)
                 db.session.commit()
                 refresh_step(request.form['case_id'], 3)
-                #refresh_step(request.form['case_id'], 7)
+                refresh_step(request.form['case_id'], 7)
                 response = flask.Response(json.dumps(Risk_assessment.query.filter_by(case_id=request.form['case_id']).first().get_dict()))
                 response.headers['Access-Control-Allow-Origin'] = '*'
                 return response, 200

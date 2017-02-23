@@ -98,7 +98,7 @@ def _form_to_case(form):
     temp_record.date = datetime.datetime.now()
     temp_record.if_handle = form['if_handle']
     temp_record.judge_doctor = form['judge_doctor']
-    temp_record.step = '0,'
+    temp_record.step = ''
     return temp_record
 
 
