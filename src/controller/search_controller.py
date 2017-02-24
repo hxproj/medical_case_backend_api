@@ -1,3 +1,4 @@
+import copy
 import httplib
 import json
 
@@ -62,13 +63,22 @@ def search_options():
             result_list = _search_special(key)
         else:
             result_list = query.filter_by(**args).all()
-    user_id_list = []
+    case_id_list = []
     for result in result_list:
-        user_id_list.append(result.user_id)
-    temp_set = set(user_id_list)
-    user_id_list = list(temp_set)
-    result = get_user_info_list(user_id_list)
-    result = result[-1::-1]
+        case_id_list.append(result.case_id)
+    temp_set = set(case_id_list)
+    case_id_list = list(temp_set)
+    result_list = []
+    for case_id in case_id_list :
+        case = Illness_case.query.filter_by(case_id=case_id).first()
+        tooth_location = ''
+        if case:
+            tooth_location = Tooth_location.query.filter_by(tooth_id = case.tooth_id).first()
+        temp_case = copy.deepcopy(case)
+        case_dict = temp_case.get_dict()
+        case_dict['user_id'] = tooth_location.user_id
+        result_list.append(case_dict)
+    result = result_list[-1::-1]
     if page == '' or page == None:
         response = flask.Response((str)(len(result)))
         response.headers['Access-Control-Allow-Origin'] = '*'
@@ -140,13 +150,13 @@ def get_all_user():
                 date_now = datetime.datetime.now()
                 current_date_num = date_now.year * 10000 + date_now.month*100 + date_now.day
                 pre_age = current_date_num - int(specific_value) * 10000
-                post_age = current_date_num - (int(specific_value) - 1) * 10000
-                pre_query = db.session.query(User).filter(and_(User.birthday > pre_age,User.birthday<post_age))
+                post_age = current_date_num - (int(specific_value) + 1) * 10000
+                pre_query = db.session.query(User).filter(and_(User.birthday > post_age,User.birthday<pre_age))
         elif pre_value and post_value:
             if parameter == "user_id":
                 pre_query = db.session.query(User).filter(and_(User.user_id > pre_value, User.user_id < post_value))
             elif parameter == "in_date":
-                pre_query = db.session.query(User).filter(and_(User.in_date > pre_value, User.in_date < post_value))
+                pre_query = db.session.query(User).filter(and_(User.in_date > str(pre_value), User.in_date < str(post_value)))
             elif parameter == "name":
                 pre_query = db.session.query(User).filter(and_(User.name > pre_value, User.name < post_value))
             elif parameter == "age":
@@ -155,6 +165,8 @@ def get_all_user():
                 pre_age = current_date_num - int(post_value) * 10000
                 post_age = current_date_num - (int(pre_value) - 1) * 10000
                 pre_query = db.session.query(User).filter(and_(User.birthday > pre_age, User.birthday < post_age))
+    else:
+        pre_query = db.session.query(User)
     query = ""
     if order_type == 1:
         if order_by == "user_id":
@@ -164,7 +176,7 @@ def get_all_user():
         elif order_by == "name":
             query = pre_query.order_by(User.name)
         elif order_by == "age":
-            query = pre_query.order_by(User.name.desc())
+            query = pre_query.order_by(User.birthday)
     elif order_type == 2:
         if order_by == "user_id":
             query = pre_query.order_by(User.user_id)
@@ -173,7 +185,7 @@ def get_all_user():
         elif order_by == "name":
             query = pre_query.order_by(User.name.desc())
         elif order_by == "age":
-            query = pre_query.order_by(User.name)
+            query = pre_query.order_by(User.birthday.desc())
     query = query.offset(offset)
     query = query.limit(app.config['PER_PAGE'])
     user_list = query.all()

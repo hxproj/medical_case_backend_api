@@ -75,10 +75,10 @@ def calculate_age(id_number):
     birthday_day = int(id_number[12:14])
     date_now = datetime.datetime.now()
     age = date_now.year - birthday_year
-    if date_now.month > birthday_month:
+    if date_now.month < birthday_month:
         age = age - 1
     elif date_now.month == birthday_month:
-        if date_now.day > birthday_day:
+        if date_now.day < birthday_day:
             age = age - 1
     return age
 
