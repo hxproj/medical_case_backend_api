@@ -35,9 +35,12 @@ def get_user_by_id(user_name):
 def add_user():
     if request.method =='POST':
         if request.form['name'] is not None and request.form['name']!= '' and request.form['contact']!=None:
+            exist_response = {}
             if_exist_user = User.query.filter_by(id_number=request.form['ID']).first()
             if if_exist_user:
-                ret = flask.Response('duplicate id number')
+                exist_response["message"] = 'duplicate id number'
+                exist_response["user_id"] = if_exist_user.user_id
+                ret = flask.Response(json.dumps(exist_response))
                 ret.headers['Access-Control-Allow-Origin'] = '*'
                 return ret, 403
             current_user = _form_to_user(request.form)
@@ -49,7 +52,7 @@ def add_user():
             #result['in_date']=result['in_date'].strftime('%Y-%m-%d %H:%M:%S')
             ret = flask.Response(json.dumps(result))
             ret.headers['Access-Control-Allow-Origin']='*'
-            return ret,httplib.OK
+            return ret, httplib.OK
         else:
             ret = flask.Response('post error')
             ret.headers['Access-Control-Allow-Origin'] = '*'
