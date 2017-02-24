@@ -120,28 +120,60 @@ def get_step_info():
 @app.route('/medical-case-of-illness/all-user', methods=['GET'])
 def get_all_user():
     page = request.args.get('page', 1, type=int)
-    order_by = request.args.get('order','user_id')
-    order_type = request.args.get('order_type',1,type=int)
+    order_by = request.args.get('order', 'user_id')
+    order_type = request.args.get('order_type', 1, type=int)
     offset = (page - 1) * app.config['PER_PAGE']
+    specific_value = request.args.get('value')
+    pre_value = request.args.get('pre_value')
+    post_value = request.args.get('post_value')
+    parameter = request.args.get('parameter')
+    pre_query = ''
+    if parameter and parameter != '':
+        if specific_value and specific_value != '':
+            if parameter == "user_id":
+                pre_query = db.session.query(User).filter(User.user_id == specific_value)
+            elif parameter == "in_date":
+                pre_query = db.session.query(User).filter(User.in_date == specific_value)
+            elif parameter == "name":
+                pre_query = db.session.query(User).filter(User.name == specific_value)
+            elif parameter == "age":
+                date_now = datetime.datetime.now()
+                current_date_num = date_now.year * 10000 + date_now.month*100 + date_now.day
+                pre_age = current_date_num - int(specific_value) * 10000
+                post_age = current_date_num - (int(specific_value) - 1) * 10000
+                pre_query = db.session.query(User).filter(and_(User.birthday > pre_age,User.birthday<post_age))
+        elif pre_value and post_value:
+            if parameter == "user_id":
+                pre_query = db.session.query(User).filter(and_(User.user_id > pre_value, User.user_id < post_value))
+            elif parameter == "in_date":
+                pre_query = db.session.query(User).filter(and_(User.in_date > pre_value, User.in_date < post_value))
+            elif parameter == "name":
+                pre_query = db.session.query(User).filter(and_(User.name > pre_value, User.name < post_value))
+            elif parameter == "age":
+                date_now = datetime.datetime.now()
+                current_date_num = date_now.year * 10000 + date_now.month * 100 + date_now.day
+                pre_age = current_date_num - int(post_value) * 10000
+                post_age = current_date_num - (int(pre_value) - 1) * 10000
+                pre_query = db.session.query(User).filter(and_(User.birthday > pre_age, User.birthday < post_age))
     query = ""
-    if order_type==1:
-        if order_by=="user_id":
-            query = db.session.query(User).order_by(User.user_id.desc())
+    if order_type == 1:
+        if order_by == "user_id":
+            query = pre_query.order_by(User.user_id.desc())
         elif order_by == "in_date":
-            query = db.session.query(User).order_by(User.in_date)
+            query = pre_query.order_by(User.in_date)
         elif order_by == "name":
-            query = db.session.query(User).order_by(User.name)
+            query = pre_query.order_by(User.name)
         elif order_by == "age":
-            query = db.session.query(User).order_by(User.name.desc())
+            query = pre_query.order_by(User.name.desc())
     elif order_type == 2:
         if order_by == "user_id":
-            query = db.session.query(User).order_by(User.user_id)
+            query = pre_query.order_by(User.user_id)
         elif order_by == "in_date":
-            query = db.session.query(User).order_by(User.in_date.desc())
+            query = pre_query.order_by(User.in_date.desc())
         elif order_by == "name":
-            query = db.session.query(User).order_by(User.name.desc())
+            query = pre_query.order_by(User.name.desc())
         elif order_by == "age":
-            query = db.session.query(User).order_by(User.name)
+            query = pre_query.order_by(User.name)
     query = query.offset(offset)
     query = query.limit(app.config['PER_PAGE'])
     user_list = query.all()
@@ -154,19 +186,19 @@ def get_all_user():
         user_response_list.append(dit)
     count = db.session.query(func.count(User.user_id)).all()[0][0]
     count = count / app.config['PER_PAGE'] + 1
-    response_dict = {"pages":count,"user_list":user_response_list}
+    response_dict = {"pages": count, "user_list": user_response_list}
     response = flask.Response(json.dumps(response_dict))
     response.headers['Access-Control-Allow-Origin'] = '*'
     return response, 200
 
 
-@app.route('/medical-case-of-illness/user-all-tooth-info',methods=['GET'])
+@app.route('/medical-case-of-illness/user-all-tooth-info', methods=['GET'])
 def get_user_all_tooth_info():
     user_id = request.args['user_id']
-    tooth_list = Tooth_location.query.filter_by(user_id = user_id).all()
+    tooth_list = Tooth_location.query.filter_by(user_id=user_id).all()
     response_info = []
     for tooth in tooth_list:
-        case_list = Illness_case.query.filter_by(tooth_id = tooth.tooth_id).all()
+        case_list = Illness_case.query.filter_by(tooth_id=tooth.tooth_id).all()
         tooth_info = {}
         case_info_list = []
         for case in case_list:
@@ -177,10 +209,10 @@ def get_user_all_tooth_info():
             num_list = []
             for i in range(len(tooth_step_list)):
                 num_list.append(int(tooth_step_list[i]))
-            case_info={}
+            case_info = {}
             case_info['case_id'] = case.case_id
-            case_info['step']=num_list
-            case_info['judge_doctor']=case.judge_doctor
+            case_info['step'] = num_list
+            case_info['judge_doctor'] = case.judge_doctor
             case_info['if_handle'] = case.if_handle
             case_info['case_type'] = case.case_type
             case_info['date'] = case.date.strftime('%Y-%m-%d %H:%M')
@@ -194,7 +226,7 @@ def get_user_all_tooth_info():
     return response, 200
 
 
-@app.route('/medical-case-of-illness/user-tooth-info',methods=['GET'])
+@app.route('/medical-case-of-illness/user-tooth-info', methods=['GET'])
 def get_user_tooth_info():
     this_tooth_id = request.args['tooth_id']
     case_info_list = []
@@ -210,8 +242,8 @@ def get_user_tooth_info():
             num_list.append(int(tooth_step_list[i]))
         case_info = {}
         case_info['case_id'] = case.case_id
-        case_info['step']=num_list
-        case_info['judge_doctor']=case.judge_doctor
+        case_info['step'] = num_list
+        case_info['judge_doctor'] = case.judge_doctor
         case_info['if_handle'] = case.if_handle
         case_info['case_type'] = case.case_type
         case_info['date'] = case.date.strftime('%Y-%m-%d %H:%M')
@@ -228,15 +260,16 @@ def get_user_tooth_info():
     response.headers['Access-Control-Allow-Origin'] = '*'
     return response, 200
 
-@app.route('/medical-case-of-illness/self-say-history',methods=['GET'])
+
+@app.route('/medical-case-of-illness/self-say-history', methods=['GET'])
 def get_self_say_and_history():
     case_id = request.args['case_id']
-    personal_history = Personal_history.query.filter_by(case_id = case_id).first()
-    illness_history = Illness_history.query.filter_by(case_id = case_id).first()
+    personal_history = Personal_history.query.filter_by(case_id=case_id).first()
+    illness_history = Illness_history.query.filter_by(case_id=case_id).first()
     tooth_location = ''
     if illness_history:
-        tooth_location = Tooth_location.query.filter_by(tooth_id = illness_history.tooth_id).first()
-    response_dit ={}
+        tooth_location = Tooth_location.query.filter_by(tooth_id=illness_history.tooth_id).first()
+    response_dit = {}
     if tooth_location and illness_history and personal_history:
         response_dit['chief_complaint'] = dict(tooth_location.get_dict().items())
         response_dit['personal_history'] = dict(personal_history.get_dict().items())
@@ -246,6 +279,7 @@ def get_self_say_and_history():
         return response, 200
     else:
         return "data error", 403
+
 
 @app.route('/medical-case-of-illness/other-info', methods=['GET'])
 def get_other_info():
@@ -285,7 +319,7 @@ def _get_user_diagnose(user_id):
     return_str = ''
     for item in diagnose_list:
         return_str += item
-        return_str +=', '
+        return_str += ', '
     return return_str
 
 
