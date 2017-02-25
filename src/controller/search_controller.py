@@ -143,7 +143,7 @@ def get_all_user():
             if parameter == "user_id":
                 pre_query = db.session.query(User).filter(User.user_id == specific_value)
             elif parameter == "in_date":
-                pre_query = db.session.query(User).filter(User.in_date == specific_value)
+                pre_query = db.session.query(User).filter(User.in_date.like('%'+specific_value+'%'))
             elif parameter == "name":
                 pre_query = db.session.query(User).filter(User.name == specific_value)
             elif parameter == "age":
