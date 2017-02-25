@@ -41,6 +41,13 @@ def add_new_oral_examination():
             oral_examination = _form_to_oral_examination(request.form)
             db.session.add(oral_examination)
             db.session.commit()
+            db.session.query(Tooth_location).filter(
+                Tooth_location.tooth_id == int(oral_examination.tooth_id)).update(
+                {'tooth_location_number': oral_examination.tooth_location})
+            db.session.query(Oral_examination).filter(
+                Oral_examination.tooth_id == int(oral_examination.tooth_id)).update(
+                {'tooth_location': oral_examination.tooth_location})
+            db.session.commit()
             res_oral_examination = Oral_examination.query.filter_by(case_id=request.form['case_id']).first()
             response = res_oral_examination.get_dict()
             ret = flask.Response(json.dumps(response))
