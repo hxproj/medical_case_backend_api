@@ -113,4 +113,6 @@ def _form_to_oral_examination(form):
     temp_oral_examination.X_Ray_fill_quality = form['X_Ray_fill_quality']
     temp_oral_examination.CT_shows = form['CT_shows']
     temp_oral_examination.piece = form['piece']
+    temp_oral_examination.OtherExpression = form['OtherExpression']
+
     return temp_oral_examination
