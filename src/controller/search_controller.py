@@ -170,7 +170,7 @@ def get_all_user():
     query = ""
     if order_type == 1:
         if order_by == "user_id":
-            query = pre_query.order_by(User.user_id.desc())
+            query = pre_query.order_by(User.user_id)
         elif order_by == "in_date":
             query = pre_query.order_by(User.in_date)
         elif order_by == "name":
@@ -179,7 +179,7 @@ def get_all_user():
             query = pre_query.order_by(User.birthday)
     elif order_type == 2:
         if order_by == "user_id":
-            query = pre_query.order_by(User.user_id)
+            query = pre_query.order_by(User.user_id.desc())
         elif order_by == "in_date":
             query = pre_query.order_by(User.in_date.desc())
         elif order_by == "name":
