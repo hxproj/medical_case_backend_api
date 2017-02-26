@@ -1,11 +1,11 @@
 from src import db
 
 
-class Picture(db.Model):
-    img_id = db.Column(db.Integer, primary_key=True)
-    case_id = db.Column(db.Integer)
+class File(db.Model):
+    file_id = db.Column(db.Integer, primary_key=True)
     path = db.Column(db.String(100))
-    picture_type = db.Column(db.Integer)
+    name = db.Column(db.String(100))
+    in_date = db.Column(db.DateTime)
 
     def get_dict(self):
         dit = self.__dict__

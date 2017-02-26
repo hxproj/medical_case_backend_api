@@ -15,3 +15,5 @@ import search_controller
 import img_controller
 import doc_helper
 import case_controller
+import case_controller
+import file_controller
