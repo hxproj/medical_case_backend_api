@@ -67,6 +67,7 @@ def _form_to_diagnose(form):
     temp_diagnose.tooth_id = form['tooth_id']
     temp_diagnose.user_id = form['user_id']
     temp_diagnose.caries_type = form['caries_type']
+    temp_diagnose.additional = form['additional']
     temp_diagnose.cure_plan = form['cure_plan']
     temp_diagnose.specification = form['specification']
 
