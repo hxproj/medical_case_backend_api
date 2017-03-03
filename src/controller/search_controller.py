@@ -17,6 +17,7 @@ from src.entity.illness_case import Illness_case
 from src.entity.illness_history import Illness_history
 from src.entity.oral_examination import Oral_examination
 from src.entity.personal_history import Personal_history
+from src.entity.past_history import PastHistory
 from src.entity.prognosis_of_management import Prognosis_of_management
 from src.entity.risk_assessment import Risk_assessment
 from src import db
@@ -278,6 +279,7 @@ def get_self_say_and_history():
     case_id = request.args['case_id']
     personal_history = Personal_history.query.filter_by(case_id=case_id).first()
     illness_history = Illness_history.query.filter_by(case_id=case_id).first()
+    past_history = PastHistory.query.filter_by(case_id=case_id).first()
     tooth_location = ''
     if illness_history:
         tooth_location = Tooth_location.query.filter_by(tooth_id=illness_history.tooth_id).first()
@@ -286,6 +288,7 @@ def get_self_say_and_history():
         response_dit['chief_complaint'] = dict(tooth_location.get_dict().items())
         response_dit['personal_history'] = dict(personal_history.get_dict().items())
         response_dit['illness_history'] = dict(illness_history.get_dict().items())
+        response_dit['past_history'] = dict(past_history.get_dict().items())
         response = flask.Response(json.dumps(response_dit))
         response.headers['Access-Control-Allow-Origin'] = '*'
         return response, 200
