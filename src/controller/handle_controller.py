@@ -123,11 +123,15 @@ def _form_to_surgical(form):
     temp_surgical.modification = form.get('modification')
     temp_surgical.lamp = form.get('lamp')
     temp_surgical.time_of_lamp = form.get('time_of_lamp')
-    temp_surgical.polishing = form.get('polishing')
     temp_surgical.appease_medicine = form.get('appease_medicine')
     temp_surgical.observed_time = form.get('observed_time')
     temp_surgical.modulo = form.get('modulo')
     temp_surgical.inlay = form.get('inlay')
+    temp_surgical.compromise = form.get('compromise')
+    temp_surgical.polishing = form.get('polishing')
+    temp_surgical.drill_needle = form.get('drill_needle')
+    temp_surgical.gingival_retraction = form.get('gingival_retraction')
+    temp_surgical.additional = form.get('additional')
     return temp_surgical
 
 
