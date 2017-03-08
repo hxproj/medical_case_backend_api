@@ -38,7 +38,8 @@ class Surgical(db.Model):
     polishing = db.Column(db.String(100))
     drill_needle = db.Column(db.String(100))
     gingival_retraction = db.Column(db.String(100))
-    additional = db.Column(db.String(500))
+    additional = db.Column(db.String(300))
+    compromise_polishing_additional =  db.Column(db.String(300))
 
 
     def get_dict(self):

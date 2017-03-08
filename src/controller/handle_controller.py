@@ -132,6 +132,7 @@ def _form_to_surgical(form):
     temp_surgical.drill_needle = form.get('drill_needle')
     temp_surgical.gingival_retraction = form.get('gingival_retraction')
     temp_surgical.additional = form.get('additional')
+    temp_surgical.compromise_polishing_additional = form.get('compromise_polishing_additional')
     return temp_surgical
 
 
