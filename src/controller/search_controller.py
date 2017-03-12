@@ -144,7 +144,8 @@ def get_all_user():
             if parameter == "user_id":
                 pre_query = db.session.query(User).filter(User.user_id == specific_value)
             elif parameter == "in_date":
-                pre_query = db.session.query(User).filter(User.in_date.like('%'+specific_value+'%'))
+                pre_query = db.session.query(User).filter(
+                    and_(User.in_date >= str(specific_value) + ' 00:00:00', User.in_date <= str(specific_value) + ' 23:59:59'))
             elif parameter == "name":
                 pre_query = db.session.query(User).filter(User.name == specific_value)
             elif parameter == "age":
@@ -157,7 +158,7 @@ def get_all_user():
             if parameter == "user_id":
                 pre_query = db.session.query(User).filter(and_(User.user_id > pre_value, User.user_id < post_value))
             elif parameter == "in_date":
-                pre_query = db.session.query(User).filter(and_(User.in_date > str(pre_value), User.in_date < str(post_value)))
+                pre_query = db.session.query(User).filter(and_(User.in_date >= str(pre_value), User.in_date <= str(post_value)+' 00:00:00'))
             elif parameter == "name":
                 pre_query = db.session.query(User).filter(and_(User.name > pre_value, User.name < post_value))
             elif parameter == "age":
@@ -198,7 +199,10 @@ def get_all_user():
         dit['age'] = calculate_age(user.id_number)
         user_response_list.append(dit)
     count = db.session.query(func.count(User.user_id)).all()[0][0]
-    count = count / app.config['PER_PAGE'] + 1
+    if count !=0 and count % app.config['PER_PAGE'] !=0:
+        count = count / app.config['PER_PAGE'] + 1
+    else:
+        count = count / app.config['PER_PAGE']
     response_dict = {"pages": count, "user_list": user_response_list}
     response = flask.Response(json.dumps(response_dict))
     response.headers['Access-Control-Allow-Origin'] = '*'
