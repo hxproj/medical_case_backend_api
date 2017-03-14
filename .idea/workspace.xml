@@ -30,6 +30,7 @@
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/controller/prognosis_of_management_controller.py" afterPath="$PROJECT_DIR$/src/controller/prognosis_of_management_controller.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/controller/risk_assessment_controller.py" afterPath="$PROJECT_DIR$/src/controller/risk_assessment_controller.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/controller/search_controller.py" afterPath="$PROJECT_DIR$/src/controller/search_controller.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/controller/selection_controller.py" afterPath="$PROJECT_DIR$/src/controller/selection_controller.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/controller/tooth_location_controller.py" afterPath="$PROJECT_DIR$/src/controller/tooth_location_controller.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/controller/user_controller.py" afterPath="$PROJECT_DIR$/src/controller/user_controller.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/controller/usphs_controller.py" afterPath="$PROJECT_DIR$/src/controller/usphs_controller.py" />
@@ -46,6 +47,7 @@
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/entity/picture.py" afterPath="$PROJECT_DIR$/src/entity/picture.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/entity/prognosis_of_management.py" afterPath="$PROJECT_DIR$/src/entity/prognosis_of_management.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/entity/risk_assessment.py" afterPath="$PROJECT_DIR$/src/entity/risk_assessment.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/entity/selections.py" afterPath="$PROJECT_DIR$/src/entity/selections.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/entity/surgical.py" afterPath="$PROJECT_DIR$/src/entity/surgical.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/entity/tooth_location.py" afterPath="$PROJECT_DIR$/src/entity/tooth_location.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/entity/user.py" afterPath="$PROJECT_DIR$/src/entity/user.py" />
@@ -68,7 +70,7 @@
     <SUITE FILE_PATH="coverage/medical_case_backend_api$oral_examination.coverage" NAME="oral_examination Coverage Results" MODIFIED="1488978134612" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src/entity" />
     <SUITE FILE_PATH="coverage/medical_case_backend_api$difficulty_assessment.coverage" NAME="difficulty_assessment Coverage Results" MODIFIED="1471611323350" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src/entity" />
     <SUITE FILE_PATH="coverage/medical_case_backend_api$past_history.coverage" NAME="past_history Coverage Results" MODIFIED="1488540766734" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src/entity" />
-    <SUITE FILE_PATH="coverage/medical_case_backend_api$run.coverage" NAME="run Coverage Results" MODIFIED="1489303974957" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/medical_case_backend_api$run.coverage" NAME="run Coverage Results" MODIFIED="1489498494821" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/medical_case_backend_api$surgical.coverage" NAME="surgical Coverage Results" MODIFIED="1488766848413" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src/entity" />
     <SUITE FILE_PATH="coverage/medical_case_backend_api$user.coverage" NAME="user Coverage Results" MODIFIED="1487057533763" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src/entity" />
     <SUITE FILE_PATH="coverage/medical_case_backend_api$usphs.coverage" NAME="usphs Coverage Results" MODIFIED="1472357137409" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src/entity" />
@@ -120,10 +122,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="selection_controller.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="selection_controller.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/controller/selection_controller.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="81">
+            <state relative-caret-position="532">
               <caret line="28" column="0" selection-start-line="28" selection-start-column="0" selection-end-line="28" selection-end-column="0" />
               <folding>
                 <element signature="e#0#11#0" expanded="true" />
@@ -132,11 +134,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="search_controller.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="search_controller.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/controller/search_controller.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2280">
-              <caret line="146" column="57" selection-start-line="146" selection-start-column="28" selection-end-line="146" selection-end-column="57" />
+            <state relative-caret-position="309">
+              <caret line="208" column="57" selection-start-line="208" selection-start-column="57" selection-end-line="208" selection-end-column="57" />
               <folding />
             </state>
           </provider>
@@ -211,10 +213,10 @@
         <option value="$PROJECT_DIR$/src/controller/oral_examination_controller.py" />
         <option value="$PROJECT_DIR$/src/entity/oral_examination.py" />
         <option value="$PROJECT_DIR$/src/entity/selections.py" />
-        <option value="$PROJECT_DIR$/src/controller/search_controller.py" />
         <option value="$PROJECT_DIR$/src/controller/__init__.py" />
         <option value="$PROJECT_DIR$/src/entity/__init__.py" />
         <option value="$PROJECT_DIR$/src/controller/selection_controller.py" />
+        <option value="$PROJECT_DIR$/src/controller/search_controller.py" />
       </list>
     </option>
   </component>
@@ -274,6 +276,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
@@ -355,7 +358,6 @@
           </PATH>
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -742,10 +744,10 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1382" height="754" extended-state="1" />
-    <editor active="false" />
+    <frame x="-8" y="-8" width="1382" height="754" extended-state="7" />
+    <editor active="true" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.19062027" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.17019667" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32636657" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3295129" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -755,7 +757,7 @@
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.26848873" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="Debug" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.28938907" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.28731942" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -846,7 +848,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="python-line">
           <url>file://$PROJECT_DIR$/src/controller/search_controller.py</url>
-          <line>311</line>
+          <line>312</line>
           <option name="timeStamp" value="72" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="python-line">
@@ -1164,14 +1166,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/entity/selections.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="190">
-          <caret line="10" column="37" selection-start-line="10" selection-start-column="37" selection-end-line="10" selection-end-column="37" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/entity/__init__.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="38">
@@ -1194,29 +1188,36 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/controller/search_controller.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2280">
-          <caret line="146" column="57" selection-start-line="146" selection-start-column="28" selection-end-line="146" selection-end-column="57" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://C:/Python27/Lib/site-packages/flask/app.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="135">
           <caret line="1624" column="0" selection-start-line="1624" selection-start-column="0" selection-end-line="1624" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/controller/selection_controller.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="81">
+        <state relative-caret-position="532">
           <caret line="28" column="0" selection-start-line="28" selection-start-column="0" selection-end-line="28" selection-end-column="0" />
           <folding>
             <element signature="e#0#11#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/entity/selections.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="190">
+          <caret line="10" column="37" selection-start-line="10" selection-start-column="37" selection-end-line="10" selection-end-column="37" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/controller/search_controller.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="309">
+          <caret line="208" column="57" selection-start-line="208" selection-start-column="57" selection-end-line="208" selection-end-column="57" />
+          <folding />
         </state>
       </provider>
     </entry>

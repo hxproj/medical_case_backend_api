@@ -198,7 +198,8 @@ def get_all_user():
         dit['diagnose_list'] = diagnose_list
         dit['age'] = calculate_age(user.id_number)
         user_response_list.append(dit)
-    count = db.session.query(func.count(User.user_id)).all()[0][0]
+    count = len(user_list)
+        #db.session.query(func.count(User.user_id)).all()[0][0]
     if count !=0 and count % app.config['PER_PAGE'] !=0:
         count = count / app.config['PER_PAGE'] + 1
     else:
