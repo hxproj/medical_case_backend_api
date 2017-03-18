@@ -41,12 +41,16 @@ def handle_selections():
                 for result in result_list:
                     selection_list.append(result.get_dict())
         ret = flask.Response(json.dumps(selection_list))
+        ret.headers['Access-Control-Allow-Origin'] = '*'
         return ret,200
     elif request.method =='DELETE':
-        id = request.args.get('id')
-        if db.session.query(Selection).filter(Selection.id==int(id)).delete():
+        field = request.args.get('field')
+        value = request.args.get('value')
+        if db.session.query(Selection).filter(and_(Selection.field == field,Selection.value == value)).delete():
             db.session.commit()
-            return 'delete success',200
+            ret = flask.Response('delete success')
+            ret.headers['Access-Control-Allow-Origin'] = '*'
+            return ret,200
         else:
             return 'error',403
     elif request.method == 'OPTIONS':
