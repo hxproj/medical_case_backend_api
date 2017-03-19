@@ -41,6 +41,23 @@ class Surgical(db.Model):
     additional = db.Column(db.String(300))
     compromise_polishing_additional =  db.Column(db.String(300))
 
+    #addtional parameters
+    dry_times = db.Column(db.String(30))
+    acid_time = db.Column(db.String(30))
+    fluoride_protector = db.Column(db.String(30))
+    is_micro = db.Column(db.String(30))
+    low_mobile = db.Column(db.String(30))
+    micro = db.Column(db.String(30))
+    penetration_resin = db.Column(db.String(30))
+
+    prosthesis_type = db.Column(db.String(30))
+    fill_material = db.Column(db.String(30))
+    bind_material = db.Column(db.String(30))
+    bind_type = db.Column(db.String(30))
+    bind_type_component = db.Column(db.String(30))
+    fluoride_acid_time = db.Column(db.String(30))
+    silicon = db.Column(db.String(30))
+    phosphorus_acid_time = db.Column(db.String(30))
 
     def get_dict(self):
         dit = self.__dict__

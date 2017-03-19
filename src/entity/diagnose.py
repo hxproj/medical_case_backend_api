@@ -14,4 +14,3 @@ class Diagnose(db.Model):
         dit = self.__dict__
         del dit['_sa_instance_state']
         return dit
-

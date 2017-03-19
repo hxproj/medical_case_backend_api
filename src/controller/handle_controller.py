@@ -133,6 +133,24 @@ def _form_to_surgical(form):
     temp_surgical.gingival_retraction = form.get('gingival_retraction')
     temp_surgical.additional = form.get('additional')
     temp_surgical.compromise_polishing_additional = form.get('compromise_polishing_additional')
+
+    #additional parameters
+    temp_surgical.dry_times = form.get('dry_times')
+    temp_surgical.acid_time = form.get('acid_time')
+    temp_surgical.fluoride_protector = form.get('fluoride_protector')
+    temp_surgical.is_micro = form.get('is_micro')
+    temp_surgical.low_mobile = form.get('low_mobile')
+    temp_surgical.micro = form.get('micro')
+    temp_surgical.penetration_resin = form.get('penetration_resin')
+
+    temp_surgical.prosthesis_type = form.get('prosthesis_type')
+    temp_surgical.fill_material = form.get('fill_material')
+    temp_surgical.bind_material = form.get('bind_material')
+    temp_surgical.bind_type = form.get('bind_type')
+    temp_surgical.bind_type_component = form.get('bind_type_component')
+    temp_surgical.fluoride_acid_time = form.get('fluoride_acid_time')
+    temp_surgical.phosphorus_acid_time = form.get('phosphorus_acid_time')
+    temp_surgical.silicon = form.get('silicon')
     return temp_surgical
 
 
