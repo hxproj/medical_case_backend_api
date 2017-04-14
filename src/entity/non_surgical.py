@@ -11,8 +11,8 @@ class Non_surgical(db.Model):
     silver_nitrate = db.Column(db.String(200))
     additional_device = db.Column(db.String(200))
     reagent = db.Column(db.String(200))
-    tools = db.Column(db.String(200))
-    lamp = db.Column(db.String(200))
+    non_surgical_tools = db.Column(db.String(200))
+    non_surgical_lamp = db.Column(db.String(200))
     check_time = db.Column(db.String(200))
     time_of_etching = db.Column(db.String(200))
 

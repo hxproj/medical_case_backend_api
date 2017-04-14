@@ -166,8 +166,8 @@ def _form_to_non_surgical(form):
     temp_non_surgical.silver_nitrate = form.get("silver_nitrate")
     temp_non_surgical.additional_device = form.get("additional_device")
     temp_non_surgical.reagent = form.get("reagent")
-    temp_non_surgical.tools = form.get("tools")
-    temp_non_surgical.lamp = form.get("lamp")
+    temp_non_surgical.non_surgical_tools = form.get("non_surgical_tools")
+    temp_non_surgical.non_surgical_lamp = form.get("non_surgical_lamp")
     temp_non_surgical.check_time = form.get("check_time")
     temp_non_surgical.time_of_etching = form.get("time_of_etching")
     return temp_non_surgical
