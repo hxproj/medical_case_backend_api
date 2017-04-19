@@ -40,6 +40,8 @@ class Oral_examination(db.Model):
     CT_shows = db.Column(db.String(300))
     piece = db.Column(db.String(300))
     OtherExpression = db.Column(db.String(300))
+    X_Ray_Visible = db.Column(db.String(50))
+    X_Ray_fill_round = db.Column(db.String(50))
 
     #development_of_the_situation = db.Column(db.String(50))
     #loss_caries_index_up = db.Column(db.String(50))
