@@ -151,6 +151,9 @@ def _form_to_surgical(form):
     temp_surgical.fluoride_acid_time = form.get('fluoride_acid_time')
     temp_surgical.phosphorus_acid_time = form.get('phosphorus_acid_time')
     temp_surgical.silicon = form.get('silicon')
+
+    temp_surgical.glass_ionomer = form.get('glass_ionomer')
+
     return temp_surgical
 
 
@@ -170,4 +173,6 @@ def _form_to_non_surgical(form):
     temp_non_surgical.non_surgical_lamp = form.get("non_surgical_lamp")
     temp_non_surgical.check_time = form.get("check_time")
     temp_non_surgical.time_of_etching = form.get("time_of_etching")
+    temp_non_surgical.non_surgical_coating_time = form.get("non_surgical_coating_time")
+
     return temp_non_surgical

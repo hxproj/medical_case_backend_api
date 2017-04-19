@@ -59,6 +59,8 @@ class Surgical(db.Model):
     silicon = db.Column(db.String(30))
     phosphorus_acid_time = db.Column(db.String(30))
 
+    glass_ionomer = db.Column(db.String(30))
+
     def get_dict(self):
         dit = self.__dict__
         del dit['_sa_instance_state']
