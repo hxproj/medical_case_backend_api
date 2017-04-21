@@ -188,6 +188,7 @@ def get_all_user():
             query = pre_query.order_by(User.name.desc())
         elif order_by == "age":
             query = pre_query.order_by(User.birthday.desc())
+    pages = len(query.all())
     query = query.offset(offset)
     query = query.limit(app.config['PER_PAGE'])
     user_list = query.all()
@@ -198,13 +199,12 @@ def get_all_user():
         dit['diagnose_list'] = diagnose_list
         dit['age'] = calculate_age(user.id_number)
         user_response_list.append(dit)
-    count = len(user_list)
-        #db.session.query(func.count(User.user_id)).all()[0][0]
-    if count !=0 and count % app.config['PER_PAGE'] !=0:
-        count = count / app.config['PER_PAGE'] + 1
+
+    if pages !=0 and pages % app.config['PER_PAGE'] !=0:
+        pages = pages / app.config['PER_PAGE'] + 1
     else:
-        count = count / app.config['PER_PAGE']
-    response_dict = {"pages": count, "user_list": user_response_list}
+        pages = pages / app.config['PER_PAGE']
+    response_dict = {"pages": pages, "user_list": user_response_list}
     response = flask.Response(json.dumps(response_dict))
     response.headers['Access-Control-Allow-Origin'] = '*'
     return response, 200
