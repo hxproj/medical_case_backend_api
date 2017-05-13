@@ -1,3 +1,4 @@
+# -*- coding: UTF-8 -*-
 import copy
 import httplib
 import json
@@ -70,11 +71,11 @@ def search_options():
     temp_set = set(case_id_list)
     case_id_list = list(temp_set)
     result_list = []
-    for case_id in case_id_list :
+    for case_id in case_id_list:
         case = Illness_case.query.filter_by(case_id=case_id).first()
         tooth_location = ''
         if case:
-            tooth_location = Tooth_location.query.filter_by(tooth_id = case.tooth_id).first()
+            tooth_location = Tooth_location.query.filter_by(tooth_id=case.tooth_id).first()
         temp_case = copy.deepcopy(case)
         case_dict = temp_case.get_dict()
         case_dict['user_id'] = tooth_location.user_id
@@ -145,20 +146,22 @@ def get_all_user():
                 pre_query = db.session.query(User).filter(User.user_id == specific_value)
             elif parameter == "in_date":
                 pre_query = db.session.query(User).filter(
-                    and_(User.in_date >= str(specific_value) + ' 00:00:00', User.in_date <= str(specific_value) + ' 23:59:59'))
+                    and_(User.in_date >= str(specific_value) + ' 00:00:00',
+                         User.in_date <= str(specific_value) + ' 23:59:59'))
             elif parameter == "name":
-                pre_query = db.session.query(User).filter(User.name == specific_value)
+                pre_query = db.session.query(User).filter(User.name.like('%' + specific_value + '%'))
             elif parameter == "age":
                 date_now = datetime.datetime.now()
-                current_date_num = date_now.year * 10000 + date_now.month*100 + date_now.day
+                current_date_num = date_now.year * 10000 + date_now.month * 100 + date_now.day
                 pre_age = current_date_num - int(specific_value) * 10000
                 post_age = current_date_num - (int(specific_value) + 1) * 10000
-                pre_query = db.session.query(User).filter(and_(User.birthday > post_age,User.birthday<pre_age))
+                pre_query = db.session.query(User).filter(and_(User.birthday > post_age, User.birthday < pre_age))
         elif pre_value and post_value:
             if parameter == "user_id":
                 pre_query = db.session.query(User).filter(and_(User.user_id > pre_value, User.user_id < post_value))
             elif parameter == "in_date":
-                pre_query = db.session.query(User).filter(and_(User.in_date >= str(pre_value), User.in_date <= str(post_value)+' 00:00:00'))
+                pre_query = db.session.query(User).filter(
+                    and_(User.in_date >= str(pre_value), User.in_date <= str(post_value) + ' 00:00:00'))
             elif parameter == "name":
                 pre_query = db.session.query(User).filter(and_(User.name > pre_value, User.name < post_value))
             elif parameter == "age":
@@ -196,11 +199,19 @@ def get_all_user():
     for user in user_list:
         diagnose_list = _get_user_diagnose(user.user_id)
         dit = user.get_dict()
+        if not diagnose_list == '':
+            diagnose_list = diagnose_list[:-2]
         dit['diagnose_list'] = diagnose_list
         dit['age'] = calculate_age(user.id_number)
+        tooth_id_list = Tooth_location.query.filter_by(user_id=dit['user_id']).all()
+        if len(tooth_id_list) == 0:
+            dit['doctor'] = ''
+        else:
+            doctor = Illness_case.query.filter_by(tooth_id=tooth_id_list[0].tooth_id).first().judge_doctor
+            dit['doctor'] = doctor
         user_response_list.append(dit)
 
-    if pages !=0 and pages % app.config['PER_PAGE'] !=0:
+    if pages != 0 and pages % app.config['PER_PAGE'] != 0:
         pages = pages / app.config['PER_PAGE'] + 1
     else:
         pages = pages / app.config['PER_PAGE']
@@ -335,7 +346,7 @@ def _get_user_diagnose(user_id):
         diagnose_str = ''
         if diagnose:
             diagnose_str = diagnose[-1].caries_degree
-        diagnose_list.append(tooth_number + diagnose_str)
+        diagnose_list.append(tooth_number + '牙' + diagnose_str)
     return_str = ''
     for item in diagnose_list:
         return_str += item
