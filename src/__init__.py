@@ -1,3 +1,4 @@
+import sys
 from flask_sqlalchemy import SQLAlchemy
 from flask import Flask
 
@@ -8,3 +9,6 @@ app.config.from_object('config.default')
 db = SQLAlchemy(app)
 from src import controller
 app.config['VERSION'] = __version__
+
+reload(sys)
+sys.setdefaultencoding('utf8')
