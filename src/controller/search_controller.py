@@ -26,6 +26,8 @@ from src.entity.surgical import Surgical
 from src.entity.tooth_location import Tooth_location
 from src.entity.user import User
 from src.entity.usphs import Usphs
+from src.entity.non_surgical import Non_surgical
+from src.entity.past_history import PastHistory
 
 
 @app.route('/medical-case-of-illness/search-by-conditons', methods=['GET'])
@@ -58,7 +60,12 @@ def search_options():
         query = Surgical.query
     elif table == 'risk_assessment':
         query = Risk_assessment.query
-    se = set(['salivary_gland_disease', 'consciously_reduce_salivary_flow'])
+    elif table == 'non_surgical':
+        query = Non_surgical.query
+    elif table == 'past_history':
+        query = PastHistory.query
+
+    se = set(['systemillness', 'infectiousdisease', 'dragallergy'])
     result_list = []
     for key in args:
         if key in se:
@@ -356,11 +363,14 @@ def _get_user_diagnose(user_id):
 
 def _search_special(key):
     return_list = []
-    if key == 'consciously_reduce_salivary_flow':
-        return_list = db.session.query(Personal_history).filter(and_(
-            Personal_history.consciously_reduce_salivary_flow != None,
-            Personal_history.consciously_reduce_salivary_flow != '')).all()
-    elif key == 'salivary_gland_disease':
-        return_list = db.session.query(Personal_history).filter(and_(
-            Personal_history.salivary_gland_disease != None, Personal_history.salivary_gland_disease != '')).all()
+    if key == 'systemillness':
+        return_list = db.session.query(PastHistory).filter(and_(
+            PastHistory.systemillness != None,
+            PastHistory.systemillness != '')).all()
+    elif key == 'infectiousdisease':
+        return_list = db.session.query(PastHistory).filter(and_(
+            PastHistory.infectiousdisease != None, PastHistory.infectiousdisease != '')).all()
+    elif key == 'dragallergy':
+        return_list = db.session.query(PastHistory).filter(and_(
+            PastHistory.dragallergy != None, PastHistory.dragallergy != '')).all()
     return return_list
