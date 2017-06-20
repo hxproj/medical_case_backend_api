@@ -1,5 +1,5 @@
 #mysql connection string
-SQLALCHEMY_DATABASE_URI='mysql+mysqldb://root:@127.0.0.1/medical_case_of_illness?charset=utf8'
+SQLALCHEMY_DATABASE_URI='mysql+mysqldb://root:123456@127.0.0.1:3307/medical_case_of_illness?charset=utf8'
 
 HTTP_HOST = ''
 HTTP_PORT = 9000

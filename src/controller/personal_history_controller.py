@@ -65,9 +65,7 @@ def _form_to_personal_history(form):
     history.user_id = form['user_id']
     history.case_id = form['case_id']
     history.tooth_id = form['tooth_id']
-    history.consumption_of_sweet = form['consumption_of_sweet']
-    #history.more_sweet = form['more_sweet']
-    history.frequency_of_sweet = form['frequency_of_sweet']
+    history.is_like_sweet = form['is_like_sweet']
     history.frequency_of_meal = form['frequency_of_meal']
     history.is_carbonic_acid = form['is_carbonic_acid']
     history.is_floss = form['is_floss']
@@ -75,7 +73,6 @@ def _form_to_personal_history(form):
     history.time_of_teeth_brush = form['time_of_teeth_brush']
     history.long_of_teeth_brush = form['long_of_teeth_brush']
     history.electric_tooth_brush = form['electric_tooth_brush']
-    #history.method_of_tooth_brush = form['method_of_tooth_brush']
     history.is_fluorine = form['is_fluorine']
     history.is_cavity_examination = form['is_cavity_examination']
     history.is_periodontal_treatment = form['is_periodontal_treatment']
@@ -93,3 +90,4 @@ def _form_to_personal_history(form):
     history.additional = form['additional']
     return history
 
+db.create_all()
