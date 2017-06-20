@@ -13,7 +13,6 @@ class Illness_history(db.Model):
     is_hypnalgia = db.Column(db.String(50))
     is_sensitive_cold_heat = db.Column(db.String(50))
     is_cold_hot_stimulationpain = db.Column(db.String(50))
-    is_delayed_pain = db.Column(db.String(50))
     cure_time = db.Column(db.String(50))
     fill_state = db.Column(db.String(50))
     additional = db.Column(db.String(500))
@@ -22,5 +21,3 @@ class Illness_history(db.Model):
         dit = self.__dict__
         del dit['_sa_instance_state']
         return dit
-
-db.create_all()

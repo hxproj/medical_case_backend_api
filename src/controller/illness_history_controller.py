@@ -75,7 +75,6 @@ def _form_to_illness_history(form):
     temp_history.is_hypnalgia = form['is_hypnalgia']
     temp_history.is_sensitive_cold_heat = form['is_sensitive_cold_heat']
     temp_history.is_cold_hot_stimulationpain = form['is_cold_hot_stimulationpain']
-    temp_history.is_delayed_pain = form['is_delayed_pain']
     temp_history.cure_time = form['cure_time']
     temp_history.fill_state = form['fill_state']
     temp_history.additional = form['additional']
