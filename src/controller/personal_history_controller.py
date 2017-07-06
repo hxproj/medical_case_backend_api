@@ -89,5 +89,3 @@ def _form_to_personal_history(form):
     history.orthodontic = form['orthodontic']
     history.additional = form['additional']
     return history
-
-db.create_all()
