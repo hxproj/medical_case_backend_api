@@ -10,4 +10,4 @@ PER_PAGE = 10
 ALLOWED_EXTENSIONS = set(['txt','pdf','png','jpg','jpeg','gif','JPG','PNG'])
 TEMPLETE_LOCATION ='C:\Users\solitaire\Desktop\illness.docx'
 
-STATIC_FILES_PATH='C:\Medical_Case\\'
+STATIC_FILES_PATH='C:\Server\ImageFile\\'
