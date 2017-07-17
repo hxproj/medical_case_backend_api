@@ -39,6 +39,11 @@ def add_new_tooth_location_record():
             illness_case.if_handle = 1
             illness_case.judge_doctor = doctor
             db.session.add(illness_case)
+            db.session.query(User).filter_by(user_id = request.form['user_id']).update(
+                {
+                    'main_doctor' : doctor
+                }
+            )
             db.session.commit()
             newest_case = Illness_case.query.filter_by(tooth_id = newest_record.tooth_id).all()[-1]
             response = newest_record.get_dict()

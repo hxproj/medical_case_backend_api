@@ -157,6 +157,8 @@ def get_all_user():
                          User.in_date <= str(specific_value) + ' 23:59:59'))
             elif parameter == "name":
                 pre_query = db.session.query(User).filter(User.name.like('%' + specific_value + '%'))
+            elif parameter == "doctor":
+                pre_query = db.session.query(User).filter(User.main_doctor.like('%' + specific_value + '%'))
             elif parameter == "age":
                 date_now = datetime.datetime.now()
                 current_date_num = date_now.year * 10000 + date_now.month * 100 + date_now.day
@@ -183,6 +185,8 @@ def get_all_user():
     if order_type == 1:
         if order_by == "user_id":
             query = pre_query.order_by(User.user_id)
+        if order_by == "doctor":
+            query = pre_query.order_by(User.main_doctor)
         elif order_by == "in_date":
             query = pre_query.order_by(User.in_date)
         elif order_by == "name":
@@ -192,6 +196,8 @@ def get_all_user():
     elif order_type == 2:
         if order_by == "user_id":
             query = pre_query.order_by(User.user_id.desc())
+        if order_by == "doctor":
+            query = pre_query.order_by(User.main_doctor.desc())
         elif order_by == "in_date":
             query = pre_query.order_by(User.in_date.desc())
         elif order_by == "name":

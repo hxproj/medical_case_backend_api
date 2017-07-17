@@ -8,7 +8,7 @@ class User(db.Model):
     occupation = db.Column(db.String(50))
     contact = db.Column(db.String(50))
     birthday = db.Column(db.Integer)
-    #main_doctor = db.Column(db.String(50))
+    main_doctor = db.Column(db.String(50))
     in_date = db.Column(db.DateTime)
 
     #def __init__(self, name):

@@ -12,6 +12,7 @@ from src.entity.difficulty_assessment import Difficulty_assessment
 from src.entity.surgical import Surgical
 from src.entity.diagnose import Diagnose
 from src.entity.non_surgical import Non_surgical
+from src.entity.user import User
 from src.entity.usphs import Usphs
 from src.entity.illness_case import Illness_case
 from src.controller.common_function import check_if_user_exist, refresh_step, delete_directory
@@ -22,6 +23,10 @@ from src import db
 def add_new_case():
     if request.method == 'POST':
         case = _form_to_case(request.form)
+        user_id = Tooth_location.query.filter_by(tooth_id=request.form['tooth_id']).first().user_id
+        db.session.query(User).filter_by(user_id = user_id).update(
+            {User.main_doctor : request.form['judge_doctor']}
+        )
         #location_record.step = 0
         db.session.add(case)
         db.session.commit()
@@ -47,6 +52,11 @@ def add_new_case():
 
     elif request.method == 'PUT':
         db.session.query(Illness_case).filter(Illness_case.case_id == request.form['case_id']).delete()
+        user_id = Tooth_location.query.filter_by(tooth_id=request.form['tooth_id']).first().user_id
+        db.session.query(User).filter_by(user_id=user_id).update(
+            {User.main_doctor: request.form['judge_doctor']}
+        )
+        # loca
         db.session.commit()
         illness_case = _form_to_case(request.form)
         illness_case.case_id = request.form['case_id']
