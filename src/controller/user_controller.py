@@ -102,7 +102,7 @@ def add_user():
 def _form_to_user(form):
     user = User()
     user.id_number = form['ID']
-    #user.main_doctor = form['doctor']
+    user.main_doctor = form['main_doctor']
     user.contact = form['contact']
     user.gender = form['gender']
     user.name = form['name']
